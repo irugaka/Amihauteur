@@ -1,3 +1,51 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+    
+index:
+    path: /
+    controller: App\Controller\DefaultController::index
+
+login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+logout:
+    path: /logout
+    methods: GET
+
+ajout:
+    path: /ajout
+    controller: App\Controller\DefaultController::AjoutConfig
+
+ajoutEchelle:
+    path: /ajoutEchelle/{id}
+    controller: App\Controller\DefaultController::AjoutEchelle
+
+detailConfig:
+    path: /detail/{id}
+    controller: App\Controller\DefaultController::detailConfig
+
+ChoixNorme:
+    path: /Norme/{id}
+    controller: App\Controller\DefaultController::ChoixNorme
+
+ajoutHauteur:
+    path: /Hauteur/{id}
+    controller: App\Controller\DefaultController::ajoutHauteur
+
+ajoutEntree:
+    path: /Entree/{id}
+    controller: App\Controller\DefaultController::ajoutEntree
+
+ajoutSortie:
+    path: /Sortie/{id}
+    controller: App\Controller\DefaultController::ajoutSortie
+
+accessoireAjout:
+    path: /Accessoire/{id}
+    controller: App\Controller\DefaultController::AjoutAccessoire
+
+ajoutChangementVolee:
+    path: /ChangementVolee/{id}
+    controller: App\Controller\DefaultController::ajoutChangementVolee

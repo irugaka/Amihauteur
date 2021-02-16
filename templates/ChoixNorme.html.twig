@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choisir une Norme{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    
+        <div class="w-75 mx-auto">
+        <div><h1>Choix de la norme</h1></div>
+    {{ form_start(NormeAjoutForm) }}
+        {{ form_row(NormeAjoutForm.id, {
+            label: 'Type d\'echelle'
+        }) }}
+        <a styke="color:black" class="text-dark btn bg-warning" href="{{ path('index') }}">Precedent</a>
+        <button class="btn bg-warning">Suivant</button>
+    {{ form_end(NormeAjoutForm) }}
+    
+        </div>
+    </div>
+
+{% endblock %}

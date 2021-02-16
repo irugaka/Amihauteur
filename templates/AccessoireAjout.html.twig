@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choisir des accessoires{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    
+        <div class="w-75 mx-auto">
+        <div><h1>Choix des Accessoires</h1></div>
+    {{ form_start(AccessoireAjoutForm) }}
+    {% for Accessoire in AccessoireAjoutForm.id %}
+      {{ form_row(Accessoire) }}
+
+    {% endfor %}
+        <a styke="color:black" class="text-dark btn bg-warning" href="{{ path('index') }}">Precedent</a>
+        <button type="submit" class="btn bg-warning">Suivant</button>
+    {{ form_end(AccessoireAjoutForm) }}
+    
+        </div>
+    </div>
+
+{% endblock %}

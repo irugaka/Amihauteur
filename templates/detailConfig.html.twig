@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+            <center><h3>Liste des Config</h3></center>
+                <!-- Tableau qui affiche les config -->
+                <table id="ListeConfig" class="table table-striped table-bordered table-sm ">
+                    <thead>
+                        <tr>
+                            <!-- <th class="bg-warning" style="color:white;">Nom</th> -->
+                            <th class="bg-warning" style="color:white;">Nom</th>
+                            <th class="bg-warning" style="color:white;">Description</th>
+                            <th class="bg-warning" style="color:white;">Reference</th>
+                            <th class="bg-warning" style="color:white;">Remise</th>
+                            <!-- <th class="bg-warning" style="color:white;"></th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td class="table-light">{{ listeConfig.NomConfig}}</td>
+                                <td class="table-light">{{ listeConfig.DescriptionConfig }}</td>
+                                <td class="table-light">{{ listeConfig.ReferenceConfig }}</td>
+                                <td class="table-light">{{ listeConfig.RemiseConfig }}</td>                            </tr>
+                    </tbody>
+                </table>
+            </div>
+{% endblock %}

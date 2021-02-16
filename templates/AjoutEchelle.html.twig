@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choisir une echelle{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+        <div class="w-75 mx-auto">
+        <div><h1>Choix de L'echelle</h1></div>
+    {{ form_start(EchelleAjoutForm) }}
+        {{ form_row(EchelleAjoutForm.Echelle_TypeEchelle, {
+            label: 'Type d\'echelle'
+        }) }}
+        <a styke="color:black" class="text-dark btn bg-warning" href="{{ path('index') }}">Precedent</a>
+        <button class="btn bg-warning">Suivant</button>
+    {{ form_end(EchelleAjoutForm) }}
+    
+        </div>
+    </div>
+{% endblock %}

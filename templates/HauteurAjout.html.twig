@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choisir une Hauteur{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    
+        <div class="w-75 mx-auto">
+        <div><h1>Choix de la hauteur</h1></div>
+    {{ form_start(HauteurAjoutForm) }}
+        {{ form_row(HauteurAjoutForm.AFranchirHauteur, {
+            label: 'Hauteur souhaitée'
+        }) }}
+
+        <a styke="color:black" class="text-dark btn bg-warning" href="{{ path('index') }}">Precedent</a>
+        <button type="submit" class="btn bg-warning">Suivant</button>
+    {{ form_end(HauteurAjoutForm) }}
+    
+        </div>
+    </div>
+
+{% endblock %}

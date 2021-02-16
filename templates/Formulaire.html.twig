@@ -1,0 +1,81 @@
+
+
+{% block bouton %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Tabs - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#tabs" ).tabs();
+  } );
+  </script>
+</head>
+<body>
+
+
+
+
+ <div id="tabs" classe="d-flex justify-content-center">
+  <ul>
+    <li><a href="#tabs-1">Normes</a></li>
+    <li><a href="#tabs-2">Hauteur Echelle</a></li>
+    <li><a href="#tabs-3">Sortie Echelle</a></li>
+    <li><a href="#tabs-4">Sortie Echelle</a></li>
+    <li><a href="#tabs-5">Sortie Echelle</a></li>
+    <li><a href="#tabs-6">Sortie Echelle</a></li>
+    <li><a href="#tabs-7">Sortie Echelle</a></li>
+  </ul>
+
+
+<div class="p-2" id="tabs-1">
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="form-group">
+    <div>
+            {{ form_label(form.name, 'Hauteur') }}
+            {{ form_widget(form.name) }}
+    </div>
+    <div>
+            {{ form_label(form.name, 'Autre Longueur') }}
+            {{ form_widget(form.price) }}
+        </div>
+    </div>
+{{ form_end(form) }}
+</div>
+
+
+
+<div id="tabs-2">
+    <p>Onglet de test des Echelles</p>
+</div>
+<div id="tabs-3">
+    <p>Onglet de test des Sorties</p>
+</div>
+<div class="p-2" id="tabs-4">
+<p>Une autre option 1</p>
+</div>
+<div class="p-2" id="tabs-5">
+<p>Une autre option 2</p>
+</div>
+<div class="p-2" id="tabs-6">
+<p>Une autre option 3</p>
+</div>
+<div class="p-2" id="tabs-7">
+<p>Une autre option 4</p>
+</div>
+</div>
+ 
+</body>
+</html>
+{% endblock %}

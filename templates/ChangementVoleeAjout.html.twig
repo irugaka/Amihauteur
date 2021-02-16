@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choisir d(u/es) changement(s) de Volee{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    
+        <div class="w-75 mx-auto">
+        <div><h1>Choix d(u/es) changement(s) de Volee</h1></div>
+    {{ form_start(ChangementVoleeAjoutForm) }}
+        {{ form_row(ChangementVoleeAjoutForm.mesureChangement) }}
+
+        <a styke="color:black" class="text-dark btn bg-warning" href="{{ path('index') }}">Precedent</a>
+        <button type="submit" class="btn bg-warning">Suivant</button>
+    {{ form_end(ChangementVoleeAjoutForm) }}
+    
+        </div>
+    </div>
+
+{% endblock %}

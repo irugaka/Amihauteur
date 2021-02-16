@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <p class="text-center">Bonjour ! Votre Email est : {{ app.user.email }}</p>
+
+    <div class="container">
+            <center><h3>Liste des Config</h3></center>
+                <!-- Tableau qui affiche les config -->
+                <table id="ListeConfig" class="table table-striped table-bordered table-sm ">
+                    <thead>
+                        <tr>
+                            <!-- <th class="bg-warning" style="color:white;">Nom</th> -->
+                            <th class="bg-warning" style="color:white;">Nom</th>
+                            <th class="bg-warning" style="color:white;">Description</th>
+                            <th class="bg-warning" style="color:white;">Reference</th>
+                            <th class="bg-warning" style="color:white;">Remise</th>
+                            <th class="bg-warning" style="color:white;">Actions</th>
+
+                            <!-- <th class="bg-warning" style="color:white;"></th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for Config in listeConfig %}
+                            <tr>
+                                <td class="table-light"><a href="{{ path('detailConfig', {'id': Config.id}) }}">
+                                {{ Config.NomConfig }}
+                                </a></td>
+                                <td class="table-light">{{ Config.DescriptionConfig }}</td>
+                                <td class="table-light">{{ Config.ReferenceConfig }}</td>
+                                <td class="table-light">{{ Config.RemiseConfig }}</td>
+                                <td class="table-light"><a class="btn btn-danger btn-sm" href="#">Supprimer</a> <a class="btn btn-primary btn-sm" href="#">Modifier</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+{% endif %}
+{% endblock %}
+
+
+
+
+

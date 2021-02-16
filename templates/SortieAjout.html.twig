@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choisir une Sortie{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    
+        <div class="w-75 mx-auto">
+        <div><h1>Choix de la sortie</h1></div>
+    {{ form_start(SortieAjoutForm) }}
+        {{ form_row(SortieAjoutForm.id, {
+            label: 'Sortie souhaitée'
+        }) }}
+
+        <a styke="color:black" class="text-dark btn bg-warning" href="{{ path('index') }}">Precedent</a>
+        <button type="submit" class="btn bg-warning">Suivant</button>
+    {{ form_end(SortieAjoutForm) }}
+    
+        </div>
+    </div>
+
+{% endblock %}
