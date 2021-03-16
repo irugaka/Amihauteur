@@ -38,6 +38,10 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Knp\Snappy\Pdf;
+
+
+
 
 
 
@@ -220,7 +224,6 @@ class DefaultController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($Echelle);
             $entityManager->flush();
-
             /*Redirection avec l'id de l'echelle*/
             return $this->redirectToRoute('ajoutSortie', array('id'=> $id));
         }
@@ -263,53 +266,63 @@ class DefaultController extends AbstractController
     /* Choix des accessoires d'une echelle dans la liste d'accessoires*/
     public function AjoutAccessoire(Request $request, int $id): Response
     {
-        $repository = $this->getDoctrine()->getRepository(Echelle::class);
-        $Echelle = $repository->find($id);
-        $form = $this->createForm(AccessoireType::class);
+        $Echelle = $this->getDoctrine()->getRepository(Echelle::class)->find($id);
+        $form = $this->createForm(AccessoireType2Type::class, $Echelle);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
-        {
-            /*Recuperation des données du formulaire*/
-            $Accessoire = $form->getData();
-            $Accessoires = $Accessoire['id'];
-            $tableau = count($Accessoires ,$mode = COUNT_NORMAL );
-            
-            /* Pour i allant de 0 jusqu'à le nombre de valeur sélectionnées, on ajoute chaque valeur une à une dans la relation entre Accessoire et Echelle*/
-            for ($i = 0; $i < $tableau; $i++)
-            {
-                $Prix = $Accessoire['prix'];
-                $EchelleAccessoire = new EchelleAccessoire();
-                $EchelleAccessoire->setAccessoire($Accessoires[$i]);
-                $EchelleAccessoire->setEchelle($Echelle);
-                $EchelleAccessoire->setQte($Prix);
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($EchelleAccessoire);
-                $entityManager->flush();
-            }
-
+        {   
+                
+            $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('ajoutChangementVolee', array('id'=> $id));
         }
-
-
-
-
-
-
-        return $this->render('AccessoireAjout.html.twig',['AccessoireAjoutForm' => $form->createView()]);
+        return $this->render('AccessoireAjout.html.twig',['Form' => $form->createView()]);
 
     }
 
     public function AjoutChangementVolee(Request $request, int $id): Response
     {
         $ChangementVolee = new ChangementVolee();
-        $session = $this->get('session');
-        $Hauteur = $session->get('hauteurmesure');
-        $form = $this->createForm(ChangementVoleeType::class,null,array('hauteur' => $Hauteur));
+        $Echelle = $this->getDoctrine()->getRepository(Echelle::class)->find($id);
+        $form = $this->createForm(ChangementVoleeType::class, $ChangementVolee);
         $form->handleRequest($request);
         
+        if ($form->isSubmitted() && $form->isValid())
+        {   
+            $repository = $this->getDoctrine()->getRepository(Echelle::class);
+            $Echelle = $repository->find($id);
+
+            $ChangementVolee->addEchelle($Echelle);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($ChangementVolee);
+            $entityManager->flush();
+
+            $repository = $this->getDoctrine()->getRepository(ChangementVolee::class);
+            $idChangement = $ChangementVolee->getId();
+            $Changement = $repository->find($idChangement);
+            
+            
+            $Echelle->addChangementVolee($Changement);
+            $entityManager->persist($Echelle);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('pdf', array('id'=> $id));
+        }
+
         return $this->render('ChangementVoleeAjout.html.twig',['ChangementVoleeAjoutForm' => $form->createView()]);
     }
-    
+
+    public function php()
+    {
+        $knpSnappyPdf->generateFromHtml(
+            $this->renderView(
+                'MyBundle:Foo:bar.html.twig',
+                array(
+                    'some'  => $vars
+                )
+            ),
+            '/path/to/the/file.pdf'
+        );
+    }
 
 }

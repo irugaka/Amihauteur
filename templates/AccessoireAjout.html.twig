@@ -1,24 +1,87 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}Choisir des accessoires{% endblock %}
 
 {% block body %}
 
 
 <div class="container">
-    
         <div class="w-75 mx-auto">
         <div><h1>Choix des Accessoires</h1></div>
-    {{ form_start(AccessoireAjoutForm) }}
-    {% for Accessoire in AccessoireAjoutForm.id %}
-      {{ form_row(Accessoire) }}
+    {{ form_start(Form) }}
+    <table>
+            <tr>
+                <td>
+                    <ul class="accessories" data-prototype="{{ form_widget(Form.EchelleAccessoire.vars.prototype)|e('html_attr') }}">
+                        {% for accessory in Form.EchelleAccessoire %}
+                            <li>
+                                <table>
+                                    <tr>
+                                        <td>{{ form_label(accessory.Accessoire) }}</td>
+                                        <td>{{ form_widget(accessory.Accessoire) }}</td>
+                                        <td>{{ form_errors(accessory.Accessoire) }}</td>
+                                    <tr>
+                                    <tr>
+                                        <td>{{ form_label(accessory.Qte) }}</td>
+                                        <td>{{ form_widget(accessory.Qte) }}</td>
+                                        <td>{{ form_errors(accessory.Qte) }}</td>
+                                    <tr>
+                                </table>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><button class="text-dark btn bg-warning" type="submit">Créer</button></td>
+                <td><button type="button" class="add_item_link text-dark btn bg-warning" data-collection-holder-class="accessories">Ajouter Accessoire</button></td>
+            </tr>
+        </table>
+    {{ form_end(Form) }}
 
-    {% endfor %}
-        <a styke="color:black" class="text-dark btn bg-warning" href="{{ path('index') }}">Precedent</a>
-        <button type="submit" class="btn bg-warning">Suivant</button>
-    {{ form_end(AccessoireAjoutForm) }}
+    
     
         </div>
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            const $accessoriessCollectionHolder = $('ul.accessories');
+            $accessoriessCollectionHolder.data('index', $accessoriessCollectionHolder.find('input').length);
+
+            $('body').on('click', '.add_item_link', function(e) {
+                var $accessoriessCollectionHolder = $(e.currentTarget).data('collectionHolderClass');
+                addFormToCollection($accessoriessCollectionHolder);
+            });
+
+            $accessoriessCollectionHolder.find('li').each(function() {
+                addTagFormDeleteLink($(this));
+            });
+        });
+
+        function addFormToCollection($collectionHolderClass) {
+            const $collectionHolder = $('.' + $collectionHolderClass);
+            const prototype = $collectionHolder.data('prototype');
+            const index = $collectionHolder.data('index');
+            let newForm = prototype;
+            newForm = newForm.replace(/__name__/g, index);
+            $collectionHolder.data('index', index + 1);
+            const $newFormLi = $('<li></li>').append(newForm);
+            $collectionHolder.append($newFormLi);
+            addTagFormDeleteLink($newFormLi);
+        }
+
+        function addTagFormDeleteLink($accessoryFormLi) {
+            const $removeFormButton = $('<button class="text-dark btn bg-warning" type="button">Delete this Accessory</button>');
+            $accessoryFormLi.append($removeFormButton);
+
+            $removeFormButton.on('click', function() {
+                $accessoryFormLi.remove();
+            });
+        }
+    </script>
 {% endblock %}

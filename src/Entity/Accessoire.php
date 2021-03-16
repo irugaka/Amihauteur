@@ -45,11 +45,17 @@ class Accessoire
     private $prixAccessoire;
 
     /**
+     * @var EchelleAccessoire[]|Collection
+     * @ORM\OneToMany(targetEntity="App\Entity\EchelleAccessoire", mappedBy="accessory", cascade={"persist"})
+     */
+    private $EchelleAccessoire;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->echelle = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->EchelleAccessoire = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -90,6 +96,32 @@ class Accessoire
     {
         $this->prixAccessoire = $prixAccessoire;
 
+        return $this;
+    }
+
+    public function getEchelleAccessoire(): Collection
+    {
+        return $this->EchelleAccessoire;
+    }
+
+    public function setEchelleAccessoire(Collection $EchelleAccessoire): self
+    {
+        $this->EchelleAccessoire = $EchelleAccessoire;
+        return $this;
+    }
+
+    public function addEchelleAccessoire(EchelleAccessoire $EchelleAccessoire): self
+    {
+        if (!$this->EchelleAccessoire->contains($EchelleAccessoire)) {
+            $this->EchelleAccessoire->add($EchelleAccessoire);
+            $EchelleAccessoire->setAccessoire($this);
+        }
+        return $this;
+    }
+
+    public function removeEchelleAccessoire(EchelleAccessoire $EchelleAccessoire): self
+    {
+        $this->EchelleAccessoire->removeElement($EchelleAccessoire);
         return $this;
     }
 

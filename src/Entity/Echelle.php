@@ -129,11 +129,17 @@ class Echelle
     private $palier;
 
     /**
+     * @var EchelleAccessoire[]|Collection
+     * @ORM\OneToMany(targetEntity="App\Entity\EchelleAccessoire", mappedBy="Echelle", cascade={"persist", "remove"})
+     */
+    private $EchelleAccessoire;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->accessoire = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->EchelleAccessoire = new ArrayCollection();
         $this->changementVolee = new \Doctrine\Common\Collections\ArrayCollection();
         $this->fixation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->palier = new \Doctrine\Common\Collections\ArrayCollection();
@@ -285,6 +291,32 @@ class Echelle
     {
         $this->palier->removeElement($palier);
 
+        return $this;
+    }
+
+    public function getEchelleAccessoire(): Collection
+    {
+        return $this->EchelleAccessoire;
+    }
+
+    public function setEchelleAccessoire(Collection $EchelleAccessoire): self
+    {
+        $this->EchelleAccessoire = $EchelleAccessoire;
+        return $this;
+    }
+
+    public function addEchelleAccessoire(EchelleAccessoire $EchelleAccessoire): self
+    {
+        if (!$this->EchelleAccessoire->contains($EchelleAccessoire)) {
+            $this->EchelleAccessoire->add($EchelleAccessoire);
+            $EchelleAccessoire->setEchelle($this);
+        }
+        return $this;
+    }
+
+    public function removeEchelleAccessoire(EchelleAccessoire $EchelleAccessoire): self
+    {
+        $this->EchelleAccessoire->removeElement($EchelleAccessoire);
         return $this;
     }
 
