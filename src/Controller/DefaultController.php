@@ -6,6 +6,8 @@ use App\Form\HauteurType;
 use App\Form\ChangementVoleeType;
 use App\Entity\Hauteur;
 use App\Entity\EchelleAccessoire;
+use App\Form\FixationType;
+use App\Entity\Fixation;
 use App\Form\SortieType;
 use App\Form\AccessoireType;
 use App\Form\AccessoireType2Type;
@@ -25,6 +27,7 @@ use App\Entity\Utilisateur;
 use App\Entity\ChangementVolee;
 use App\Entity\Config;
 use App\Entity\Role;
+use App\Form\FixationCollectionFormType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,7 +41,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+
 use Knp\Snappy\Pdf;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 
 
 
@@ -312,17 +317,54 @@ class DefaultController extends AbstractController
         return $this->render('ChangementVoleeAjout.html.twig',['ChangementVoleeAjoutForm' => $form->createView()]);
     }
 
-    public function php()
+    public function AjoutFixation(Request $request, int $id): Response
     {
-        $knpSnappyPdf->generateFromHtml(
-            $this->renderView(
-                'MyBundle:Foo:bar.html.twig',
-                array(
-                    'some'  => $vars
-                )
-            ),
-            '/path/to/the/file.pdf'
-        );
+        $Echelle = $this->getDoctrine()->getRepository(Echelle::class)->find($id);
+        $form = $this->createForm(FixationCollectionFormType::class, $Echelle);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {   
+            /*$repository = $this->getDoctrine()->getRepository(Echelle::class);
+            $Echelle = $repository->find($id);
+
+            $ChangementVolee->addEchelle($Echelle);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($ChangementVolee);
+            $entityManager->flush();
+
+            $repository = $this->getDoctrine()->getRepository(ChangementVolee::class);
+            $idChangement = $ChangementVolee->getId();
+            $Changement = $repository->find($idChangement);
+            
+            
+            $Echelle->addChangementVolee($Changement);
+            $entityManager->persist($Echelle);
+            $entityManager->flush();*/
+
+            return $this->redirectToRoute('pdf', array('id'=> $id));
+        }
+        return $this->render('AjoutFixation.html.twig',['Form' => $form->createView()]);
     }
+
+        public function toPdfAction(Pdf $knpSnappyPdf) {
+            
+            $repository = $this->getDoctrine()->getRepository(Echelle::class);
+            $Echelle = $repository->find(1);
+            $PrixSortie = $Echelle->getEchellesortie();
+            $ListeAccessoire = $Echelle->getEchelleAccessoire();
+
+
+            $html = $this->renderView(
+                'test.html.twig',
+            [
+                'ListeAccessoire' => $ListeAccessoire,
+                'Echelle' => $Echelle
+            ]);
+
+                return new PdfResponse(
+                    $knpSnappyPdf->getOutputFromHtml($html).'.pdf'
+                );
+        }
 
 }

@@ -49,3 +49,11 @@ accessoireAjout:
 ajoutChangementVolee:
     path: /ChangementVolee/{id}
     controller: App\Controller\DefaultController::ajoutChangementVolee
+
+pdf:
+    path: /Pdf
+    controller: App\Controller\DefaultController::toPdfAction
+
+ajoutFixation:
+    path: /AjoutFixation/{id}
+    controller: App\Controller\DefaultController::AjoutFixation

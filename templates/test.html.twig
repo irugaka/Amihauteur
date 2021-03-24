@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+
+<p style="text-align:left">
+SIRET 519 634 232 00010
+<span style="float:right;">Devis DEV 20206485</span>
+<br>
+76000 Rouen
+<span style="float:right;">En date du [Date du jour]</span>
+<br>
+<b>Votre contact : Karl GEST </b>
+<br>
+Tel : 07 60 34 00 41
+<br>
+Email : assistant@amihauteur.com
+</p>
+<br>
+<br>
+
+<div class="container">
+                <!-- Tableau qui affiche les config -->
+                <table id="ListeConfig" class="table table-striped table-bordered table-sm ">
+                    <thead>
+                        <tr>
+                            <!-- <th class="bg-warning">Nom</th> -->
+                            <th>Nom/Code</th>
+                            <th>Description</th>
+                            <th>Qte</th>
+                            <th>PU HT</th>
+                            <th>TVA</th>
+                            <th>Total HT</th>
+
+                            <!-- <th class="bg-warning"></th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                                <td class="table-light">
+                                {{ Echelle.echelleTypeEchelle.libelleTypeEchelle }}
+                                </a></td>
+                                <td class="table-light">-</td>
+                                <td class="table-light">-</td>
+                                <td class="table-light">-</td>
+                                <td class="table-light"> - </td>
+                                <td class="table-light">-</td>
+                            </tr>
+                    {% for Accessoire in ListeAccessoire %}
+                            <tr>
+                                <td class="table-light">
+                                {{ Accessoire.Accessoire.nomAccessoire }}
+                                </a></td>
+                                <td class="table-light">- {{ Accessoire.Accessoire.refAccessoire }}</td>
+                                <td class="table-light">{{ Accessoire.Qte }}</td>
+                                <td class="table-light">{{ Accessoire.Accessoire.prixAccessoire }}</td>
+                                <td class="table-light"> - </td>
+                                <td class="table-light"> {{ Accessoire.Accessoire.prixAccessoire * Accessoire.Qte }}</td>
+                            </tr>
+                            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
