@@ -57,3 +57,11 @@ pdf:
 ajoutFixation:
     path: /AjoutFixation/{id}
     controller: App\Controller\DefaultController::AjoutFixation
+
+pdf2:
+    path: pdf2
+    controller: App\Controller\DefaultController::toPdfActionLegend
+
+pdf3:
+    path : pdf3
+    controller: App\Controller\DefaultController::toPdfActionIncruste

@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<style>
+
+img {
+
+    width: auto;
+	height: 1500px;
+    border-width : 3px;
+    border-color : black;
+    border-style : solid;
+    display: block;
+    margin-right : auto;
+    margin-left : auto;
+    margin-top : auto;
+    margin-bottom : auto;
+}
+.contenant {
+  position: relative;
+  text-align: center;
+  color: black;
+}
+
+.texte_centrer {
+  position: absolute;
+  top: 750px;
+  left: 300px;
+  transform: translate(-50%, -50%);
+}
+
+.texte2
+{
+    position: absolute;
+  top: 600px;
+  left: 450px;
+  transform: translate(-50%, -50%);
+}
+
+.texte3
+{
+    position: absolute;
+  top: 1050px;
+  left: 760px;
+  transform: translate(-50%, -50%);
+}
+</style>
+
+<div class="contenant">
+    <img src="{{ absolute_url(asset('build/img/EchellePlan.jpg')) }}" alt="">
+  <div class="texte_centrer">3500</div>
+  <div class="texte2">3500</div>
+  <div class="texte3">3500</div>
+</div>

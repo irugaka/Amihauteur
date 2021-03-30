@@ -18,7 +18,9 @@
                             <li>
                                 <table>
                                     <tr>
-                                        <td>{{ form_label(fixation.Fix) }}</td>
+                                        <td>{{ form_label(fixation.departFixation) }}</td>
+                                        <td>{{ form_label(fixation.hauteurRelativeFixation) }}</td>
+                                        <td>{{ form_label(fixation.hauteurAbsolueFixation) }}</td>
                                     <tr>
                                 </table>
                             </li>
@@ -28,7 +30,7 @@
             </tr>
             <tr>
                 <td><button class="text-dark btn bg-warning" type="submit">Créer</button></td>
-                <td><button type="button" class="add_item_link text-dark btn bg-warning" data-collection-holder-class="accessories">Ajouter Fixation</button></td>
+                <td><button type="button" class="add_item_link text-dark btn bg-warning" data-collection-holder-class="fixation">Ajouter Fixation</button></td>
             </tr>
         </table>
     {{ form_end(Form) }}
@@ -45,12 +47,13 @@
         $(document).ready(function() {
             const $fixationsCollectionHolder = $('ul.fixation');
             $fixationsCollectionHolder.data('index', $fixationsCollectionHolder.find('input').length);
-            alert("js is working");
+            alert("fonctionnel");
 
             $('body').on('click', '.add_item_link', function(e) {
                 var $fixationssCollectionHolder = $(e.currentTarget).data('collectionHolderClass');
                 addFormToCollection($fixationssCollectionHolder);
-                alert("js is working");
+                alert("fonctionnel");
+                
             });
 
             $fixationsCollectionHolder.find('li').each(function() {
@@ -59,6 +62,7 @@
         });
 
         function addFormToCollection($collectionHolderClass) {
+            alert("js is working");
             const $collectionHolder = $('.' + $collectionHolderClass);
             const prototype = $collectionHolder.data('prototype');
             const index = $collectionHolder.data('index');

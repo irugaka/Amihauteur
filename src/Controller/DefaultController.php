@@ -325,22 +325,7 @@ class DefaultController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {   
-            /*$repository = $this->getDoctrine()->getRepository(Echelle::class);
-            $Echelle = $repository->find($id);
-
-            $ChangementVolee->addEchelle($Echelle);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($ChangementVolee);
-            $entityManager->flush();
-
-            $repository = $this->getDoctrine()->getRepository(ChangementVolee::class);
-            $idChangement = $ChangementVolee->getId();
-            $Changement = $repository->find($idChangement);
-            
-            
-            $Echelle->addChangementVolee($Changement);
-            $entityManager->persist($Echelle);
-            $entityManager->flush();*/
+            $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('pdf', array('id'=> $id));
         }
@@ -363,7 +348,44 @@ class DefaultController extends AbstractController
             ]);
 
                 return new PdfResponse(
-                    $knpSnappyPdf->getOutputFromHtml($html).'.pdf'
+                    $knpSnappyPdf->getOutputFromHtml($html),'Devis_Sans_Plan.pdf'
+                );
+        }
+
+
+        public function toPdfActionLegend(Pdf $knpSnappyPdf) {
+            
+            $repository = $this->getDoctrine()->getRepository(Echelle::class);
+            $Echelle = $repository->find(1);
+            $PrixSortie = $Echelle->getEchellesortie();
+            $ListeAccessoire = $Echelle->getEchelleAccessoire();
+            $basedir = __DIR__.'/../';
+            $filename = 'Devis';
+
+            $html = $this->renderView(
+                'test2.html.twig',[
+                    'basedir' => $basedir,
+                ],);
+
+                return new PdfResponse(
+                    $knpSnappyPdf->getOutputFromHtml($html),'Plan_Avec_Legende.pdf'
+                );
+        }
+
+        public function toPdfActionIncruste(Pdf $knpSnappyPdf) {
+            //return $this->render('test3.html.twig');
+            $repository = $this->getDoctrine()->getRepository(Echelle::class);
+            $Echelle = $repository->find(1);
+            $PrixSortie = $Echelle->getEchellesortie();
+            $ListeAccessoire = $Echelle->getEchelleAccessoire();
+            $basedir = __DIR__.'/../';
+            $filename = 'Devis';
+
+            $html = $this->renderView(
+                'test3.html.twig');
+
+                return new PdfResponse(
+                    $knpSnappyPdf->getOutputFromHtml($html),'Plan_Incrustation.pdf'
                 );
         }
 

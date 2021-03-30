@@ -135,6 +135,11 @@ class Echelle
     private $EchelleAccessoire;
 
     /**
+     * @ORM\OneToMany(targetEntity=EchelleFixation::class, mappedBy="Echelle")
+     */
+    private $Fixation;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -143,6 +148,7 @@ class Echelle
         $this->changementVolee = new \Doctrine\Common\Collections\ArrayCollection();
         $this->fixation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->palier = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Fixation = new ArrayCollection();
     }
 
     public function getId(): ?int
