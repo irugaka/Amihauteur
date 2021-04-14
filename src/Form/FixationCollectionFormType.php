@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Echelle;
+use App\Entity\EchelleFixation;
 use App\Entity\Fixation;
 
 class FixationCollectionFormType extends AbstractType
@@ -29,7 +30,7 @@ class FixationCollectionFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Echelle::class,
+            //'data_class' => EchelleFixation::class,
         ]);
     }
 }

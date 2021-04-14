@@ -22,6 +22,13 @@ class TypeEchelle
     private $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="prix", type="integer", nullable=false)
+     */
+    private $prix;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="libelle_type_echelle", type="string", length=50, nullable=false)
@@ -41,6 +48,18 @@ class TypeEchelle
     public function setLibelleTypeEchelle(string $libelleTypeEchelle): self
     {
         $this->libelleTypeEchelle = $libelleTypeEchelle;
+
+        return $this;
+    }
+
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(string $prix): self
+    {
+        $this->prix = $prix;
 
         return $this;
     }

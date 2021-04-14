@@ -18,9 +18,9 @@
                             <li>
                                 <table>
                                     <tr>
-                                        <td>{{ form_label(fixation.departFixation) }}</td>
-                                        <td>{{ form_label(fixation.hauteurRelativeFixation) }}</td>
-                                        <td>{{ form_label(fixation.hauteurAbsolueFixation) }}</td>
+                                        <td>{{ form_row(fixation.departFixation) }}</td>
+                                        <td>{{ form_row(fixation.hauteurRelativeFixation) }}</td>
+                                        <td>{{ form_row(fixation.hauteurAbsolueFixation) }}</td>
                                     <tr>
                                 </table>
                             </li>
@@ -47,12 +47,10 @@
         $(document).ready(function() {
             const $fixationsCollectionHolder = $('ul.fixation');
             $fixationsCollectionHolder.data('index', $fixationsCollectionHolder.find('input').length);
-            alert("fonctionnel");
 
             $('body').on('click', '.add_item_link', function(e) {
                 var $fixationssCollectionHolder = $(e.currentTarget).data('collectionHolderClass');
                 addFormToCollection($fixationssCollectionHolder);
-                alert("fonctionnel");
                 
             });
 
@@ -62,7 +60,6 @@
         });
 
         function addFormToCollection($collectionHolderClass) {
-            alert("js is working");
             const $collectionHolder = $('.' + $collectionHolderClass);
             const prototype = $collectionHolder.data('prototype');
             const index = $collectionHolder.data('index');

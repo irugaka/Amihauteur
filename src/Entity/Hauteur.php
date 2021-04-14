@@ -28,6 +28,13 @@ class Hauteur
      */
     private $afranchirHauteur;
 
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="prix", type="integer", nullable=true)
+     */
+    private $prix;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,5 +52,18 @@ class Hauteur
         return $this;
     }
 
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?int $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    
 
 }

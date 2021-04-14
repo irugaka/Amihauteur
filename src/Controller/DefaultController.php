@@ -188,6 +188,16 @@ class DefaultController extends AbstractController
             $idHauteur = $class->getId();
             $Hauteur = $repository->find($idHauteur);
             $hauteurmesure = $Hauteur->getAfranchirHauteur();
+            if($hauteurmesure>5999)
+            {
+                $Hauteur->setPrix(3000);
+            }
+            else
+            {
+                $Hauteur->setPrix(1500);
+            }
+            $entityManager->persist($class);
+            $entityManager->flush();
             /* On récupère la session pour y affecter une variable qui sera accessible partout*/
             $session = $this->get('session');
             $session->set('hauteurmesure', $hauteurmesure);
@@ -277,7 +287,7 @@ class DefaultController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {   
-                
+            
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('ajoutChangementVolee', array('id'=> $id));
         }
@@ -319,26 +329,29 @@ class DefaultController extends AbstractController
 
     public function AjoutFixation(Request $request, int $id): Response
     {
+        $Fixation = new Fixation();
         $Echelle = $this->getDoctrine()->getRepository(Echelle::class)->find($id);
-        $form = $this->createForm(FixationCollectionFormType::class, $Echelle);
+    $form = $this->createForm(FixationCollectionFormType::class/*, Echelle::class*/);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
-        {   
+        {
+            $Data = $form->getData();
+            echo dump($Data['Fixation']);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('pdf', array('id'=> $id));
+            //return $this->redirectToRoute('pdf', array('id'=> $id));
         }
         return $this->render('AjoutFixation.html.twig',['Form' => $form->createView()]);
     }
 
-        public function toPdfAction(Pdf $knpSnappyPdf) {
+        public function toPdfAction(Request $request, Pdf $knpSnappyPdf) {
             
             $repository = $this->getDoctrine()->getRepository(Echelle::class);
-            $Echelle = $repository->find(1);
+            $Echelle = $repository->find(5);
             $PrixSortie = $Echelle->getEchellesortie();
             $ListeAccessoire = $Echelle->getEchelleAccessoire();
-
+            $i = 1;
 
             $html = $this->renderView(
                 'test.html.twig',
@@ -347,16 +360,25 @@ class DefaultController extends AbstractController
                 'Echelle' => $Echelle
             ]);
 
+            $html2 = $this->renderView(
+                'test3.html.twig',
+            [
+                'Echelle' => $Echelle,
+            ]);
+
                 return new PdfResponse(
-                    $knpSnappyPdf->getOutputFromHtml($html),'Devis_Sans_Plan.pdf'
+                    $knpSnappyPdf->getOutputFromHtml(array($html,$html2)),'Devis_Sans_Plan.pdf'
                 );
+
+
+                
         }
 
 
         public function toPdfActionLegend(Pdf $knpSnappyPdf) {
             
             $repository = $this->getDoctrine()->getRepository(Echelle::class);
-            $Echelle = $repository->find(1);
+            $Echelle = $repository->find(5);
             $PrixSortie = $Echelle->getEchellesortie();
             $ListeAccessoire = $Echelle->getEchelleAccessoire();
             $basedir = __DIR__.'/../';
@@ -375,14 +397,17 @@ class DefaultController extends AbstractController
         public function toPdfActionIncruste(Pdf $knpSnappyPdf) {
             //return $this->render('test3.html.twig');
             $repository = $this->getDoctrine()->getRepository(Echelle::class);
-            $Echelle = $repository->find(1);
+            $Echelle = $repository->find(5);
             $PrixSortie = $Echelle->getEchellesortie();
             $ListeAccessoire = $Echelle->getEchelleAccessoire();
             $basedir = __DIR__.'/../';
             $filename = 'Devis';
 
             $html = $this->renderView(
-                'test3.html.twig');
+                'test3.html.twig',
+            [
+                'Echelle' => $Echelle,
+            ]);
 
                 return new PdfResponse(
                     $knpSnappyPdf->getOutputFromHtml($html),'Plan_Incrustation.pdf'

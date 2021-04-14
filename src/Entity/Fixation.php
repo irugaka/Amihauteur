@@ -45,11 +45,10 @@ class Fixation
     private $hauteurAbsolueFixation;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Echelle", mappedBy="fixation")
+     * @var EchelleFixation[]|Collection
+     * @ORM\OneToMany(targetEntity="App\Entity\EchelleFixation", mappedBy="fixation", cascade={"persist"})
      */
-    private $echelle;
+    private $EchelleFixation;
 
     /**
      * Constructor
@@ -100,30 +99,23 @@ class Fixation
         return $this;
     }
 
-    /**
-     * @return Collection|Echelle[]
-     */
-    public function getEchelle(): Collection
+    public function getEchelleFixation(): Collection
     {
-        return $this->echelle;
+        return $this->EchelleFixation;
     }
 
-    public function addEchelle(Echelle $echelle): self
+    public function addEchelleFixation(EchelleFixation $EchelleFixation): self
     {
-        if (!$this->echelle->contains($echelle)) {
-            $this->echelle[] = $echelle;
-            $echelle->addFixation($this);
+        if (!$this->EchelleFixation->contains($EchelleFixation)) {
+            $this->EchelleFixation->add($EchelleFixation);
+            $EchelleFixation->setFixation($this);
         }
-
         return $this;
     }
 
-    public function removeEchelle(Echelle $echelle): self
+    public function removeEchelleFixation(EchelleFixation $EchelleFixation): self
     {
-        if ($this->echelle->removeElement($echelle)) {
-            $echelle->removeFixation($this);
-        }
-
+        $this->EchelleFixation->removeElement($EchelleFixation);
         return $this;
     }
 

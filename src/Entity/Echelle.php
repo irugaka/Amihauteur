@@ -99,19 +99,10 @@ class Echelle
     private $changementVolee;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Fixation", inversedBy="echelle")
-     * @ORM\JoinTable(name="echelle_fixation",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="echelle_id", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="fixation_id", referencedColumnName="id")
-     *   }
-     * )
+     * @var EchelleFixation[]|Collection
+     * @ORM\OneToMany(targetEntity="App\Entity\EchelleFixation", mappedBy="Echelle", cascade={"persist", "remove"})
      */
-    private $fixation;
+    private $EchelleFixation;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -135,20 +126,14 @@ class Echelle
     private $EchelleAccessoire;
 
     /**
-     * @ORM\OneToMany(targetEntity=EchelleFixation::class, mappedBy="Echelle")
-     */
-    private $Fixation;
-
-    /**
      * Constructor
      */
     public function __construct()
     {
+        $this->EchelleFixation = new ArrayCollection();
         $this->EchelleAccessoire = new ArrayCollection();
         $this->changementVolee = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->fixation = new \Doctrine\Common\Collections\ArrayCollection();
         $this->palier = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->Fixation = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -253,30 +238,6 @@ class Echelle
     }
 
     /**
-     * @return Collection|Fixation[]
-     */
-    public function getFixation(): Collection
-    {
-        return $this->fixation;
-    }
-
-    public function addFixation(Fixation $fixation): self
-    {
-        if (!$this->fixation->contains($fixation)) {
-            $this->fixation[] = $fixation;
-        }
-
-        return $this;
-    }
-
-    public function removeFixation(Fixation $fixation): self
-    {
-        $this->fixation->removeElement($fixation);
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Palier[]
      */
     public function getPalier(): Collection
@@ -323,6 +284,33 @@ class Echelle
     public function removeEchelleAccessoire(EchelleAccessoire $EchelleAccessoire): self
     {
         $this->EchelleAccessoire->removeElement($EchelleAccessoire);
+        return $this;
+    }
+
+
+    public function getEchelleFixation(): Collection
+    {
+        return $this->EchelleFixation;
+    }
+
+    public function setEchelleFixation(Collection $EchelleFixation): self
+    {
+        $this->EchelleFixation = $EchelleFixation;
+        return $this;
+    }
+
+    public function addEchelleFixation(EchelleFixation $EchelleFixation): self
+    {
+        if (!$this->EchelleFixation->contains($EchelleFixation)) {
+            $this->EchelleFixation->add($EchelleFixation);
+            $EchelleFixation->setEchelle($this);
+        }
+        return $this;
+    }
+
+    public function removeEchelleFixation(EchelleFixation $EchelleFixation): self
+    {
+        $this->EchelleFixation->removeElement($EchelleFixation);
         return $this;
     }
 

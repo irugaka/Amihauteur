@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Fixation;
+use App\Entity\Echelle;
 use App\Entity\EchelleFixation;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
