@@ -21,7 +21,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=180, unique=true, nullable=true)
      */
     private $email;
 
@@ -32,9 +32,45 @@ class User implements UserInterface
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $Telephone;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Adresse;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Entreprise;
+
+    /**
+     * @ORM\Column(type="string", length=6)
+     */
+    private $CodePostal;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Pays;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ManyToOne;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Typeuser::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $TypeUser;
 
     public function getId(): ?int
     {
@@ -68,11 +104,11 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
+        $role = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $role[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        return array_unique($role);
     }
 
     public function setRoles(array $roles): self
@@ -115,5 +151,89 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->Telephone;
+    }
+
+    public function setTelephone(?string $Telephone): self
+    {
+        $this->Telephone = $Telephone;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->Adresse;
+    }
+
+    public function setAdresse(string $Adresse): self
+    {
+        $this->Adresse = $Adresse;
+
+        return $this;
+    }
+
+    public function getEntreprise(): ?string
+    {
+        return $this->Entreprise;
+    }
+
+    public function setEntreprise(?string $Entreprise): self
+    {
+        $this->Entreprise = $Entreprise;
+
+        return $this;
+    }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->CodePostal;
+    }
+
+    public function setCodePostal(string $CodePostal): self
+    {
+        $this->CodePostal = $CodePostal;
+
+        return $this;
+    }
+
+    public function getPays(): ?string
+    {
+        return $this->Pays;
+    }
+
+    public function setPays(string $Pays): self
+    {
+        $this->Pays = $Pays;
+
+        return $this;
+    }
+
+    public function getManyToOne(): ?string
+    {
+        return $this->ManyToOne;
+    }
+
+    public function setManyToOne(string $ManyToOne): self
+    {
+        $this->ManyToOne = $ManyToOne;
+
+        return $this;
+    }
+
+    public function getTypeUser(): ?Typeuser
+    {
+        return $this->TypeUser;
+    }
+
+    public function setTypeUser(?Typeuser $TypeUser): self
+    {
+        $this->TypeUser = $TypeUser;
+
+        return $this;
     }
 }

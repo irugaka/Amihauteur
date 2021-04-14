@@ -79,6 +79,7 @@ class DefaultController extends AbstractController
     /*1 Ajout d'une nouvelle configuration lorsque l'utilisateur clique sur "Ajouter"*/
     public function AjoutConfig(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         /* On indique qu'on va utiliser une nouvelle config*/
         $class = new Config();
         /*On creer le form en utilisant celui préalablement crée "ConfigType"*/
