@@ -2,44 +2,62 @@
 
 namespace App\Controller;
 
+use App\Entity\TypeUser;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/register", name="app_register")
+     * @Route("/register/{verification}", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, int $verification): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-
+            
+            if($verification == 1)
+            {
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+            }
+            
+            $repository = $this->getDoctrine()->getRepository(TypeUser::class);
+            $typeuser = $repository->find($verification);
+            $user->setUserTypeuser($typeuser);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+            if($verification == 2)
+            {
+                $session = $this->get('session');
+                $session->set('valeurverification', 2);
+                $redirection = $this->redirectToRoute('ajout', array('verification' => $verification,));
+            }
+            else
+            {
+                $redirection = $this->redirectToRoute('logout');
+            }
 
-            return $this->redirectToRoute('login');
+            return $redirection;
+            
         }
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+            'registrationForm' => $form->createView(), 'verification' => $verification,
         ]);
     }
 }

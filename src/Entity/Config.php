@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,6 +50,21 @@ class Config
      * @ORM\Column(name="remise_config", type="integer", nullable=false)
      */
     private $remiseConfig;
+
+    /**
+     * @ORM\OneToMany(targetEntity=PDF::class, mappedBy="Config")
+     */
+    private $ConfigPDF;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="ConfigUser")
+     */
+    private $User;
+
+    public function __construct()
+    {
+        $this->ConfigPDF = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -98,6 +115,48 @@ class Config
     public function setRemiseConfig(int $remiseConfig): self
     {
         $this->remiseConfig = $remiseConfig;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PDF[]
+     */
+    public function getConfigPDF(): Collection
+    {
+        return $this->ConfigPDF;
+    }
+
+    public function addConfigPDF(PDF $configPDF): self
+    {
+        if (!$this->ConfigPDF->contains($configPDF)) {
+            $this->ConfigPDF[] = $configPDF;
+            $configPDF->setConfig($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConfigPDF(PDF $configPDF): self
+    {
+        if ($this->ConfigPDF->removeElement($configPDF)) {
+            // set the owning side to null (unless already changed)
+            if ($configPDF->getConfig() === $this) {
+                $configPDF->setConfig(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): self
+    {
+        $this->User = $User;
 
         return $this;
     }

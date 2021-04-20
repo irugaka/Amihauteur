@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -37,7 +39,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\Column(type="string", length=9, nullable=true)
      */
     private $Telephone;
 
@@ -62,15 +64,35 @@ class User implements UserInterface
     private $Pays;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $ManyToOne;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Typeuser::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Typeuser::class, inversedBy="userss")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $TypeUser;
+    private $UserTypeuser;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $prenom;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville;
+
+    /**
+     * @ORM\OneToMany(targetEntity=config::class, mappedBy="User")
+     */
+    private $ConfigUser;
+
+    public function __construct()
+    {
+        $this->ConfigUser = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -213,26 +235,80 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getManyToOne(): ?string
+    public function getUserTypeuser(): ?typeuser
     {
-        return $this->ManyToOne;
+        return $this->UserTypeuser;
     }
 
-    public function setManyToOne(string $ManyToOne): self
+    public function setUserTypeuser(?typeuser $Typeuser): self
     {
-        $this->ManyToOne = $ManyToOne;
+        $this->UserTypeuser = $Typeuser;
 
         return $this;
     }
 
-    public function getTypeUser(): ?Typeuser
+    public function getNom(): ?string
     {
-        return $this->TypeUser;
+        return $this->nom;
     }
 
-    public function setTypeUser(?Typeuser $TypeUser): self
+    public function setNom(string $nom): self
     {
-        $this->TypeUser = $TypeUser;
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|config[]
+     */
+    public function getConfigUser(): Collection
+    {
+        return $this->ConfigUser;
+    }
+
+    public function addConfigUser(config $configUser): self
+    {
+        if (!$this->ConfigUser->contains($configUser)) {
+            $this->ConfigUser[] = $configUser;
+            $configUser->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConfigUser(config $configUser): self
+    {
+        if ($this->ConfigUser->removeElement($configUser)) {
+            // set the owning side to null (unless already changed)
+            if ($configUser->getUser() === $this) {
+                $configUser->setUser(null);
+            }
+        }
 
         return $this;
     }

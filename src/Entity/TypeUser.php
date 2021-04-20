@@ -25,13 +25,15 @@ class TypeUser
     private $LibelleTypeUser;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="TypeUser")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="Typeuser")
      */
-    private $users;
+    private $userss;
+
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->userss = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -54,27 +56,27 @@ class TypeUser
     /**
      * @return Collection|User[]
      */
-    public function getUsers(): Collection
+    public function getUserss(): Collection
     {
-        return $this->users;
+        return $this->userss;
     }
 
-    public function addUser(User $user): self
+    public function addUserss(User $userss): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setTypeUser($this);
+        if (!$this->userss->contains($userss)) {
+            $this->userss[] = $userss;
+            $userss->setTypeuser($this);
         }
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function removeUserss(User $userss): self
     {
-        if ($this->users->removeElement($user)) {
+        if ($this->userss->removeElement($userss)) {
             // set the owning side to null (unless already changed)
-            if ($user->getTypeUser() === $this) {
-                $user->setTypeUser(null);
+            if ($userss->getTypeuser() === $this) {
+                $userss->setTypeuser(null);
             }
         }
 

@@ -13,10 +13,16 @@ class SecurityController extends AbstractController
      * @Route("/login", name="app_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
-    {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+    {   
+        $session = $this->get('session');
+        if($session->get('valeurverification') == 2)
+        {
+            return $this->redirectToRoute('logout');
+        }
+         if ($this->getUser()) {
+            $session->set('valeurverification', 1);
+             return $this->redirectToRoute('index', [ $this->getUser() ]);
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -31,6 +37,8 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
+        $session = $this->get('session');
+        $session->clear();
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
         
     }

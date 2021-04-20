@@ -41,6 +41,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 use Knp\Snappy\Pdf;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
@@ -55,31 +56,53 @@ class DefaultController extends AbstractController
     public int $abc;
     
     /* Page d'accueil lorsque l'utilisateur se connecte ou reviens sur le site en session ou clique sur "Accueil"*/
-    public function index(Request $request): Response
+    public function index(Request $request, UserInterface $user): Response
     {
+        $iduser = $user;
+        $session = $this->get('session');
+        $session->set('iduser', $iduser);
+
+        if($session->get('valeurverification') == 1)
+        {
         /* On cherche toutes les configs dans la base*/
         /*TODO Config selon l'utilisateur*/
 		$em = $this->getDoctrine()->getManager();
         $listeConfig = $em->getRepository(Config::class)
                                 ->FindAll();
+        $session = $this->get('session');
+        $valeur = $session->get('valeurverification');
         /* On fait le rendering du formulaire vers Index.html.twig en passant la liste des configs obtenue plus haut*/          
-        return $this->render('Index.html.twig',array('listeConfig' => $listeConfig));
+        return $this->render('Index.html.twig',array('listeConfig' => $listeConfig, 'id' => $iduser));
+        }
+        else{
+            return $this->redirectToRoute('login');
+        }
     }
 
     /* Affichage de la page donnant toutes les informations sur une config (Echelle type d'echelle, remise....)*/
     public function detailConfig(Request $request, int $id): Response
     {
+        $session = $this->get('session');
+        if($session->get('valeurverification') == 1)
+        {
+
+        $session = $this->get('session');
+        $valeur = $session->get('valeurverification');
         $em = $this->getDoctrine()->getManager();
         $listeConfig = $em->getRepository(Config::class)
                                 ->find($id);
-        return $this->render('detailConfig.html.twig',
-    array('listeConfig' => $listeConfig, 'id' => $id));
+        $retour = $this->render('detailConfig.html.twig',
+    array('listeConfig' => $listeConfig, 'id' => $id, 'valeur' => $valeur));
+}
+else{
+    return $this->redirectToRoute('login');
+}
     }
 
     /*1 Ajout d'une nouvelle configuration lorsque l'utilisateur clique sur "Ajouter"*/
-    public function AjoutConfig(Request $request): Response
+    public function AjoutConfig(Request $request, int $verification): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+         
         /* On indique qu'on va utiliser une nouvelle config*/
         $class = new Config();
         /*On creer le form en utilisant celui préalablement crée "ConfigType"*/
@@ -99,12 +122,16 @@ class DefaultController extends AbstractController
         }
         /* On fait le rendering du formulaire vers ConfigAjout.html.twig en passant le formulaire crée plus haut*/  
         return $this->render('ConfigAjout.html.twig', ['ConfigAjoutForm' => $form->createView(),]);
+        
     }
 
     /*2 Ajout du type d'echelle lorsque l'utilisateur clique sur suivant dans la page d'ajout d'une config*/
     public function AjoutEchelle(Request $request, int $id): Response
     {
-        /* On renomme la variable de l'id de la config precedemment ajoutée*/
+        $session = $this->get('session');
+        if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
+        {
+            /* On renomme la variable de l'id de la config precedemment ajoutée*/
         $idconfig = $id;
         /*On indique qu'on va utiliser une nouvelle Echelle*/
         $class = new Echelle();
@@ -130,14 +157,21 @@ class DefaultController extends AbstractController
             return $this->redirectToRoute('ChoixNorme', array('id'=> $idEchelle));
 
         }
-
-        /*On fait le rendering du formulaire en envoyant celui-ci dans le template*/
-        return $this->render('AjoutEchelle.html.twig', ['EchelleAjoutForm' => $form->createView()]);
+        return $this->render('AjoutEchelle.html.twig', ['EchelleAjoutForm' => $form->createView(),'valeur' => $session->get('verification')]);
+        }
+        else{
+            return $this->render('Denied.html.twig');
+        }
+        
     }
 
     /*4 Choix des normes*/
     public function ChoixNorme(Request $request, int $id): Response
     {
+
+        $session = $this->get('session');
+        if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
+        {
         /*Creation du formulaire de Norme*/
         $form = $this->createForm(NormeType::class);
         $form->handleRequest($request);
@@ -167,11 +201,19 @@ class DefaultController extends AbstractController
         return $this->render('ChoixNorme.html.twig',['NormeAjoutForm' => $form->createView()]);
 
     }
+    else{
+        return $this->render('Denied.html.twig');
+    }
+        
+    }
 
 
     /* 5 Ajout d'une hauteur */
     public function AjoutHauteur(Request $request, int $id): Response
     {
+        $session = $this->get('session');
+        if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
+        {
         /* On utilise une nouvelle hauteur*/
         $class = new Hauteur();
         /*Creation du formulaire de la hauteur*/
@@ -214,11 +256,19 @@ class DefaultController extends AbstractController
         }
         /* Rendering avec le form en parametre*/
         return $this->render('HauteurAjout.html.twig',['HauteurAjoutForm' => $form->createView()]);
+
+    }
+    else{
+        return $this->render('Denied.html.twig');
+    }
     }
 
     /*6 Ajout d'une entree */
     public function AjoutEntree(Request $request, int $id): Response
     {
+        $session = $this->get('session');
+        if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
+        {
         /* On utilise une nouvelle Entree*/
         $class = new Entree();
         /*Creation du formulaire de l'entree*/
@@ -245,11 +295,19 @@ class DefaultController extends AbstractController
         }
         /*Renderingen passant le form dans le twig*/
         return $this->render('EntreeAjout.html.twig',['EntreeAjoutForm' => $form->createView()]);
+
+    }
+    else{
+        return $this->render('Denied.html.twig');
+    }
     }
 
     /* 7 Ajout d'une sortie */
     public function AjoutSortie(Request $request, int $id): Response
     {
+        $session = $this->get('session');
+        if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
+        {
         /* On utilise une nouvelle Sortie*/
         $class = new Sortie();
         /*Creation du formulaire de la Sortie*/
@@ -278,10 +336,18 @@ class DefaultController extends AbstractController
 
         return $this->render('SortieAjout.html.twig',['SortieAjoutForm' => $form->createView()]);
     }
+    else{
+        return $this->render('Denied.html.twig');
+    }
+    }
 
     /* Choix des accessoires d'une echelle dans la liste d'accessoires*/
     public function AjoutAccessoire(Request $request, int $id): Response
     {
+
+        $session = $this->get('session');
+        if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
+        {
         $Echelle = $this->getDoctrine()->getRepository(Echelle::class)->find($id);
         $form = $this->createForm(AccessoireType2Type::class, $Echelle);
         $form->handleRequest($request);
@@ -293,13 +359,18 @@ class DefaultController extends AbstractController
             return $this->redirectToRoute('ajoutChangementVolee', array('id'=> $id));
         }
         return $this->render('AccessoireAjout.html.twig',['Form' => $form->createView()]);
-
+    }
+    else{
+        return $this->render('Denied.html.twig');
+    }
     }
 
     public function AjoutChangementVolee(Request $request, int $id): Response
     {
+        $session = $this->get('session');
+        if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
+        {
         $ChangementVolee = new ChangementVolee();
-        $Echelle = $this->getDoctrine()->getRepository(Echelle::class)->find($id);
         $form = $this->createForm(ChangementVoleeType::class, $ChangementVolee);
         $form->handleRequest($request);
         
@@ -327,9 +398,16 @@ class DefaultController extends AbstractController
 
         return $this->render('ChangementVoleeAjout.html.twig',['ChangementVoleeAjoutForm' => $form->createView()]);
     }
+    else{
+        return $this->render('Denied.html.twig');
+    }
+    }
 
     public function AjoutFixation(Request $request, int $id): Response
     {
+        $session = $this->get('session');
+        if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
+        {
         $Fixation = new Fixation();
         $Echelle = $this->getDoctrine()->getRepository(Echelle::class)->find($id);
     $form = $this->createForm(FixationCollectionFormType::class/*, Echelle::class*/);
@@ -344,10 +422,23 @@ class DefaultController extends AbstractController
             //return $this->redirectToRoute('pdf', array('id'=> $id));
         }
         return $this->render('AjoutFixation.html.twig',['Form' => $form->createView()]);
+
+    }
+    else{
+        return $this->render('Denied.html.twig');
+    }
     }
 
         public function toPdfAction(Request $request, Pdf $knpSnappyPdf) {
-            
+        $session = $this->get('session');
+
+        if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
+        {
+            $user = $session->get('iduser');
+        if($session->get('valeurverification') == 2)
+        {
+            $session->clear();
+        }
             $repository = $this->getDoctrine()->getRepository(Echelle::class);
             $Echelle = $repository->find(5);
             $PrixSortie = $Echelle->getEchellesortie();
@@ -358,7 +449,7 @@ class DefaultController extends AbstractController
                 'test.html.twig',
             [
                 'ListeAccessoire' => $ListeAccessoire,
-                'Echelle' => $Echelle
+                'Echelle' => $Echelle, 
             ]);
 
             $html2 = $this->renderView(
@@ -367,9 +458,29 @@ class DefaultController extends AbstractController
                 'Echelle' => $Echelle,
             ]);
 
-                return new PdfResponse(
+                /*return new PdfResponse(
                     $knpSnappyPdf->getOutputFromHtml(array($html,$html2)),'Devis_Sans_Plan.pdf'
+                );*/
+                $knpSnappyPdf->generateFromHtml(
+                    $this->renderView(
+                        'test.html.twig',['ListeAccessoire' => $ListeAccessoire,
+                        'Echelle' => $Echelle, ]
+                    ),
+                    '../Devis/Devis1.pdf'
                 );
+
+                $knpSnappyPdf->generateFromHtml(
+                    $this->renderView(
+                        'test3.html.twig',['ListeAccessoire' => $ListeAccessoire,
+                        'Echelle' => $Echelle, ]
+                    ),
+                    '../Devis/Devis2.pdf'
+                );
+            }
+            else{
+                return $this->render('Denied.html.twig');
+            }
+            return $this->redirectToRoute('index');
 
 
                 

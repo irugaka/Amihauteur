@@ -21,10 +21,10 @@
     <input type="password" name="password" id="inputPassword" class="form-control" required>
     <br>
     Pas encore de compte ?
-    <a href=" {{ path('register') }} ">Cliquez ici</a>
+    <a href=" {{ path('register',{ 'Verification' : 1 }) }} ">Cliquez ici</a>
     <br>
     Vous souhaitez réaliser un devis sans vous inscrire ?
-    <a href=" {{ path('register') }} ">Cliquez ici</a>
+    <a href=" {{ path('register', { 'Verification' : 2 }) }} ">Cliquez ici</a>
     <br>
 
     <input type="hidden" name="_csrf_token"

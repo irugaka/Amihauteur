@@ -1,13 +1,13 @@
 register:
-    path: /register
+    path: /register/{Verification}
     controller: App\Controller\RegistrationController::register
     
 index:
-    path: /
+    path: /index
     controller: App\Controller\DefaultController::index
 
 login:
-    path: /login
+    path: /
     controller: App\Controller\SecurityController::login
 
 logout:
@@ -15,7 +15,7 @@ logout:
     methods: GET
 
 ajout:
-    path: /ajout
+    path: /ajout/{verification}
     controller: App\Controller\DefaultController::AjoutConfig
 
 ajoutEchelle:
