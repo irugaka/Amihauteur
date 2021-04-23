@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\PDF;
+use App\Entity\EntityPDF;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method PDF|null find($id, $lockMode = null, $lockVersion = null)
- * @method PDF|null findOneBy(array $criteria, array $orderBy = null)
- * @method PDF[]    findAll()
- * @method PDF[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method EntityPDF|null find($id, $lockMode = null, $lockVersion = null)
+ * @method EntityPDF|null findOneBy(array $criteria, array $orderBy = null)
+ * @method EntityPDF[]    findAll()
+ * @method EntityPDF[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PDFRepository extends ServiceEntityRepository
+class EntityPDFRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, PDF::class);
+        parent::__construct($registry, EntityPDF::class);
     }
 
     // /**

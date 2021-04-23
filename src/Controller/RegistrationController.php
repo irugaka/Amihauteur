@@ -45,6 +45,7 @@ class RegistrationController extends AbstractController
             {
                 $session = $this->get('session');
                 $session->set('valeurverification', 2);
+                $session->set('iduser',$user);
                 $redirection = $this->redirectToRoute('ajout', array('verification' => $verification,));
             }
             else

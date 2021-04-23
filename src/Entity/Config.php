@@ -52,12 +52,12 @@ class Config
     private $remiseConfig;
 
     /**
-     * @ORM\OneToMany(targetEntity=PDF::class, mappedBy="Config")
+     * @ORM\OneToMany(targetEntity=EntityPDF::class, mappedBy="Config", cascade={"persist"})
      */
     private $ConfigPDF;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="ConfigUser")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="ConfigUser", cascade={"persist"})
      */
     private $User;
 
@@ -120,14 +120,14 @@ class Config
     }
 
     /**
-     * @return Collection|PDF[]
+     * @return Collection|EntityPDF[]
      */
     public function getConfigPDF(): Collection
     {
         return $this->ConfigPDF;
     }
 
-    public function addConfigPDF(PDF $configPDF): self
+    public function addConfigPDF(EntityPDF $configPDF): self
     {
         if (!$this->ConfigPDF->contains($configPDF)) {
             $this->ConfigPDF[] = $configPDF;
@@ -137,7 +137,7 @@ class Config
         return $this;
     }
 
-    public function removeConfigPDF(PDF $configPDF): self
+    public function removeConfigPDF(EntityPDF $configPDF): self
     {
         if ($this->ConfigPDF->removeElement($configPDF)) {
             // set the owning side to null (unless already changed)

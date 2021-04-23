@@ -26,9 +26,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <ul class="navbar-nav mr-auto">
 <li class="nav-item active">
-<img src="{{ asset('build/img/amihauteur.png') }}" alt="Ami-hauteur logo" width=8%>
+<img src="{{ asset('build/img/amihauteur.png') }}" alt="Ami-hauteur logo" width=15%>
 {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-  <a class="navbar-brand" href=" {{ path('logout') }} ">Accueil</a>
+  <a class="navbar-brand" alt"Se deconnecter" href=" {{ path('logout') }} ">Accueil</a>
   {% endif %}
   {% if is_granted('IS_AUTHENTICATED_FULLY') %}
   <a class="navbar-brand" href=" {{ path('index') }} ">Accueil</a>

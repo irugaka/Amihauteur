@@ -23,7 +23,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for Config in listeConfig %}
+                        {% for Config in listeConfig.getConfigUser %}
                             <tr>
                                 <td class="table-light"><a href="{{ path('detailConfig', {'id': Config.id}) }}">
                                 {{ Config.NomConfig }}

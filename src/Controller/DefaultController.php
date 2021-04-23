@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Form\HauteurType;
 use App\Form\ChangementVoleeType;
+use App\Entity\EntityPDF;
 use App\Entity\Hauteur;
+use App\Entity\User;
 use App\Entity\EchelleAccessoire;
 use App\Form\FixationType;
 use App\Entity\Fixation;
@@ -66,11 +68,11 @@ class DefaultController extends AbstractController
         {
         /* On cherche toutes les configs dans la base*/
         /*TODO Config selon l'utilisateur*/
-		$em = $this->getDoctrine()->getManager();
-        $listeConfig = $em->getRepository(Config::class)
-                                ->FindAll();
         $session = $this->get('session');
         $valeur = $session->get('valeurverification');
+		$em = $this->getDoctrine()->getManager();
+        $listeConfig = $em->getRepository(User::class)->find($iduser->getId());
+        
         /* On fait le rendering du formulaire vers Index.html.twig en passant la liste des configs obtenue plus haut*/          
         return $this->render('Index.html.twig',array('listeConfig' => $listeConfig, 'id' => $iduser));
         }
@@ -110,12 +112,20 @@ else{
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $session = $this->get('session');
+            $user = $session->get('iduser');
             /* On insère la nouvelle config dans la base */
+            $utilisateur = $session->get('iduser');
+            $repository = $this->getDoctrine()->getRepository(User::class);
+            $user = $repository->find($utilisateur->getId());
+            $class->setUser($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($class);
             $entityManager->flush();
             /* On récupère l'id de la config qui vient d'être insérée*/
             $idConfig = $class->getId();
+            $session = $this->get('session');
+            $session->set('LaConfig',$class);
             /* On redirige vers la route pour ajouter le type d'echelle en passant l'id de la config précédente*/
             return $this->redirectToRoute('ajoutEchelle', array('id' => $idConfig));
 
@@ -429,23 +439,20 @@ else{
     }
     }
 
-        public function toPdfAction(Request $request, Pdf $knpSnappyPdf) {
+        public function toPdfAction(Request $request,int $id, Pdf $knpSnappyPdf) {
         $session = $this->get('session');
 
         if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
         {
             $user = $session->get('iduser');
-        if($session->get('valeurverification') == 2)
-        {
-            $session->clear();
-        }
             $repository = $this->getDoctrine()->getRepository(Echelle::class);
-            $Echelle = $repository->find(5);
+            $Echelle = $repository->find($id);
             $PrixSortie = $Echelle->getEchellesortie();
             $ListeAccessoire = $Echelle->getEchelleAccessoire();
             $i = 1;
+            
 
-            $html = $this->renderView(
+            /*$html = $this->renderView(
                 'test.html.twig',
             [
                 'ListeAccessoire' => $ListeAccessoire,
@@ -456,17 +463,21 @@ else{
                 'test3.html.twig',
             [
                 'Echelle' => $Echelle,
-            ]);
+            ]);*/
 
                 /*return new PdfResponse(
                     $knpSnappyPdf->getOutputFromHtml(array($html,$html2)),'Devis_Sans_Plan.pdf'
                 );*/
+
+                $nom = $user->getnom();
+                $date = getdate();
+
                 $knpSnappyPdf->generateFromHtml(
                     $this->renderView(
                         'test.html.twig',['ListeAccessoire' => $ListeAccessoire,
                         'Echelle' => $Echelle, ]
                     ),
-                    '../Devis/Devis1.pdf'
+                    '../Devis/' . $user->getnom() . $date["mday"] . $date["mon"] . $date["year"] . '1.pdf'
                 );
 
                 $knpSnappyPdf->generateFromHtml(
@@ -474,16 +485,35 @@ else{
                         'test3.html.twig',['ListeAccessoire' => $ListeAccessoire,
                         'Echelle' => $Echelle, ]
                     ),
-                    '../Devis/Devis2.pdf'
+                    '../Devis/' . $user->getnom() . $date["mday"] . $date["mon"] . $date["year"] . '2.pdf'
                 );
+                $config = $session->get('LaConfig');
+                for($i=1; $i<2; $i++)
+                {
+                    
+                }
+                $EntityPDF = new EntityPDF();
+                $EntityPDF->setLibellePDF($user->getnom() . "'" . $i . "'");
+                $EntityPDF->setLocationPDF('../Devis/' . $user->getnom() . $date["mday"] . $date["mon"] . $date["year"] . $i . '.pdf');
+                $entityManager = $this->getDoctrine()->getManager();
+                //$repository = $this->getDoctrine()->getRepository(Config::class);
+                //$Config = $repository->find($idconfig->getId());
+                $EntityPDF->setConfig($config);
+                $entityManager->persist($EntityPDF);
+                $entityManager->flush();
+
+                if($session->get('valeurverification') == 2)
+                {
+                    return $this->redirectToRoute('logout');
+                }
+                else{
+                    return $this->redirectToRoute('index', [$session->get('iduser')]);
+                }
             }
+
             else{
                 return $this->render('Denied.html.twig');
-            }
-            return $this->redirectToRoute('index');
-
-
-                
+            }                
         }
 
 

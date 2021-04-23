@@ -51,7 +51,7 @@ ajoutChangementVolee:
     controller: App\Controller\DefaultController::ajoutChangementVolee
 
 pdf:
-    path: /Pdf
+    path: /Pdf/{id}
     controller: App\Controller\DefaultController::toPdfAction
 
 ajoutFixation:

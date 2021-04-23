@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\PDFRepository;
+use App\Repository\EntityPDFRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PDFRepository::class)
+ * @ORM\Entity(repositoryClass=EntityPDFRepository::class)
  */
-class PDF
+class EntityPDF
 {
     /**
      * @ORM\Id
@@ -28,7 +28,7 @@ class PDF
     private $LocationPDF;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Config::class, inversedBy="ConfigPDF")
+     * @ORM\ManyToOne(targetEntity=Config::class, inversedBy="ConfigPDF", cascade={"persist"})
      */
     private $Config;
 
