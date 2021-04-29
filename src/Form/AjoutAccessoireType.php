@@ -2,26 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Config;
+use App\Entity\Accessoire;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ConfigType extends AbstractType
+class AjoutAccessoireType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('NomConfig')
-            ->add('ReferenceConfig')
-            ->add('DescriptionConfig')
+            ->add('nomAccessoire')
+            ->add('refAccessoire')
+            ->add('prixAccessoire')
+            ->add('Commercialise')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Config::class,
+            'data_class' => Accessoire::class,
         ]);
     }
 }

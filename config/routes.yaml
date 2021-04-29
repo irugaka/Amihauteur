@@ -65,3 +65,23 @@ pdf2:
 pdf3:
     path : pdf3
     controller: App\Controller\DefaultController::toPdfActionIncruste
+
+GestionAdmin:
+    path : GestionAdmin
+    controller: App\Controller\AdminController::GestionAdmin
+
+AdminSupprimerAccessoire:
+    path : GestionAdmin/SupprimerAccessoire/{id}
+    controller: App\Controller\AdminController::SupprimerAccessoire
+
+AdminModifierAccessoire:
+    path : GestionAdmin/ModifierAccessoire/{id}
+    controller: App\Controller\AdminController::ModifierAccessoire
+
+AdminCommercialiseAccessoire:
+    path : GestionAdmin/CommercialiseAccessoire/{id}
+    controller: App\Controller\AdminController::CommercialiseAccessoire
+
+AdminAjouterAccessoire:
+    path : GestionAdmin/AjouterAccessoire
+    controller: App\Controller\AdminController::AjouterAccessoire

@@ -51,6 +51,11 @@ class Accessoire
     private $EchelleAccessoire;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Commercialise;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -122,6 +127,18 @@ class Accessoire
     public function removeEchelleAccessoire(EchelleAccessoire $EchelleAccessoire): self
     {
         $this->EchelleAccessoire->removeElement($EchelleAccessoire);
+        return $this;
+    }
+
+    public function getCommercialise(): ?bool
+    {
+        return $this->Commercialise;
+    }
+
+    public function setCommercialise(bool $Commercialise): self
+    {
+        $this->Commercialise = $Commercialise;
+
         return $this;
     }
 

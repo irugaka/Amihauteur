@@ -64,7 +64,7 @@ class User implements UserInterface
     private $Pays;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Typeuser::class, inversedBy="userss")
+     * @ORM\ManyToOne(targetEntity=TypeUser::class, inversedBy="userss")
      * @ORM\JoinColumn(nullable=false)
      */
     private $UserTypeuser;
@@ -85,7 +85,7 @@ class User implements UserInterface
     private $ville;
 
     /**
-     * @ORM\OneToMany(targetEntity=config::class, mappedBy="User")
+     * @ORM\OneToMany(targetEntity=Config::class, mappedBy="User")
      */
     private $ConfigUser;
 

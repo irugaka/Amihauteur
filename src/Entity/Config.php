@@ -47,12 +47,12 @@ class Config
     /**
      * @var int
      *
-     * @ORM\Column(name="remise_config", type="integer", nullable=false)
+     * @ORM\Column(name="remise_config", type="integer", nullable=true)
      */
     private $remiseConfig;
 
     /**
-     * @ORM\OneToMany(targetEntity=EntityPDF::class, mappedBy="Config", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=EntityPDF::class, mappedBy="Config")
      */
     private $ConfigPDF;
 
@@ -60,6 +60,11 @@ class Config
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="ConfigUser", cascade={"persist"})
      */
     private $User;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $DateConfig;
 
     public function __construct()
     {
@@ -157,6 +162,18 @@ class Config
     public function setUser(?User $User): self
     {
         $this->User = $User;
+
+        return $this;
+    }
+
+    public function getDateConfig(): ?\DateTimeInterface
+    {
+        return $this->DateConfig;
+    }
+
+    public function setDateConfig(\DateTimeInterface $DateConfig): self
+    {
+        $this->DateConfig = $DateConfig;
 
         return $this;
     }

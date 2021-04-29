@@ -71,10 +71,11 @@ class DefaultController extends AbstractController
         $session = $this->get('session');
         $valeur = $session->get('valeurverification');
 		$em = $this->getDoctrine()->getManager();
+        $ListeAdmin = $em->getRepository(Config::class)->FindAll();
         $listeConfig = $em->getRepository(User::class)->find($iduser->getId());
         
         /* On fait le rendering du formulaire vers Index.html.twig en passant la liste des configs obtenue plus haut*/          
-        return $this->render('Index.html.twig',array('listeConfig' => $listeConfig, 'id' => $iduser));
+        return $this->render('Index.html.twig',array('listeConfig' => $listeConfig, 'id' => $iduser, 'listeAdmin' => $ListeAdmin));
         }
         else{
             return $this->redirectToRoute('login');
@@ -112,6 +113,26 @@ else{
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $date = getdate();
+            if($date["mday"]<10)
+            {
+                $jour = 0 . $date["mday"];
+            }
+            else
+            {
+                $jour = $date["mday"];
+            }
+            if($date["mon"]<10)
+            {
+                $mois = 0 . $date["mon"];
+            }
+            else
+            {
+                $mois = $date["mon"];
+            }
+
+            $datetime = new \DateTime($date["year"] . $mois . $jour);
+
             $session = $this->get('session');
             $user = $session->get('iduser');
             /* On insère la nouvelle config dans la base */
@@ -119,13 +140,13 @@ else{
             $repository = $this->getDoctrine()->getRepository(User::class);
             $user = $repository->find($utilisateur->getId());
             $class->setUser($user);
+            $class->setDateConfig($datetime);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($class);
             $entityManager->flush();
-            /* On récupère l'id de la config qui vient d'être insérée*/
             $idConfig = $class->getId();
             $session = $this->get('session');
-            $session->set('LaConfig',$class);
+            $session->set('LaConfig',$idConfig);
             /* On redirige vers la route pour ajouter le type d'echelle en passant l'id de la config précédente*/
             return $this->redirectToRoute('ajoutEchelle', array('id' => $idConfig));
 
@@ -449,7 +470,6 @@ else{
             $Echelle = $repository->find($id);
             $PrixSortie = $Echelle->getEchellesortie();
             $ListeAccessoire = $Echelle->getEchelleAccessoire();
-            $i = 1;
             
 
             /*$html = $this->renderView(
@@ -488,19 +508,20 @@ else{
                     '../Devis/' . $user->getnom() . $date["mday"] . $date["mon"] . $date["year"] . '2.pdf'
                 );
                 $config = $session->get('LaConfig');
-                for($i=1; $i<2; $i++)
+                for($i=1; $i<3; $i++)
                 {
-                    
+                    $EntityPDF = new EntityPDF();
+                    $EntityPDF->setLibellePDF($user->getnom() . "'" . $i . "'");
+                    $EntityPDF->setLocationPDF('../Devis/' . $user->getnom() . $date["mday"] . $date["mon"] . $date["year"] . $i . '.pdf');
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $repository = $this->getDoctrine()->getRepository(Config::class);
+                    $Config = $repository->find($session->get('LaConfig'));
+                    $EntityPDF->setConfig($Config);
+                    $entityManager->persist($EntityPDF);
+                    $entityManager->persist($EntityPDF);
+                    $entityManager->flush();
                 }
-                $EntityPDF = new EntityPDF();
-                $EntityPDF->setLibellePDF($user->getnom() . "'" . $i . "'");
-                $EntityPDF->setLocationPDF('../Devis/' . $user->getnom() . $date["mday"] . $date["mon"] . $date["year"] . $i . '.pdf');
-                $entityManager = $this->getDoctrine()->getManager();
-                //$repository = $this->getDoctrine()->getRepository(Config::class);
-                //$Config = $repository->find($idconfig->getId());
-                $EntityPDF->setConfig($config);
-                $entityManager->persist($EntityPDF);
-                $entityManager->flush();
+                
 
                 if($session->get('valeurverification') == 2)
                 {

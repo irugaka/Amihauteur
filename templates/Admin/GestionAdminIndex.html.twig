@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+
+
+    <div class="container">
+            <center><h3>Liste des Accessoires du Site</h3></center>
+                <!-- Tableau qui affiche les config -->
+                <table id="ListeConfig" class="table table-striped table-bordered table-sm ">
+                    <thead>
+                        <tr>
+                            <!-- <th class="bg-warning" style="color:white;">Nom</th> -->
+                            <th class="bg-warning" style="color:white;">Nom</th>
+                            <th class="bg-warning" style="color:white;">Reference</th>
+                            <th class="bg-warning" style="color:white;">Prix</th>
+                            <th class="bg-warning" style="color:white;">Commercialisé</th>
+                            <th class="bg-warning" style="color:white;">Action</th>
+
+                            <!-- <th class="bg-warning" style="color:white;"></th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for Accessoire in listeAccessoire %}
+                         {% if Accessoire.Commercialise == false %}
+                            <tr>
+                                <td style="background-color:#ff7c7c" class="table-light">{{ Accessoire.nomAccessoire }}</td>
+                                <td style="background-color:#ff7c7c" class="table-light">{{ Accessoire.refAccessoire }}</td>
+                                <td style="background-color:#ff7c7c" class="table-light">{{ Accessoire.prixAccessoire }}</td>
+                                <td style="background-color:#ff7c7c" class="table-light">{% if Accessoire.Commercialise == true %}Oui{% endif %}
+                                {% if Accessoire.Commercialise == false %}Non{% endif %}
+                                </td>
+                                <td style="background-color:#ff7c7c" class="table-light"><a class="btn btn-success btn-sm" href="{{ path('AdminCommercialiseAccessoire', { 'id' : Accessoire.id }) }}">Commercialiser</a> <a class="btn btn-primary btn-sm" href="{{ path('AdminModifierAccessoire', { 'id' : Accessoire.id }) }}">Modifier</a></td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td class="table-light">{{ Accessoire.nomAccessoire }}</td>
+                                <td class="table-light">{{ Accessoire.refAccessoire }}</td>
+                                <td class="table-light">{{ Accessoire.prixAccessoire }}</td>
+                                <td class="table-light">{% if Accessoire.Commercialise == true %}Oui{% endif %}
+                                {% if Accessoire.Commercialise == false %}Non{% endif %}
+                                </td>
+                                <td class="table-light"><a class="btn btn-danger btn-sm" href="{{ path('AdminSupprimerAccessoire', { 'id' : Accessoire.id }) }}">De-Commercialiser</a> <a class="btn btn-primary btn-sm" href="{{ path('AdminModifierAccessoire', { 'id' : Accessoire.id }) }}">Modifier</a></td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a class="btn btn-primary btn-sm" href="{{ path('AdminAjouterAccessoire') }}">Ajouter un Accessoire</a>
+            </div>
+
+{% endblock %}

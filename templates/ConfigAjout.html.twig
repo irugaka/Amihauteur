@@ -11,16 +11,13 @@
         <div><h1>Ajout d'une configuration</h1></div>
     {{ form_start(ConfigAjoutForm) }}
         {{ form_row(ConfigAjoutForm.NomConfig, {
-            label: 'Nom de la configuration'
+            label: 'Reference Chantier (Pour le Client)'
         }) }}
         {{ form_row(ConfigAjoutForm.ReferenceConfig, {
             label: 'Reference de la configuration'
         }) }}
         {{ form_row(ConfigAjoutForm.DescriptionConfig, {
             label: 'Description'
-        }) }}
-        {{ form_row(ConfigAjoutForm.RemiseConfig, {
-            label: 'Remise'
         }) }}
 
         

@@ -28,7 +28,7 @@ class EntityPDF
     private $LocationPDF;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Config::class, inversedBy="ConfigPDF", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Config::class, inversedBy="ConfigPDF")
      */
     private $Config;
 

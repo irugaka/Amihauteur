@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un accessoire{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+        <div class="w-75 mx-auto">
+        <div><h1>Modifier l'accessoire</h1></div>
+    {{ form_start(AjoutAccessoireForm) }}
+        {{ form_row(AjoutAccessoireForm.nomAccessoire) }}
+        {{ form_row(AjoutAccessoireForm.refAccessoire) }}
+        {{ form_row(AjoutAccessoireForm.prixAccessoire) }}
+        {{ form_row(AjoutAccessoireForm.Commercialise) }}
+        <a styke="color:black" class="text-dark btn bg-warning" href="{{ path('index') }}">Precedent</a>
+        <button class="btn bg-warning">Valider</button>
+    {{ form_end(AjoutAccessoireForm) }}
+    
+        </div>
+    </div>
+{% endblock %}
