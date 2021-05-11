@@ -1,6 +1,10 @@
 register:
     path: /register/{Verification}
     controller: App\Controller\RegistrationController::register
+
+RegisterInvite:
+    path: /registerInvite/{id}
+    controller: App\Controller\RegistrationController::RegisterInvite
     
 index:
     path: /index
@@ -85,3 +89,7 @@ AdminCommercialiseAccessoire:
 AdminAjouterAccessoire:
     path : GestionAdmin/AjouterAccessoire
     controller: App\Controller\AdminController::AjouterAccessoire
+
+ModifierConfig:
+    path : ModifierConfig/{id}
+    controller: App\Controller\DefaultController::ModifierConfig

@@ -14,6 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link href="sticky-footer.css" rel="stylesheet">
 
  {% endblock %}
 
@@ -22,13 +23,12 @@
  {%  endblock %}
 </head>
 <!-- on définit la couleur de fond -->
-<body class="background">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <ul class="navbar-nav mr-auto">
 <li class="nav-item active">
-<img src="{{ asset('build/img/amihauteur.png') }}" alt="Ami-hauteur logo" width=15%>
+<img class="logo align-top align-middle align-bottom" src="{{ asset('build/img/amihauteur.png') }}" alt="Ami-hauteur logo" style="width=60%; height:auto">
 {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-  <a class="navbar-brand" alt"Se deconnecter" href=" {{ path('logout') }} ">Accueil</a>
+  <a class="navbar-brand" alt"" href=" {{ path('logout') }} ">Accueil</a>
   {% endif %}
   {% if is_granted('IS_AUTHENTICATED_FULLY') %}
   <a class="navbar-brand" href=" {{ path('index') }} ">Accueil</a>
@@ -36,17 +36,56 @@
   {% if is_granted('IS_AUTHENTICATED_FULLY') %}
   <a class="navbar-brand" href="{{ path('ajout', { 'verification' : 1 }) }}">Ajouter</a>
   {% endif %}
-  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-  <a class="navbar-brand" href="{{ path('logout') }}">Deconnexion</a>
-  {% endif %}
   {% if is_granted('ROLE_ADMIN') %}
      <a class="navbar-brand" href="{{ path('GestionAdmin') }}">Gerer le site (Admin)</a>
 {% endif %}
   </li>
   </ul>
+  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+  <p style="font-size:1.2em;" class="navbar-brand my-2 my-sm-0 align-top align-middle align-bottom">Bienvenue <span style="color:red;">{{ app.user.nom }} {{ app.user.prenom }}</span></p> <a class="navbar-brand my-2 my-sm-0" href="{{ path('logout') }}">Deconnexion</a>
+  {% endif %}
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
+  <style>
+
+.btn.bg-warning {
+  background-color: #ff7f18 !important;
+  color: black;
+}
+.text-dark,
+.btn.bg-warning:active,
+.btn.bg-warning:hover,
+.btn.bg-warning:focus {
+  background-color: #FF5100 !important;
+}
+
+.navbar
+{
+  background-color: #e3e3e3 !important;
+  margin-bottom:20px;
+}
+
+.logo
+{
+  
+}
+
+footer
+{
+  background-color:#e3e3e3;
+}
+
+.navbar-brand
+{
+  font-size:1.5em;
+}
+
+
+  </style>
+
+
 
   {# <div class="collapse navbar-collapse" id="navbarSupportedContent"> #}
     {# <ul class="navbar-nav mr-auto"> #}
@@ -60,12 +99,18 @@
         {% block body %}
 
         {% endblock %}
-        
-    <div>
-    <footer>
-    <center><p>Site développé par Ami-Hauteur</p></center>
-    </footer>
 
+    {% block progression %}
+    {% endblock %}
 
-</body>
-</html>
+<footer id="footer" class="footer-1 fixed-bottom">
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-12 text-center">
+<p>Site developpé par Ami-Hauteur</p>
+</div>
+</div>
+</div>
+</div>
+</footer>

@@ -15,6 +15,7 @@ class ConfigType extends AbstractType
             ->add('NomConfig')
             ->add('ReferenceConfig')
             ->add('DescriptionConfig')
+            ->add('RemiseConfig')
         ;
     }
 

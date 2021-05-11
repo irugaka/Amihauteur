@@ -20,8 +20,12 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, int $verification): Response
     {
         $user = new User();
+        if($verification == 1)
+        {
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
+        $session = $this->get('session');
+        $session->set('valeurverification', 1);
 
         if ($form->isSubmitted() && $form->isValid()) {
             
@@ -41,24 +45,56 @@ class RegistrationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            if($verification == 2)
-            {
-                $session = $this->get('session');
-                $session->set('valeurverification', 2);
-                $session->set('iduser',$user);
-                $redirection = $this->redirectToRoute('ajout', array('verification' => $verification,));
-            }
-            else
-            {
-                $redirection = $this->redirectToRoute('logout');
-            }
-
-            return $redirection;
+            return $this->redirectToRoute('logout');
             
         }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(), 'verification' => $verification,
+            
         ]);
+        }
+        if($verification == 2)
+        {
+            $type = $this->getDoctrine()->getRepository(TypeUser::class)->find(2);
+            $session = $this->get('session');
+            $session->set('valeurverification', 2);
+            $user->setPrenom('Invite');
+            $user->setNom('Invite');
+            $user->setUserTypeuser($type);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            $session->set('iduser',$user);
+            return $this->redirectToRoute('ajout', array('verification' => $verification,));
+        }
+    }
+
+    public function RegisterInvite(Request $request, int $id): Response
+    {
+        $session = $this->get('session');
+        $iduser = $session->get('iduser')->getId();
+        $user = $this->getDoctrine()->getRepository(User::class)->find($iduser);
+        $verification = $session->get('valeurverification');
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('pdf', array('id' => $id));
+
+        }
+
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $form->createView(), 'verification' => $verification,
+            
+        ]);
+
+
+
     }
 }

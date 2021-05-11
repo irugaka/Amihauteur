@@ -8,14 +8,26 @@
         <div class="w-75 mx-auto">
         <div><h1>Choix de L'echelle</h1></div>
     {{ form_start(EchelleAjoutForm) }}
-        {{ form_row(EchelleAjoutForm.Echelle_TypeEchelle, {
-            label: 'Type d\'echelle'
+    {{ form_row(EchelleAjoutForm.Echelle_TypeEchelle, {
         }) }}
-        <a styke="color:black" class="text-dark btn bg-warning" href="{{ path('index') }}">Precedent</a>
+    {% for child in EchelleAjoutForm.Echelle_TypeEchelle %}
+    {{ child.Echelle_TypeEchelle.vars.id }}
+    {% endfor %}
+    
+        
+        <a styke="color:black" class="btn bg-warning" href="#">Precedent</a>
         <button class="btn bg-warning">Suivant</button>
     {{ form_end(EchelleAjoutForm) }}
     
         </div>
     </div>
-    {{ valeur }}
+
+    <div>
+<br>
+</div>
+<br>
+{% endblock %}
+
+{% block progression %}
+{{ include('ProgressionBar.html.twig') }}
 {% endblock %}

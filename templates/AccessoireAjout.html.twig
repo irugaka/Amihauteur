@@ -34,8 +34,8 @@
                 </td>
             </tr>
             <tr>
-                <td><button class="text-dark btn bg-warning" type="submit">Créer</button></td>
-                <td><button type="button" class="add_item_link text-dark btn bg-warning" data-collection-holder-class="accessories">Ajouter Accessoire</button></td>
+                <td><button class="text-dark btn bg-warning" type="submit">Suivant</button></td>
+                <td><button type="button" class="add_item_link text-dark btn bg-warning" data-collection-holder-class="accessories">+</button></td>
             </tr>
         </table>
     {{ form_end(Form) }}
@@ -76,7 +76,7 @@
         }
 
         function addTagFormDeleteLink($accessoryFormLi) {
-            const $removeFormButton = $('<button class="text-dark btn bg-warning" type="button">Delete this Accessory</button>');
+            const $removeFormButton = $('<button class="text-dark btn bg-warning" type="button">-</button>');
             $accessoryFormLi.append($removeFormButton);
 
             $removeFormButton.on('click', function() {
@@ -84,4 +84,9 @@
             });
         }
     </script>
+{% endblock %}
+
+{% block progression %}
+<br>
+{{ include('ProgressionBar.html.twig') }}
 {% endblock %}

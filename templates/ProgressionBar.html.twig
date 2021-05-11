@@ -1,0 +1,392 @@
+{% block progression %}
+
+ <style>
+#progression {
+    width: 100%;
+	margin: 0 auto;
+	padding-bottom: 23px; /* taille de la margin top et de lataille de police de la description */
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	outline: none;
+    font-family: sans-serif;
+	text-align: center;
+}
+#progression > * {
+	background: #DEDEDE;
+	display: inline-block;
+	vertical-align: middle;
+}
+#progression .fait + *, #progression .fait {
+	background: #ff7f18;
+}
+#progression .etape {
+	color: white;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 24px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	position: relative;
+}
+#progression .etape .desc {
+	color: grey;
+	position: absolute;
+	top: 100%;
+	margin-top: 5px;
+	left: 50%;
+	font-size: 18px;
+	margin-left: -75px;
+	width: 150px;
+	line-height: 1;
+}
+#progression .fait .desc, #progression .fait + .etape .desc {
+	color: grey;
+}
+#progression .ligne {
+	width: 100px;
+	height: 4px;
+	margin: 0 3px;
+}
+</style>
+{#
+{% if app.request.attributes.get('_route') == 'ajout' %}
+        <div id="progression">
+	<span class="etape fait">
+		1<div class="desc">Ajouter une configuration</div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape">
+		2<div class="desc">Choisir un type d'echelle</div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape">
+		3<div class="desc">Choisir une norme</div>
+	</span><span class="ligne">
+	</span><span class="etape">
+		4<div class="desc">Choix de la Hauteur</div>
+	</span><span class="ligne">
+	</span><span class="etape">
+		5<div class="desc">Choix de l'Entree</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		6<div class="desc">Choix de la Sortie</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		7<div class="desc">Choix des Accessoire</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		8<div class="desc">Choix du Changement de volée</div>
+	</span><span class="ligne"></span><span class="etape">
+		9<div class="desc">Generation du Devis</div>
+        </span>
+	</span>
+</div>
+{% endif %}
+    {% if app.request.attributes.get('_route') == 'ajoutEchelle' %}
+        <div id="progression">
+	<span class="etape fait">
+		1<div class="desc"><a href="{{ path('ajout', { 'verification' : app.session.get('valeurverification') }) }}">Ajouter une configuration</a></div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		2<div class="desc">Choisir un type d'echelle</div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape">
+		3<div class="desc">Choisir une norme</div>
+	</span><span class="ligne">
+	</span><span class="etape">
+		4<div class="desc">Choix de la Hauteur</div>
+	</span><span class="ligne">
+	</span><span class="etape">
+		5<div class="desc">Choix de l'Entree</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		6<div class="desc">Choix de la Sortie</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		7<div class="desc">Choix des Accessoire</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		8<div class="desc">Choix du Changement de volée</div>
+	</span><span class="ligne"></span><span class="etape">
+		9<div class="desc">Generation du Devis</div>
+        </span>
+	</span>
+</div>
+{% endif %}
+{% if app.request.attributes.get('_route') == 'ChoixNorme' %}
+{% set tab = app.session.get('tab') %}
+<div id="progression">
+	<span class="etape fait">
+		1<div class="desc"><a href="{{ path('ajout', { 'verification' : app.session.get('valeurverification') }) }}">Ajouter une configuration</a></div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		2<div class="desc"><a href="{{ path('ajoutEchelle', {id : tab[0].id }) }}">Choisir un type d'echelle</a></div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		3<div class="desc">Choisir une norme</div>
+	</span><span class="ligne">
+	</span><span class="etape">
+		4<div class="desc">Choix de la Hauteur</div>
+	</span><span class="ligne">
+	</span><span class="etape">
+		5<div class="desc">Choix de l'Entree</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		6<div class="desc">Choix de la Sortie</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		7<div class="desc">Choix des Accessoire</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		8<div class="desc">Choix du Changement de volée</div>
+	</span><span class="ligne"></span><span class="etape">
+		9<div class="desc">Generation du Devis</div>
+        </span>
+	</span>
+</div>
+{% endif %}
+{% if app.request.attributes.get('_route') == 'ajoutHauteur' %}
+<div id="progression">
+	<span class="etape fait">
+		1<div class="desc">Ajouter une configuration</div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		2<div class="desc">Choisir un type d'echelle</div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		3<div class="desc">Choisir une norme</div>
+	</span><span class="ligne">
+	</span><span class="etape fait">
+		4<div class="desc">Choix de la Hauteur</div>
+	</span><span class="ligne">
+	</span><span class="etape">
+		5<div class="desc">Choix de l'Entree</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		6<div class="desc">Choix de la Sortie</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		7<div class="desc">Choix des Accessoire</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		8<div class="desc">Choix du Changement de volée</div>
+	</span><span class="ligne"></span><span class="etape">
+		9<div class="desc">Generation du Devis</div>
+        </span>
+	</span>
+</div>
+{% endif %}
+{% if app.request.attributes.get('_route') == 'ajoutEntree' %}
+<div id="progression">
+	<span class="etape fait">
+		1<div class="desc">Ajouter une configuration</div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		2<div class="desc">Choisir un type d'echelle</div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		3<div class="desc">Choisir une norme</div>
+	</span><span class="ligne">
+	</span><span class="etape fait">
+		4<div class="desc">Choix de la Hauteur</div>
+	</span><span class="ligne">
+	</span><span class="etape fait">
+		5<div class="desc">Choix de l'Entree</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		6<div class="desc">Choix de la Sortie</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		7<div class="desc">Choix des Accessoire</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		8<div class="desc">Choix du Changement de volée</div>
+	</span><span class="ligne"></span><span class="etape">
+		9<div class="desc">Generation du Devis</div>
+        </span>
+	</span>
+</div>
+{% endif %}
+{% if app.request.attributes.get('_route') == 'ajoutSortie' %}
+<div id="progression">
+	<span class="etape fait">
+		1<div class="desc">Ajouter une configuration</div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		2<div class="desc">Choisir un type d'echelle</div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		3<div class="desc">Choisir une norme</div>
+	</span><span class="ligne">
+	</span><span class="etape fait">
+		4<div class="desc">Choix de la Hauteur</div>
+	</span><span class="ligne">
+	</span><span class="etape fait">
+		5<div class="desc">Choix de l'Entree</div>
+        </span><span class="ligne">
+	</span><span class="etape fait">
+		6<div class="desc">Choix de la Sortie</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		7<div class="desc">Choix des Accessoire</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		8<div class="desc">Choix du Changement de volée</div>
+	</span><span class="ligne"></span><span class="etape">
+		9<div class="desc">Generation du Devis</div>
+        </span>
+	</span>
+</div>
+{% endif %}
+{% if app.request.attributes.get('_route') == 'accessoireAjout' %}
+<div id="progression">
+	<span class="etape fait">
+		1<div class="desc">Ajouter une configuration</div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		2<div class="desc">Choisir un type d'echelle</div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		3<div class="desc">Choisir une norme</div>
+	</span><span class="ligne">
+	</span><span class="etape fait">
+		4<div class="desc">Choix de la Hauteur</div>
+	</span><span class="ligne">
+	</span><span class="etape fait">
+		5<div class="desc">Choix de l'Entree</div>
+        </span><span class="ligne">
+	</span><span class="etape fait">
+		6<div class="desc">Choix de la Sortie</div>
+        </span><span class="ligne">
+	</span><span class="etape fait">
+		7<div class="desc">Choix des Accessoire</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		8<div class="desc">Choix du Changement de volée</div>
+	</span><span class="ligne"></span><span class="etape">
+		9<div class="desc">Generation du Devis</div>
+        </span>
+	</span>
+</div>
+{% endif %}
+{% if app.request.attributes.get('_route') == 'ajoutChangementVolee' %}
+<div id="progression">
+	<span class="etape fait">
+		1<div class="desc">Ajouter une configuration</div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		2<div class="desc">Choisir un type d'echelle</div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		3<div class="desc">Choisir une norme</div>
+	</span><span class="ligne">
+	</span><span class="etape fait">
+		4<div class="desc">Choix de la Hauteur</div>
+	</span><span class="ligne">
+	</span><span class="etape fait">
+		5<div class="desc">Choix de l'Entree</div>
+        </span><span class="ligne">
+	</span><span class="etape fait">
+		6<div class="desc">Choix de la Sortie</div>
+        </span><span class="ligne">
+	</span><span class="etape fait">
+		7<div class="desc">Choix des Accessoire</div>
+        </span><span class="ligne">
+	</span><span class="etape fait">
+		8<div class="desc">Choix du Changement de volée</div>
+	</span><span class="ligne"></span><span class="etape">
+		9<div class="desc">Generation du Devis</div>
+        </span>
+	</span>
+</div>
+{% endif %}
+{% if app.request.attributes.get('_route') == 'RegisterInvite' and verification == 2 %}
+<div id="progression">
+	<span class="etape fait">
+		1<div class="desc">Ajouter une configuration</div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		2<div class="desc">Choisir un type d'echelle</div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		3<div class="desc">Choisir une norme</div>
+	</span><span class="ligne">
+	</span><span class="etape fait">
+		4<div class="desc">Choix de la Hauteur</div>
+	</span><span class="ligne">
+	</span><span class="etape fait">
+		5<div class="desc">Choix de l'Entree</div>
+        </span><span class="ligne">
+	</span><span class="etape fait">
+		6<div class="desc">Choix de la Sortie</div>
+        </span><span class="ligne">
+	</span><span class="etape fait">
+		7<div class="desc">Choix des Accessoire</div>
+        </span><span class="ligne">
+	</span><span class="etape fait">
+		8<div class="desc">Choix du Changement de volée</div>
+	</span><span class="ligne"></span><span class="etape fait">
+		9<div class="desc">Generation du Devis</div>
+        </span>
+	</span>
+</div>
+{% endif %} #}
+{% autoescape false %} 
+{% if app.request.attributes.get('_route') == 'ajout' %}
+{% set attr = Progression(1) %}
+{{ attr|raw }}
+{% endif %}
+{% if app.request.attributes.get('_route') == 'ajoutEchelle' %}
+{% set attr = Progression(2) %}
+{{ attr|raw }}
+{% endif %}
+{% if app.request.attributes.get('_route') == 'ChoixNorme' %}
+{% set attr = Progression(3) %}
+{{ attr|raw }}
+{% endif %}
+{% if app.request.attributes.get('_route') == 'ajoutHauteur' %}
+{% set attr = Progression(4) %}
+{{ attr|raw }}
+{% endif %}
+{% if app.request.attributes.get('_route') == 'ajoutEntree' %}
+{% set attr = Progression(5) %}
+{{ attr|raw }}
+{% endif %}
+{% if app.request.attributes.get('_route') == 'ajoutSortie' %}
+{% set attr = Progression(6) %}
+{{ attr|raw }}
+{% endif %}
+{% if app.request.attributes.get('_route') == 'accessoireAjout' %}
+{% set attr = Progression(7) %}
+{{ attr|raw }}
+{% endif %}
+{% if app.request.attributes.get('_route') == 'ajoutChangementVolee' %}
+{% set attr = Progression(8) %}
+{{ attr|raw }}
+{% endif %}
+{% if app.request.attributes.get('_route') == 'RegisterInvite' and verification == 2 %}
+{% set attr = Progression(0) %}
+{{ attr|raw }}
+{% endif %}
+{% endautoescape %}
+
+{% endblock %}

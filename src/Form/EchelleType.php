@@ -17,7 +17,8 @@ class EchelleType extends AbstractType
         $builder
             ->add('Echelle_TypeEchelle', EntityType::class,array(
                 'class'=> TypeEchelle::class,
-                'choice_label'=>'LibelleTypeEchelle'
+                'choice_label'=>'LibelleTypeEchelle',
+                'expanded' => true,
             ))
         ;
     }

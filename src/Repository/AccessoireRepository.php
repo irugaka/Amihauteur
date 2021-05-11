@@ -19,22 +19,20 @@ class AccessoireRepository extends ServiceEntityRepository
         parent::__construct($registry, Accessoire::class);
     }
 
-    // /**
-    //  * @return Accessoire[] Returns an array of Accessoire objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Accessoire[] Returns an array of Accessoire objects
+      */
+
+    public function AccessoireCommercialise($value)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
+            ->andWhere('a.Commercialise = :val')
             ->setParameter('val', $value)
             ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Accessoire

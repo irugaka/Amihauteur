@@ -105,9 +105,18 @@ else{
     /*1 Ajout d'une nouvelle configuration lorsque l'utilisateur clique sur "Ajouter"*/
     public function AjoutConfig(Request $request, int $verification): Response
     {
-         
-        /* On indique qu'on va utiliser une nouvelle config*/
-        $class = new Config();
+        $session = $this->get('session');
+        if($session->get('tab'))
+        {
+            $tab = $session->get('tab');
+            $idconfig = $tab[0]->getid();
+            $class = $this->getDoctrine()->getRepository(Config::class)->find($idconfig);
+        }
+        else
+        {
+            /* On indique qu'on va utiliser une nouvelle config*/
+            $class = new Config();
+        }
         /*On creer le form en utilisant celui préalablement crée "ConfigType"*/
         $form = $this->createForm(ConfigType::class, $class);
         $form->handleRequest($request);
@@ -133,7 +142,7 @@ else{
 
             $datetime = new \DateTime($date["year"] . $mois . $jour);
 
-            $session = $this->get('session');
+            
             $user = $session->get('iduser');
             /* On insère la nouvelle config dans la base */
             $utilisateur = $session->get('iduser');
@@ -147,6 +156,15 @@ else{
             $idConfig = $class->getId();
             $session = $this->get('session');
             $session->set('LaConfig',$idConfig);
+            if($session->get('tab'))
+            {
+                $tab[0] = $class;
+            }
+            else
+            {
+                $tab = array($class);
+            }
+            $session->set('tab',$tab);
             /* On redirige vers la route pour ajouter le type d'echelle en passant l'id de la config précédente*/
             return $this->redirectToRoute('ajoutEchelle', array('id' => $idConfig));
 
@@ -156,16 +174,54 @@ else{
         
     }
 
+    public function ModifierConfig(Request $request, int $id)
+    {
+        $session = $this->get('session');
+        if($session->get('valeurverification') == 1)
+        {
+
+        $Config = $this->getDoctrine()->getRepository(Config::class)->find($id);
+
+        $form = $this->createForm(ConfigType::class, $Config);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($Config);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('index', [$session->get('iduser')]);
+        }
+
+        return $this->render('ConfigAjout.html.twig', ['ConfigAjoutForm' => $form->createView(),]);
+    }
+    else
+    {
+        return $this->render('Denied.html.twig');
+    }
+    }
+
     /*2 Ajout du type d'echelle lorsque l'utilisateur clique sur suivant dans la page d'ajout d'une config*/
     public function AjoutEchelle(Request $request, int $id): Response
     {
         $session = $this->get('session');
         if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
         {
+            $tab = $session->get('tab');
+            if(count($tab) > 1)
+        {
+            $idEchelle = $tab[1]->getid();
+            $class = $this->getDoctrine()->getRepository(Echelle::class)->find($idEchelle);
+        }
+        else
+        {
+            /* On indique qu'on va utiliser une nouvelle config*/
+            $class = new Echelle();
+        }
             /* On renomme la variable de l'id de la config precedemment ajoutée*/
         $idconfig = $id;
         /*On indique qu'on va utiliser une nouvelle Echelle*/
-        $class = new Echelle();
         /* On indique qu'on prépare une selection dans la table config (on raccourci la prochaine ligne de code)*/
         $repository = $this->getDoctrine()->getRepository(Config::class);
         /*Creation du formulaire du Type de l'echelle*/
@@ -183,6 +239,9 @@ else{
             $entityManager->flush();
             /*On recupere l'id de l'echelle crée*/
             $idEchelle = $class->getId();
+            $tab = $session->get('tab');
+            array_push($tab, $class);
+            $session->set('tab',$tab);
 
             /*Redirection vers la route pour choisir la norme de l'echelle en passant l'id de celle-ci*/
             return $this->redirectToRoute('ChoixNorme', array('id'=> $idEchelle));
@@ -423,8 +482,15 @@ else{
             $Echelle->addChangementVolee($Changement);
             $entityManager->persist($Echelle);
             $entityManager->flush();
-
-            return $this->redirectToRoute('pdf', array('id'=> $id));
+            if($session->get('valeurverification') == 2)
+            {
+                $redirection = $this->redirectToRoute('RegisterInvite', array('id'=> $id));
+            }
+            else
+            {
+                $redirection = $this->redirectToRoute('pdf', array('id'=> $id));
+            }
+            return $redirection;
         }
 
         return $this->render('ChangementVoleeAjout.html.twig',['ChangementVoleeAjoutForm' => $form->createView()]);

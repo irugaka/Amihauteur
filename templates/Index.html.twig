@@ -33,7 +33,7 @@
                                 <td class="table-light">{{ Config.DescriptionConfig }}</td>
                                 <td class="table-light">{{ Config.ReferenceConfig }}</td>
                                 <td class="table-light">{{ Config.DateConfig|date('Y-m-d') }}</td>
-                                <td class="table-light"><a class="btn btn-danger btn-sm" href="#">Supprimer</a> <a class="btn btn-primary btn-sm" href="#">Modifier</a></td>
+                                <td class="table-light"><a class="btn btn-danger btn-sm" onclick="return confirm('Etes-vous sur de vouloir supprimer cette configuration ?')" href="#">Supprimer</a> <a class="btn btn-primary btn-sm" href="#">Modifier</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -54,6 +54,7 @@
                             <th class="bg-warning" style="color:white;">Description</th>
                             <th class="bg-warning" style="color:white;">Reference</th>
                             <th class="bg-warning" style="color:white;">Date</th>
+                            <th class="bg-warning" style="color:white;">Remise</th>
                             <th class="bg-warning" style="color:white;">Actions</th>
 
                             <!-- <th class="bg-warning" style="color:white;"></th> -->
@@ -68,12 +69,16 @@
                                 <td class="table-light">{{ Config.DescriptionConfig }}</td>
                                 <td class="table-light">{{ Config.ReferenceConfig }}</td>
                                 <td class="table-light">{{ Config.DateConfig|date('Y-m-d') }}</td>
-                                <td class="table-light"><a class="btn btn-danger btn-sm" href="#">Supprimer</a> <a class="btn btn-primary btn-sm" href="#">Modifier</a></td>
+                                <td class="table-light">{% if Config.RemiseConfig is null %} Pas de Remise allouée
+                                {% else %}{{ Config.RemiseConfig }} {% endif %}</td>
+                                <td class="table-light"><a class="btn btn-danger btn-sm" onclick="return confirm('Etes-vous sur de vouloir supprimer cette configuration ?')" href="#">Supprimer</a> <a class="btn btn-primary btn-sm" href="{{ path('ModifierConfig', { 'id' : Config.id }) }}">Modifier</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
+            <br>
+            <br>
              {% endif %}
 {% endif %}
 

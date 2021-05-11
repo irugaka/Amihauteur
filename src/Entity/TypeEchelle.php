@@ -35,6 +35,11 @@ class TypeEchelle
      */
     private $libelleTypeEchelle;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Image::class, mappedBy="TypeEchelle", cascade={"persist", "remove"})
+     */
+    private $image;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +65,28 @@ class TypeEchelle
     public function setPrix(string $prix): self
     {
         $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($image === null && $this->image !== null) {
+            $this->image->setTypeEchelle(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($image !== null && $image->getTypeEchelle() !== $this) {
+            $image->setTypeEchelle($this);
+        }
+
+        $this->image = $image;
 
         return $this;
     }
