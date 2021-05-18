@@ -51,7 +51,7 @@
 	margin: 0 3px;
 }
 </style>
-{#
+
 {% if app.request.attributes.get('_route') == 'ajout' %}
         <div id="progression">
 	<span class="etape fait">
@@ -349,8 +349,8 @@
         </span>
 	</span>
 </div>
-{% endif %} #}
-{% autoescape false %} 
+{% endif %}
+{# {% autoescape false %} 
 {% if app.request.attributes.get('_route') == 'ajout' %}
 {% set attr = Progression(1) %}
 {{ attr|raw }}
@@ -387,6 +387,6 @@
 {% set attr = Progression(0) %}
 {{ attr|raw }}
 {% endif %}
-{% endautoescape %}
+{% endautoescape %} #}
 
 {% endblock %}

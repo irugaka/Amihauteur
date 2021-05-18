@@ -14,15 +14,14 @@ class AppExtension extends AbstractExtension
         return [
             new TwigFunction('Progression', [$this, 'getProgressionBar']),
         ];
-        
+        /*. (($number >= 2) ? "<a href=\"path('ajout'))\">Test</a>" : "") .*/
     }
 
     public function getProgressionBar(int $number)
     {
 
-        return "<div id=\"progression\"><span class=\"etape" . (($number >= 1) ? " fait" : "") ."\">1<div class=\"desc\">" . "Ajouter une configuration" . (($number >= 2) ? "</a>" : "") . "</div></span><span class=\"ligne\"></span>"
-        . (($number >= 2) ? "<a href=\"path('ajout'))\">Test</a>" : "") .
-        "<span class=\"etape"  . (($number >= 2) ? " fait" : "") ."\">2<div class=\"desc\">Choisir un type d'echelle</div></span><span class=\"ligne\"></span>
+        return "<div id=\"progression\"><span class=\"etape" . (($number >= 1) ? " fait" : "") ."\">1<div class=\"desc\">" . "Ajouter une configuration" . (($number >= 2) ? "</a>" : "") . "</div></span><span class=\"ligne\"></span>
+        <span class=\"etape"  . (($number >= 2) ? " fait" : "") ."\">2<div class=\"desc\">Choisir un type d'echelle</div></span><span class=\"ligne\"></span>
 	    <span class=\"etape"  . (($number >= 3) ? " fait" : "") ."\">3<div class=\"desc\">Choisir une norme</div></span><span class=\"ligne\"></span>
         <span class=\"etape"  . (($number >= 4) ? " fait" : "") ."\">4<div class=\"desc\">Choix de la Hauteur</div></span><span class=\"ligne\"></span>
         <span class=\"etape"  . (($number >= 5) ? " fait" : "") . "\">5<div class=\"desc\">Choix de l'Entree</div></span><span class=\"ligne\"></span>

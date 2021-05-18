@@ -7,6 +7,7 @@ use App\Form\ChangementVoleeType;
 use App\Entity\EntityPDF;
 use App\Entity\Hauteur;
 use App\Entity\User;
+use App\Entity\TypeEchelle;
 use App\Entity\EchelleAccessoire;
 use App\Form\FixationType;
 use App\Entity\Fixation;
@@ -222,6 +223,8 @@ else{
             /* On renomme la variable de l'id de la config precedemment ajoutée*/
         $idconfig = $id;
         /*On indique qu'on va utiliser une nouvelle Echelle*/
+        $repository = $this->getDoctrine()->getRepository(TypeEchelle::class);
+        $ListeType = $repository->FindAll();
         /* On indique qu'on prépare une selection dans la table config (on raccourci la prochaine ligne de code)*/
         $repository = $this->getDoctrine()->getRepository(Config::class);
         /*Creation du formulaire du Type de l'echelle*/
@@ -247,7 +250,7 @@ else{
             return $this->redirectToRoute('ChoixNorme', array('id'=> $idEchelle));
 
         }
-        return $this->render('AjoutEchelle.html.twig', ['EchelleAjoutForm' => $form->createView(),'valeur' => $session->get('verification')]);
+        return $this->render('AjoutEchelle.html.twig', ['EchelleAjoutForm' => $form->createView(),'valeur' => $session->get('verification'), 'ListeType' => $ListeType]);
         }
         else{
             return $this->render('Denied.html.twig');

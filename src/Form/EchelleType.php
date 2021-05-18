@@ -19,7 +19,7 @@ class EchelleType extends AbstractType
                 'class'=> TypeEchelle::class,
                 'choice_label'=>'LibelleTypeEchelle',
                 'expanded' => true,
-            ))
+                    ))
         ;
     }
 
