@@ -49,6 +49,11 @@ class Entree
      */
     private $descriptionEntree;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Commercialise;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -98,6 +103,18 @@ class Entree
     public function setDescriptionEntree(string $descriptionEntree): self
     {
         $this->descriptionEntree = $descriptionEntree;
+
+        return $this;
+    }
+
+    public function getCommercialise(): ?bool
+    {
+        return $this->Commercialise;
+    }
+
+    public function setCommercialise(bool $Commercialise): self
+    {
+        $this->Commercialise = $Commercialise;
 
         return $this;
     }

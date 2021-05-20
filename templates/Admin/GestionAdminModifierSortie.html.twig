@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% if id == 0 %}
+Ajouter une Sortie
+{% else %}
+Modifier une Sortie
+{% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+        <div class="w-75 mx-auto">
+        <div><h1>{% if id == 0 %}Ajouter une Sortie{% else %} Modifier une Sortie{% endif %}</h1></div>
+    {{ form_start(AjoutSortieForm) }}
+        {{ form_row(AjoutSortieForm.libelleSortie) }}
+        {{ form_row(AjoutSortieForm.referenceSortie) }}
+        {{ form_row(AjoutSortieForm.prixSortie) }}
+        {{ form_row(AjoutSortieForm.descriptionEntree) }}
+        {{ form_row(AjoutSortieForm.Commercialise) }}
+        <button class="btn bg-warning">Valider</button>
+    {{ form_end(AjoutSortieForm) }}
+    
+        </div>
+    </div>
+{% endblock %}

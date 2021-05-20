@@ -93,3 +93,52 @@ AdminAjouterAccessoire:
 ModifierConfig:
     path : ModifierConfig/{id}
     controller: App\Controller\DefaultController::ModifierConfig
+
+AdminSupprimerTypeEchelle:
+    path : GestionAdmin/SupprimerTypeEchelle/{id}
+    controller: App\Controller\AdminController::SupprimerTypeEchelle
+
+AdminCommercialiseTypeEchelle:
+    path : GestionAdmin/CommercialiseTypeEchelle/{id}
+    controller: App\Controller\AdminController::CommercialiseTypeEchelle
+
+AdminAjouterTypeEchelle:
+    path : GestionAdmin/AjouterTypeEchelle
+    controller: App\Controller\AdminController::AjouterTypeEchelle
+
+AdminModifierTypeEchelle:
+    path : GestionAdmin/ModifierTypeEchelle/{id}
+    controller: App\Controller\AdminController::ModifierTypeEchelle
+
+AdminSupprimerEntree:
+    path : GestionAdmin/SupprimerEntree/{id}
+    controller: App\Controller\AdminController::SupprimerEntree
+
+AdminCommercialiseEntree:
+    path : GestionAdmin/CommercialiseEntree/{id}
+    controller: App\Controller\AdminController::CommercialiseEntree
+
+AdminAjouterEntree:
+    path : GestionAdmin/AjouterEntree
+    controller: App\Controller\AdminController::AjouterEntree
+
+AdminModifierEntree:
+    path : GestionAdmin/ModifierEntree/{id}
+    controller: App\Controller\AdminController::ModifierEntree
+
+
+AdminSupprimerSortie:
+    path : GestionAdmin/SupprimerSortie/{id}
+    controller: App\Controller\AdminController::SupprimerSortie
+
+AdminCommercialiseSortie:
+    path : GestionAdmin/CommercialiseSortie/{id}
+    controller: App\Controller\AdminController::CommercialiseSortie
+
+AdminAjouterSortie:
+    path : GestionAdmin/AjouterSortie
+    controller: App\Controller\AdminController::AjouterSortie
+
+AdminModifierSortie:
+    path : GestionAdmin/ModifierSortie/{id}
+    controller: App\Controller\AdminController::ModifierSortie

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% if id == 0 %}
+Ajouter une Entree
+{% else %}
+Modifier une Entree
+{% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+        <div class="w-75 mx-auto">
+        <div><h1>{% if id == 0 %}Ajouter une Entree{% else %} Modifier une Entree{% endif %}</h1></div>
+    {{ form_start(AjoutEntreeForm) }}
+        {{ form_row(AjoutEntreeForm.libelleEntree) }}
+        {{ form_row(AjoutEntreeForm.referenceEntree) }}
+        {{ form_row(AjoutEntreeForm.prixEntree) }}
+        {{ form_row(AjoutEntreeForm.descriptionEntree) }}
+        {{ form_row(AjoutEntreeForm.Commercialise) }}
+        <button class="btn bg-warning">Valider</button>
+    {{ form_end(AjoutEntreeForm) }}
+    
+        </div>
+    </div>
+{% endblock %}

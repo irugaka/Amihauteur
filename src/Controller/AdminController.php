@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\TypeEchelle;
 use App\Form\HauteurType;
+use App\Form\AjoutEntreeType;
+use App\Form\AjoutSortieType;
 use App\Form\ChangementVoleeType;
 use App\Entity\EntityPDF;
 use App\Entity\Hauteur;
@@ -30,6 +33,7 @@ use App\Entity\ChangementVolee;
 use App\Entity\Config;
 use App\Entity\Role;
 use App\Form\AjoutAccessoireType;
+use App\Form\AjoutTypeEchelleType;
 use App\Form\FixationCollectionFormType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -67,9 +71,14 @@ class AdminController extends AbstractController
         $session = $this->get('session');
             $em = $this->getDoctrine()->getManager();
             $ListeAccessoires = $em->getRepository(Accessoire::class)->FindAll();
-            return $this->render('Admin/GestionAdminIndex.html.twig', ['listeAccessoire' => $ListeAccessoires]);
+            $ListeTypeEchelle = $em->getRepository(TypeEchelle::class)->FindAll();
+            $ListeEntree = $em->getRepository(Entree::class)->findAll();
+            $ListeSortie = $em->getRepository(Sortie::class)->findAll();
+            return $this->render('Admin/GestionAdminIndex.html.twig', ['listeAccessoire' => $ListeAccessoires, 'ListeTypeEchelle' => $ListeTypeEchelle, 'ListeEntree' => $ListeEntree, 'ListeSortie' => $ListeSortie]);
         
     }
+
+     /* Accessoire ---------------------------------------------------------*/
 
     public function SupprimerAccessoire(Request $request, int $id): Response
     {
@@ -123,7 +132,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('GestionAdmin');
         }
 
-        return $this->render('Admin/GestionAdminModifierAccessoire.html.twig', ['AjoutAccessoireForm' => $form->createView()]);
+        return $this->render('Admin/GestionAdminModifierAccessoire.html.twig', ['AjoutAccessoireForm' => $form->createView(), 'id' => $id]);
 
     }
 
@@ -133,6 +142,7 @@ class AdminController extends AbstractController
         {
             return $this->render('Denied.html.twig');
         }
+        $id = 0;
         $Accessoire = new Accessoire();
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(AjoutAccessoireType::class, $Accessoire);
@@ -149,5 +159,259 @@ class AdminController extends AbstractController
         return $this->render('Admin/GestionAdminModifierAccessoire.html.twig', ['AjoutAccessoireForm' => $form->createView()]);
 
     }
+
+    /* Type d'echelle ---------------------------------------------------------*/
+
+    public function SupprimerTypeEchelle(Request $request, int $id): Response
+    {
+        if($this->denyAccessUnlessGranted('ROLE_ADMIN'))
+        {
+            return $this->render('Denied.html.twig');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $TypeEchelle = $em->getRepository(TypeEchelle::class)->Find($id);
+        $TypeEchelle->setCommercialise(0);
+        $em->persist($TypeEchelle);
+        $em->flush();
+
+        return $this->redirectToRoute('GestionAdmin');
+    }
+
+    public function CommercialiseTypeEchelle(Request $request, int $id): Response
+    {
+        if($this->denyAccessUnlessGranted('ROLE_ADMIN'))
+        {
+            return $this->render('Denied.html.twig');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $TypeEchelle = $em->getRepository(TypeEchelle::class)->Find($id);
+        $TypeEchelle->setCommercialise(1);
+        $em->persist($TypeEchelle);
+        $em->flush();
+
+        return $this->redirectToRoute('GestionAdmin');
+    }
+
+    public function ModifierTypeEchelle(Request $request, int $id): Response
+    {
+        if($this->denyAccessUnlessGranted('ROLE_ADMIN'))
+        {
+            return $this->render('Denied.html.twig');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $TypeEchelle = $em->getRepository(TypeEchelle::class)->Find($id);
+        $form = $this->createForm(AjoutTypeEchelleType::class, $TypeEchelle);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->persist($TypeEchelle);
+            $em->flush();
+
+            return $this->redirectToRoute('GestionAdmin');
+        }
+
+        return $this->render('Admin/GestionAdminModifierTypeEchelle.html.twig', ['AjoutTypeEchelleForm' => $form->createView(),'id' => $id]);
+
+    }
+
+    public function AjouterTypeEchelle(Request $request): Response
+    {
+        if($this->denyAccessUnlessGranted('ROLE_ADMIN'))
+        {
+            return $this->render('Denied.html.twig');
+        }
+        $id = 0;
+        $TypeEchelle = new TypeEchelle();
+        $em = $this->getDoctrine()->getManager();
+        $form = $this->createForm(AjoutTypeEchelleType::class, $TypeEchelle);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->persist($TypeEchelle);
+            $em->flush();
+
+            return $this->redirectToRoute('GestionAdmin');
+        }
+
+        return $this->render('Admin/GestionAdminModifierTypeEchelle.html.twig', ['AjoutTypeEchelleForm' => $form->createView(), 'id' => $id]);
+
+    }
+
+
+     /* Entrees ---------------------------------------------------------*/
+
+     public function SupprimerEntree(Request $request, int $id): Response
+    {
+        if($this->denyAccessUnlessGranted('ROLE_ADMIN'))
+        {
+            return $this->render('Denied.html.twig');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $Entree = $em->getRepository(Entree::class)->Find($id);
+        $Entree->setCommercialise(0);
+        $em->persist($Entree);
+        $em->flush();
+
+        return $this->redirectToRoute('GestionAdmin');
+    }
+
+    public function CommercialiseEntree(Request $request, int $id): Response
+    {
+        if($this->denyAccessUnlessGranted('ROLE_ADMIN'))
+        {
+            return $this->render('Denied.html.twig');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $Entree = $em->getRepository(Entree::class)->Find($id);
+        $Entree->setCommercialise(1);
+        $em->persist($Entree);
+        $em->flush();
+
+        return $this->redirectToRoute('GestionAdmin');
+    }
+
+    public function ModifierEntree(Request $request, int $id): Response
+    {
+        if($this->denyAccessUnlessGranted('ROLE_ADMIN'))
+        {
+            return $this->render('Denied.html.twig');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $Entree = $em->getRepository(Entree::class)->Find($id);
+        $form = $this->createForm(AjoutEntreeType::class, $Entree);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->persist($Entree);
+            $em->flush();
+
+            return $this->redirectToRoute('GestionAdmin');
+        }
+
+        return $this->render('Admin/GestionAdminModifierEntree.html.twig', ['AjoutEntreeForm' => $form->createView(),'id' => $id]);
+
+    }
+
+    public function AjouterEntree(Request $request): Response
+    {
+        if($this->denyAccessUnlessGranted('ROLE_ADMIN'))
+        {
+            return $this->render('Denied.html.twig');
+        }
+        $id = 0;
+        $Entree = new Entree();
+        $em = $this->getDoctrine()->getManager();
+        $form = $this->createForm(AjoutEntreeType::class, $Entree);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->persist($Entree);
+            $em->flush();
+
+            return $this->redirectToRoute('GestionAdmin');
+        }
+
+        return $this->render('Admin/GestionAdminModifierEntree.html.twig', ['AjoutEntreeForm' => $form->createView(), 'id' => $id]);
+
+    }
+
+
+
+     /* Sortie ---------------------------------------------------------*/
+
+     public function SupprimerSortie(Request $request, int $id): Response
+    {
+        if($this->denyAccessUnlessGranted('ROLE_ADMIN'))
+        {
+            return $this->render('Denied.html.twig');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $Sortie = $em->getRepository(Sortie::class)->Find($id);
+        $Sortie->setCommercialise(0);
+        $em->persist($Sortie);
+        $em->flush();
+
+        return $this->redirectToRoute('GestionAdmin');
+    }
+
+    public function CommercialiseSortie(Request $request, int $id): Response
+    {
+        if($this->denyAccessUnlessGranted('ROLE_ADMIN'))
+        {
+            return $this->render('Denied.html.twig');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $Sortie = $em->getRepository(Sortie::class)->Find($id);
+        $Sortie->setCommercialise(1);
+        $em->persist($Sortie);
+        $em->flush();
+
+        return $this->redirectToRoute('GestionAdmin');
+    }
+
+    public function ModifierSortie(Request $request, int $id): Response
+    {
+        if($this->denyAccessUnlessGranted('ROLE_ADMIN'))
+        {
+            return $this->render('Denied.html.twig');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $Sortie = $em->getRepository(Sortie::class)->Find($id);
+        $form = $this->createForm(AjoutSortieType::class, $Sortie);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->persist($Sortie);
+            $em->flush();
+
+            return $this->redirectToRoute('GestionAdmin');
+        }
+
+        return $this->render('Admin/GestionAdminModifierSortie.html.twig', ['AjoutSortieForm' => $form->createView(),'id' => $id]);
+
+    }
+
+    public function AjouterSortie(Request $request): Response
+    {
+        if($this->denyAccessUnlessGranted('ROLE_ADMIN'))
+        {
+            return $this->render('Denied.html.twig');
+        }
+        $id = 0;
+        $Sortie = new Entree();
+        $em = $this->getDoctrine()->getManager();
+        $form = $this->createForm(AjoutSortieType::class, $Sortie);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->persist($Sortie);
+            $em->flush();
+
+            return $this->redirectToRoute('GestionAdmin');
+        }
+
+        return $this->render('Admin/GestionAdminModifierSortie.html.twig', ['AjoutSortieForm' => $form->createView(), 'id' => $id]);
+    }
+
+
+
+
+
+
 
 }

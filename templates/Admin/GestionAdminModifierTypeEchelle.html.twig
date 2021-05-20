@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% if id == 0 %}
+Ajouter un accessoire
+{% else %}
+Modifier un Accessoire
+{% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+        <div class="w-75 mx-auto">
+        <div><h1>{% if id == 0 %}Ajouter un Type d'Echelle{% else %} Modifier un type d'Echelle{% endif %}</h1></div>
+    {{ form_start(AjoutTypeEchelleForm) }}
+        {{ form_row(AjoutTypeEchelleForm.libelleTypeEchelle) }}
+        {{ form_row(AjoutTypeEchelleForm.prix) }}
+        {{ form_row(AjoutTypeEchelleForm.Commercialise) }}
+        <button class="btn bg-warning">Valider</button>
+    {{ form_end(AjoutTypeEchelleForm) }}
+    
+        </div>
+    </div>
+{% endblock %}
