@@ -10,9 +10,21 @@
         <div class="w-75 mx-auto">
         <div><h1>Choix de la norme</h1></div>
     {{ form_start(NormeAjoutForm) }}
-        {{ form_row(NormeAjoutForm.id, {
-            label: 'Norme'
-        }) }}
+    <table class="table table-striped table-bordered table-sm ">
+    {% for key, type in NormeAjoutForm.echelleNorme %}
+    {% set attr = NormeAjoutForm.echelleNorme.vars.choices[key].data.ImageUrl %}
+    <tr>
+      <td>
+      {{ form_widget(type) }}
+      </td>
+    <td style="width:auto"><img src="{{ asset(attr) }}">
+    <br>
+    {{ NormeAjoutForm.echelleNorme.vars.choices[key].data.descriptionNorme }}</td>
+    
+     </tr>
+    {% endfor %}
+   
+    </table>
         <a styke="color:black" class="text-dark btn bg-warning" href="{{ path('index') }}">Precedent</a>
         <button class="btn bg-warning">Suivant</button>
     {{ form_end(NormeAjoutForm) }}

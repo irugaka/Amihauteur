@@ -153,17 +153,18 @@
 </div>
 {% endif %}
 {% if app.request.attributes.get('_route') == 'ajoutHauteur' %}
+{% set tab = app.session.get('tab') %}
 <div id="progression">
 	<span class="etape fait">
-		1<div class="desc">Ajouter une configuration</div>
+		1<div class="desc"><a href="{{ path('ajout', { 'verification' : app.session.get('valeurverification') }) }}">Ajouter une configuration</a></div>
 	</span><span class="ligne">
 	</span>
 	<span class="etape fait">
-		2<div class="desc">Choisir un type d'echelle</div>
+		2<div class="desc"><a href="{{ path('ajoutEchelle', {id : tab[0].id }) }}">Choisir un type d'echelle</a></div>
 	</span><span class="ligne">
 	</span>
 	<span class="etape fait">
-		3<div class="desc">Choisir une norme</div>
+		3<div class="desc"><a href="{{ path('ChoixNorme', {id : tab[1].id }) }}">Choisir une norme</a></div>
 	</span><span class="ligne">
 	</span><span class="etape fait">
 		4<div class="desc">Choix de la Hauteur</div>
@@ -186,20 +187,21 @@
 </div>
 {% endif %}
 {% if app.request.attributes.get('_route') == 'ajoutEntree' %}
+{% set tab = app.session.get('tab') %}
 <div id="progression">
 	<span class="etape fait">
-		1<div class="desc">Ajouter une configuration</div>
+		1<div class="desc"><a href="{{ path('ajout', { 'verification' : app.session.get('valeurverification') }) }}">Ajouter une configuration</a></div>
 	</span><span class="ligne">
 	</span>
 	<span class="etape fait">
-		2<div class="desc">Choisir un type d'echelle</div>
+		2<div class="desc"><a href="{{ path('ajoutEchelle', {id : tab[0].id }) }}">Choisir un type d'echelle</a></div>
 	</span><span class="ligne">
 	</span>
 	<span class="etape fait">
-		3<div class="desc">Choisir une norme</div>
+		3<div class="desc"><a href="{{ path('ChoixNorme', {id : tab[1].id }) }}">Choisir une norme</a></div>
 	</span><span class="ligne">
 	</span><span class="etape fait">
-		4<div class="desc">Choix de la Hauteur</div>
+		4<div class="desc"><a href="{{ path('ajoutHauteur', {id : tab[1].id }) }}">Choix de la Hauteur</a></div>
 	</span><span class="ligne">
 	</span><span class="etape fait">
 		5<div class="desc">Choix de l'Entree</div>
@@ -219,23 +221,24 @@
 </div>
 {% endif %}
 {% if app.request.attributes.get('_route') == 'ajoutSortie' %}
+{% set tab = app.session.get('tab') %}
 <div id="progression">
 	<span class="etape fait">
-		1<div class="desc">Ajouter une configuration</div>
+		1<div class="desc"><a href="{{ path('ajout', { 'verification' : app.session.get('valeurverification') }) }}">Ajouter une configuration</a></div>
 	</span><span class="ligne">
 	</span>
 	<span class="etape fait">
-		2<div class="desc">Choisir un type d'echelle</div>
+		2<div class="desc"><a href="{{ path('ajoutEchelle', {id : tab[0].id }) }}">Choisir un type d'echelle</a></div>
 	</span><span class="ligne">
 	</span>
 	<span class="etape fait">
-		3<div class="desc">Choisir une norme</div>
+		3<div class="desc"><a href="{{ path('ChoixNorme', {id : tab[1].id }) }}">Choisir une norme</a></div>
 	</span><span class="ligne">
 	</span><span class="etape fait">
-		4<div class="desc">Choix de la Hauteur</div>
+		4<div class="desc"><a href="{{ path('ajoutHauteur', {id : tab[1].id }) }}">Choix de la Hauteur</a></div>
 	</span><span class="ligne">
 	</span><span class="etape fait">
-		5<div class="desc">Choix de l'Entree</div>
+		5<div class="desc"><a href="{{ path('ajoutEntree', {id : tab[1].id }) }}">Choix de l'Entree</a></div>
         </span><span class="ligne">
 	</span><span class="etape fait">
 		6<div class="desc">Choix de la Sortie</div>
@@ -252,26 +255,27 @@
 </div>
 {% endif %}
 {% if app.request.attributes.get('_route') == 'accessoireAjout' %}
+{% set tab = app.session.get('tab') %}
 <div id="progression">
 	<span class="etape fait">
-		1<div class="desc">Ajouter une configuration</div>
+		1<div class="desc"><a href="{{ path('ajout', { 'verification' : app.session.get('valeurverification') }) }}">Ajouter une configuration</a></div>
 	</span><span class="ligne">
 	</span>
 	<span class="etape fait">
-		2<div class="desc">Choisir un type d'echelle</div>
+		2<div class="desc"><a href="{{ path('ajoutEchelle', {id : tab[0].id }) }}">Choisir un type d'echelle</a></div>
 	</span><span class="ligne">
 	</span>
 	<span class="etape fait">
-		3<div class="desc">Choisir une norme</div>
+		3<div class="desc"><a href="{{ path('ChoixNorme', {id : tab[1].id }) }}">Choisir une norme</a></div>
 	</span><span class="ligne">
 	</span><span class="etape fait">
-		4<div class="desc">Choix de la Hauteur</div>
+		4<div class="desc"><a href="{{ path('ajoutHauteur', {id : tab[1].id }) }}">Choix de la Hauteur</a></div>
 	</span><span class="ligne">
 	</span><span class="etape fait">
-		5<div class="desc">Choix de l'Entree</div>
+		5<div class="desc"><a href="{{ path('ajoutEntree', {id : tab[1].id }) }}">Choix de l'Entree</a></div>
         </span><span class="ligne">
 	</span><span class="etape fait">
-		6<div class="desc">Choix de la Sortie</div>
+		6<div class="desc"><a href="{{ path('ajoutSortie', {id : tab[1].id }) }}">Choix de la Sortie</a></div>
         </span><span class="ligne">
 	</span><span class="etape fait">
 		7<div class="desc">Choix des Accessoire</div>
@@ -285,29 +289,30 @@
 </div>
 {% endif %}
 {% if app.request.attributes.get('_route') == 'ajoutChangementVolee' %}
+{% set tab = app.session.get('tab') %}
 <div id="progression">
 	<span class="etape fait">
-		1<div class="desc">Ajouter une configuration</div>
+		1<div class="desc"><a href="{{ path('ajout', { 'verification' : app.session.get('valeurverification') }) }}">Ajouter une configuration</a></div>
 	</span><span class="ligne">
 	</span>
 	<span class="etape fait">
-		2<div class="desc">Choisir un type d'echelle</div>
+		2<div class="desc"><a href="{{ path('ajoutEchelle', {id : tab[0].id }) }}">Choisir un type d'echelle</a></div>
 	</span><span class="ligne">
 	</span>
 	<span class="etape fait">
-		3<div class="desc">Choisir une norme</div>
+		3<div class="desc"><a href="{{ path('ChoixNorme', {id : tab[1].id }) }}">Choisir une norme</a></div>
 	</span><span class="ligne">
 	</span><span class="etape fait">
-		4<div class="desc">Choix de la Hauteur</div>
+		4<div class="desc"><a href="{{ path('ajoutHauteur', {id : tab[1].id }) }}">Choix de la Hauteur</a></div>
 	</span><span class="ligne">
 	</span><span class="etape fait">
-		5<div class="desc">Choix de l'Entree</div>
+		5<div class="desc"><a href="{{ path('ajoutEntree', {id : tab[1].id }) }}">Choix de l'Entree</a></div>
         </span><span class="ligne">
 	</span><span class="etape fait">
-		6<div class="desc">Choix de la Sortie</div>
+		6<div class="desc"><a href="{{ path('ajoutSortie', {id : tab[1].id }) }}">Choix de la Sortie</a></div>
         </span><span class="ligne">
 	</span><span class="etape fait">
-		7<div class="desc">Choix des Accessoire</div>
+		7<div class="desc"><a href="{{ path('accessoireAjout', {id : tab[1].id }) }}"> Choix des Accessoire</a></div>
         </span><span class="ligne">
 	</span><span class="etape fait">
 		8<div class="desc">Choix du Changement de volée</div>
@@ -320,7 +325,7 @@
 {% if app.request.attributes.get('_route') == 'RegisterInvite' and verification == 2 %}
 <div id="progression">
 	<span class="etape fait">
-		1<div class="desc">Ajouter une configuration</div>
+		1<div class="desc"><a href="{{ path('ajout', { 'verification' : app.session.get('valeurverification') }) }}">Ajouter une configuration</a></div>
 	</span><span class="ligne">
 	</span>
 	<span class="etape fait">

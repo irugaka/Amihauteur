@@ -38,6 +38,11 @@ class Norme
     private $element;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ImageUrl;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -85,6 +90,18 @@ class Norme
         if ($this->element->removeElement($element)) {
             $element->removeNorme($this);
         }
+
+        return $this;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->ImageUrl;
+    }
+
+    public function setImageUrl(string $ImageUrl): self
+    {
+        $this->ImageUrl = $ImageUrl;
 
         return $this;
     }

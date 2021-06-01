@@ -261,30 +261,33 @@ else{
     /*4 Choix des normes*/
     public function ChoixNorme(Request $request, int $id): Response
     {
-
+        
         $session = $this->get('session');
         if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
         {
         /*Creation du formulaire de Norme*/
-        $form = $this->createForm(NormeType::class);
+        $tab = $session->get('tab');
+        $idEchelle = $tab[1]->getid();
+        $class = $this->getDoctrine()->getRepository(Echelle::class)->find($idEchelle);
+        $form = $this->createForm(NormeType::class, $class);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) 
         {
         /*On récupère les données envoyées par le formulaire lors du submit. Celui-ci renvoie un array*/
-        $Data = $form->getData();
+        //$Data = $form->getData();
         /*Selection dans l'array du champs renseignant lid de la norme choisie*/
-        $IdNorme = $Data['id'];
+        //$IdNorme = $Data['id'];
         /*On recherche la norme qui correspond à l'id*/
         $repository = $this->getDoctrine()->getRepository(Norme::class);
-        $Norme = $repository->find($IdNorme);
+        //$Norme = $repository->find($IdNorme);
         /*On recherche L'echelle grâce à l'id passée precedemment*/ 
         $repository = $this->getDoctrine()->getRepository(Echelle::class);
         $Echelle = $repository->find($id);
         /* On utilise le setter et on insert dans echelle*/
-        $Echelle->setEchelleNorme($Norme);
+        //$Echelle->setEchelleNorme($Norme);
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($Echelle);
+        $entityManager->persist($class);
         $entityManager->flush();
         /*Redirection en passant la valeur de l'echelle*/
         return $this->redirectToRoute('ajoutHauteur', array('id'=> $id));
@@ -362,10 +365,13 @@ else{
         $session = $this->get('session');
         if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
         {
+        $tab = $session->get('tab');
+        $idEchelle = $tab[1]->getid();
+        $Echelle = $this->getDoctrine()->getRepository(Echelle::class)->find($idEchelle);
         /* On utilise une nouvelle Entree*/
         $class = new Entree();
         /*Creation du formulaire de l'entree*/
-        $form = $this->createForm(EntreeType::class);
+        $form = $this->createForm(EntreeType::class,$Echelle);
         $form->handleRequest($request);
         $repository = $this->getDoctrine()->getRepository(Entree::class);
 
@@ -373,13 +379,7 @@ else{
         {
             /*On récupère les données envoyées par le formulaire lors du submit. Celui-ci renvoie un array*/
             /* Ensuite on recherche l'entrée avec la valeur de l'entree choisit*/
-            $Data = $form->getData();
-            $idEntree = $Data['id'];
-            $Entree = $repository->find($idEntree);
-            /* On recherche l'echelle grace à l'id passé puis on insert grâce au setter*/
-            $repository = $this->getDoctrine()->getRepository(Echelle::class);
-            $Echelle = $repository->find($id);
-            $Echelle->setEchelleEntree($Entree);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($Echelle);
             $entityManager->flush();
@@ -402,9 +402,11 @@ else{
         if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
         {
         /* On utilise une nouvelle Sortie*/
-        $class = new Sortie();
+        $tab = $session->get('tab');
+        $idEchelle = $tab[1]->getid();
+        $Echelle = $this->getDoctrine()->getRepository(Echelle::class)->find($idEchelle);
         /*Creation du formulaire de la Sortie*/
-        $form = $this->createForm(SortieType::class);
+        $form = $this->createForm(SortieType::class,$Echelle);
         $form->handleRequest($request);
         $repository = $this->getDoctrine()->getRepository(Sortie::class);
 
@@ -413,12 +415,6 @@ else{
             /*On récupère les données envoyées par le formulaire lors du submit. Celui-ci renvoie un array*/
             /* Ensuite on recherche l'entrée avec la valeur de la sortiee choisit*/
             /*Enfin on insert*/
-            $Data = $form->getData();
-            $idSortie = $Data['id'];
-            $Sortie = $repository->find($idSortie);
-            $repository = $this->getDoctrine()->getRepository(Echelle::class);
-            $Echelle = $repository->find($id);
-            $Echelle->setEchelleSortie($Sortie);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($Echelle);
             $entityManager->flush();
@@ -590,6 +586,8 @@ else{
                     $entityManager->persist($EntityPDF);
                     $entityManager->flush();
                 }
+
+                $session->remove('tab');
                 
 
                 if($session->get('valeurverification') == 2)

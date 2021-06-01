@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Sortie;
+use App\Entity\Echelle;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,7 +14,7 @@ class SortieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('id', EntityType::class, [
+        ->add('echelleSortie', EntityType::class, [
             'class'=>Sortie::class,
             'choice_label'=> 'LibelleSortie',
             'choice_value'=>'id',
@@ -24,7 +25,6 @@ class SortieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            // Configure your form options here
-        ]);
+            'data_class' => Echelle::class, ]);
     }
 }
