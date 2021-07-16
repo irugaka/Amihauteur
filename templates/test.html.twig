@@ -44,21 +44,21 @@ Email : assistant@amihauteur.com
                         </tr>
                     </thead>
                     <tbody>
+                    {% set PrixFinalCoupe = 0 %}
+                    {% for Coupe in CoupeEchelle %}
                     <tr>
                                 <td class="table-light">
-                                {{ Echelle.echelleTypeEchelle.libelleTypeEchelle }}
+                                {{ Coupe.CoupeEchelleId.Libelle }}
                                 </a></td>
-                                <td class="table-light"> {% if Echelle.echelleTypeEchelle.id == 1 %}
-                                Ceci est une Echelle à Crinoline
-                                {% else %}
-                                Ceci est une echelle de toit
-                                {% endif %} </td>
-                                <td class="table-light">-</td>
-                                <td class="table-light">{{ Echelle.echelleTypeEchelle.prix }}</td>
+                                <td>Une description</td>
+                                <td class="table-light">{{ Coupe.Qte}}</td>
+                                <td class="table-light">{{ Coupe.CoupeEchelleId.Prix }}</td>
                                 <td class="table-light"> 20 % </td>
-                                <td class="table-light">{{ Echelle.echelleTypeEchelle.prix }}</td>
+                                <td class="table-light">{{ Coupe.CoupeEchelleId.Prix * Coupe.Qte}}</td>
                             </tr>
                             <tr>
+                             {% set PrixFinalCoupe = PrixFinalCoupe + Coupe.CoupeEchelleId.Prix * Coupe.Qte %}
+                            {% endfor %}
                                 <td class="table-light">
                                 {{ Echelle.echelleEntree.libelleEntree }}
                                 </a></td>
@@ -96,7 +96,7 @@ Email : assistant@amihauteur.com
                             {% endfor %}
                     </tbody>
                 </table>
-                {% set PrixFinal = PrixFinal + Echelle.echelleTypeEchelle.prix + Echelle.echelleEntree.prixEntree + Echelle.echelleSortie.prixSortie + PrixFinalAccessoire %}
+                {% set PrixFinal = PrixFinal + PrixFinalCoupe + Echelle.echelleEntree.prixEntree + Echelle.echelleSortie.prixSortie + PrixFinalAccessoire %}
             </div>
 
 <p style="text-align:right">

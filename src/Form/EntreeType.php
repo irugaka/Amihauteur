@@ -17,7 +17,8 @@ class EntreeType extends AbstractType
         ->add('echelleEntree', EntityType::class, [
             'class'=>Entree::class,
             'choice_label'=> 'LibelleEntree',
-            'choice_value'=>'id'
+            'choice_value'=>'id',
+            'expanded' => true,
         ])
     ;
     }

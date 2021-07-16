@@ -392,7 +392,7 @@ class AdminController extends AbstractController
             return $this->render('Denied.html.twig');
         }
         $id = 0;
-        $Sortie = new Entree();
+        $Sortie = new Sortie();
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(AjoutSortieType::class, $Sortie);
         $form->handleRequest($request);

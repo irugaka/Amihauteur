@@ -54,6 +54,11 @@ class Entree
      */
     private $Commercialise;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ImageUrl;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -115,6 +120,18 @@ class Entree
     public function setCommercialise(bool $Commercialise): self
     {
         $this->Commercialise = $Commercialise;
+
+        return $this;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->ImageUrl;
+    }
+
+    public function setImageUrl(string $ImageUrl): self
+    {
+        $this->ImageUrl = $ImageUrl;
 
         return $this;
     }

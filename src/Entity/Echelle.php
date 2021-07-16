@@ -126,6 +126,14 @@ class Echelle
     private $EchelleAccessoire;
 
     /**
+     * @var CoupeEchelleEchelle[]|Collection
+     * @ORM\OneToMany(targetEntity=CoupeEchelleEchelle::class, mappedBy="EchelleId", cascade={"persist"})
+     */
+    private $coupeEchelleEchelles;
+
+
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -134,6 +142,7 @@ class Echelle
         $this->EchelleAccessoire = new ArrayCollection();
         $this->changementVolee = new \Doctrine\Common\Collections\ArrayCollection();
         $this->palier = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->coupeEchelleEchelles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -311,6 +320,36 @@ class Echelle
     public function removeEchelleFixation(EchelleFixation $EchelleFixation): self
     {
         $this->EchelleFixation->removeElement($EchelleFixation);
+        return $this;
+    }
+
+    /**
+     * @return Collection|CoupeEchelleEchelle[]
+     */
+    public function getCoupeEchelleEchelles(): Collection
+    {
+        return $this->coupeEchelleEchelles;
+    }
+
+    public function addCoupeEchelleEchelle(CoupeEchelleEchelle $coupeEchelleEchelle): self
+    {
+        if (!$this->coupeEchelleEchelles->contains($coupeEchelleEchelle)) {
+            $this->coupeEchelleEchelles[] = $coupeEchelleEchelle;
+            $coupeEchelleEchelle->setEchelleId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCoupeEchelleEchelle(CoupeEchelleEchelle $coupeEchelleEchelle): self
+    {
+        if ($this->coupeEchelleEchelles->removeElement($coupeEchelleEchelle)) {
+            // set the owning side to null (unless already changed)
+            if ($coupeEchelleEchelle->getEchelleId() === $this) {
+                $coupeEchelleEchelle->setEchelleId(null);
+            }
+        }
+
         return $this;
     }
 

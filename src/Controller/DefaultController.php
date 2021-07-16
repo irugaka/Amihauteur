@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\HauteurType;
 use App\Form\ChangementVoleeType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use App\Entity\EntityPDF;
 use App\Entity\Hauteur;
 use App\Entity\User;
@@ -29,6 +30,8 @@ use App\Entity\Norme;
 use App\Entity\Utilisateur;
 use App\Entity\ChangementVolee;
 use App\Entity\Config;
+use App\Entity\CoupeEchelle;
+use App\Entity\CoupeEchelleEchelle;
 use App\Entity\Role;
 use App\Form\FixationCollectionFormType;
 use Doctrine\ORM\EntityRepository;
@@ -64,6 +67,7 @@ class DefaultController extends AbstractController
         $iduser = $user;
         $session = $this->get('session');
         $session->set('iduser', $iduser);
+        $session->remove('tab');
 
         if($session->get('valeurverification') == 1)
         {
@@ -82,6 +86,7 @@ class DefaultController extends AbstractController
             return $this->redirectToRoute('login');
         }
     }
+
 
     /* Affichage de la page donnant toutes les informations sur une config (Echelle type d'echelle, remise....)*/
     public function detailConfig(Request $request, int $id): Response
@@ -102,6 +107,7 @@ else{
     return $this->redirectToRoute('login');
 }
     }
+
 
     /*1 Ajout d'une nouvelle configuration lorsque l'utilisateur clique sur "Ajouter"*/
     public function AjoutConfig(Request $request, int $verification): Response
@@ -172,8 +178,8 @@ else{
         }
         /* On fait le rendering du formulaire vers ConfigAjout.html.twig en passant le formulaire crée plus haut*/  
         return $this->render('ConfigAjout.html.twig', ['ConfigAjoutForm' => $form->createView(),]);
-        
     }
+
 
     public function ModifierConfig(Request $request, int $id)
     {
@@ -247,7 +253,7 @@ else{
             $session->set('tab',$tab);
 
             /*Redirection vers la route pour choisir la norme de l'echelle en passant l'id de celle-ci*/
-            return $this->redirectToRoute('ChoixNorme', array('id'=> $idEchelle));
+            return $this->redirectToRoute('ajoutHauteur', array('id'=> $idEchelle));
 
         }
         return $this->render('AjoutEchelle.html.twig', ['EchelleAjoutForm' => $form->createView(),'valeur' => $session->get('verification'), 'ListeType' => $ListeType]);
@@ -261,47 +267,35 @@ else{
     /*4 Choix des normes*/
     public function ChoixNorme(Request $request, int $id): Response
     {
-        
         $session = $this->get('session');
+        /* Si l'utilisateur est un connecté ou un invité */
         if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
         {
         /*Creation du formulaire de Norme*/
         $tab = $session->get('tab');
+        /* Echelle prend la valeur de tab[1] */
         $idEchelle = $tab[1]->getid();
         $class = $this->getDoctrine()->getRepository(Echelle::class)->find($idEchelle);
         $form = $this->createForm(NormeType::class, $class);
         $form->handleRequest($request);
-        
         if ($form->isSubmitted() && $form->isValid()) 
         {
-        /*On récupère les données envoyées par le formulaire lors du submit. Celui-ci renvoie un array*/
-        //$Data = $form->getData();
-        /*Selection dans l'array du champs renseignant lid de la norme choisie*/
-        //$IdNorme = $Data['id'];
-        /*On recherche la norme qui correspond à l'id*/
-        $repository = $this->getDoctrine()->getRepository(Norme::class);
-        //$Norme = $repository->find($IdNorme);
-        /*On recherche L'echelle grâce à l'id passée precedemment*/ 
-        $repository = $this->getDoctrine()->getRepository(Echelle::class);
-        $Echelle = $repository->find($id);
-        /* On utilise le setter et on insert dans echelle*/
-        //$Echelle->setEchelleNorme($Norme);
+        /* On insert dans la base de données*/
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($class);
         $entityManager->flush();
         /*Redirection en passant la valeur de l'echelle*/
         return $this->redirectToRoute('ajoutHauteur', array('id'=> $id));
-
         }
         /*Rendering du formulaire*/
         return $this->render('ChoixNorme.html.twig',['NormeAjoutForm' => $form->createView()]);
-
     }
+    /* Si l'utilisateur n'est ni connecté ni invité on retourne une page lui indiquant que l'accès est interdit */
     else{
         return $this->render('Denied.html.twig');
+    }   
     }
-        
-    }
+
 
 
     /* 5 Ajout d'une hauteur */
@@ -316,7 +310,6 @@ else{
         $form = $this->createForm(HauteurType::class, $class);
         $form->handleRequest($request);
         $repository = $this->getDoctrine()->getRepository(Hauteur::class);
-
         if ($form->isSubmitted() && $form->isValid())
         {
             /* Insertion de la nouvelle hauteur*/
@@ -327,6 +320,8 @@ else{
             $idHauteur = $class->getId();
             $Hauteur = $repository->find($idHauteur);
             $hauteurmesure = $Hauteur->getAfranchirHauteur();
+            $repository = $this->getDoctrine()->getRepository(Echelle::class);
+            $Echelle = $repository->find($id);
             if($hauteurmesure>5999)
             {
                 $Hauteur->setPrix(3000);
@@ -335,6 +330,220 @@ else{
             {
                 $Hauteur->setPrix(1500);
             }
+
+            /*if($session->get('TableauEchelleCoupe'))
+            {
+            $tableau = $session->get('TableauEchelleCoupe');
+            $tableau[0]->removeCoupeEchelleEchelle($tableau[3]);
+            $tableau[1]->removeCoupeEchelleEchelle($tableau[4]);
+            $tableau[2]->removeCoupeEchelleEchelle($tableau[3]);
+            $tableau[2]->removeCoupeEchelleEchelle($tableau[4]);
+            $entityManager->flush();
+                
+            }*/
+            
+            $hauteurmesure = $hauteurmesure - 710;
+            if($hauteurmesure<=2010)
+            {
+                    $CoupeEchelle = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 1960]);
+                    $CoupeEchelleEchelle = new CoupeEchelleEchelle();
+                    $CoupeEchelleEchelle->setEchelleId($Echelle);
+                    $CoupeEchelleEchelle->setCoupeEchelleId($CoupeEchelle);
+                    $CoupeEchelleEchelle->setQte(1);
+                    $entityManager->persist($CoupeEchelleEchelle);
+                    $entityManager->flush($CoupeEchelleEchelle);
+                    $TableauEchelleCoupe = array($CoupeEchelleEchelle);
+                    $session->set('TableauEchelleCoupe',$TableauEchelleCoupe);
+                    $entityManager->Flush();
+            }
+            else
+            {
+                if($hauteurmesure<= 3970)
+                {
+                    $CoupeEchelle = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 1960]);
+                    $CoupeEchelle2 = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 3360]);
+                    $TableauEchelleCoupe = array($CoupeEchelle);
+                    array_push($TableauEchelleCoupe,$CoupeEchelle2);
+                    array_push($TableauEchelleCoupe,$Echelle);
+                    $CoupeEchelleEchelle = new CoupeEchelleEchelle();
+                    $CoupeEchelleEchelle->setEchelleId($Echelle);
+                    $CoupeEchelleEchelle->setCoupeEchelleId($CoupeEchelle);
+                    $CoupeEchelleEchelle->setQte(1);
+                    $entityManager->persist($CoupeEchelleEchelle);
+                    $entityManager->flush($CoupeEchelleEchelle);
+                    array_push($TableauEchelleCoupe,$CoupeEchelleEchelle);
+                    $session->set('TableauEchelleCoupe',$TableauEchelleCoupe);
+                    $CoupeEchelleEchelle = new CoupeEchelleEchelle();
+                    $CoupeEchelleEchelle->setEchelleId($Echelle);
+                    $CoupeEchelleEchelle->setCoupeEchelleId($CoupeEchelle2);
+                    $CoupeEchelleEchelle->setQte(1);
+                    $entityManager->persist($CoupeEchelleEchelle);
+                    $entityManager->flush($CoupeEchelleEchelle);
+                    array_push($TableauEchelleCoupe,$CoupeEchelleEchelle);
+                    $session->set('TableauEchelleCoupe',$TableauEchelleCoupe);
+                }
+                else
+                {
+                    if($hauteurmesure<= 5930)
+                    {
+                        $CoupeEchelle = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 1960]);
+                        $CoupeEchelle2 = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 3360]);
+                        $CoupeEchelleEchelle = new CoupeEchelleEchelle();
+                        $CoupeEchelleEchelle->setEchelleId($Echelle);
+                        $CoupeEchelleEchelle->setCoupeEchelleId($CoupeEchelle2);
+                        $CoupeEchelleEchelle->setQte(2);
+                        $entityManager->persist($CoupeEchelleEchelle);
+                        $entityManager->flush($CoupeEchelleEchelle);
+                        $TableauEchelleCoupe = array($CoupeEchelleEchelle);
+                        $session->set('TableauEchelleCoupe',$TableauEchelleCoupe);
+                    }
+                    else
+                    {
+                        if($hauteurmesure<= 7890)
+                        {
+                            $CoupeEchelle = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 1960]);
+                            $CoupeEchelle2 = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 3360]);
+                            $CoupeEchelleEchelle = new CoupeEchelleEchelle();
+                            $CoupeEchelleEchelle->setEchelleId($Echelle);
+                            $CoupeEchelleEchelle->setCoupeEchelleId($CoupeEchelle);
+                            $CoupeEchelleEchelle->setQte(1);
+                            $entityManager->persist($CoupeEchelleEchelle);
+                            $entityManager->flush($CoupeEchelleEchelle);
+                            $TableauEchelleCoupe = array($CoupeEchelleEchelle);
+                            $session->set('TableauEchelleCoupe',$TableauEchelleCoupe);
+                            $CoupeEchelleEchelle = new CoupeEchelleEchelle();
+                            $CoupeEchelleEchelle->setEchelleId($Echelle);
+                            $CoupeEchelleEchelle->setCoupeEchelleId($CoupeEchelle2);
+                            $CoupeEchelleEchelle->setQte(2);
+                            $entityManager->persist($CoupeEchelleEchelle);
+                            $entityManager->flush($CoupeEchelleEchelle);
+                            $TableauEchelleCoupe = array($CoupeEchelleEchelle);
+                            $session->set('TableauEchelleCoupe',$TableauEchelleCoupe);
+                        }
+                        else
+                        {
+                            if($hauteurmesure<= 9850)
+                            {
+                                $CoupeEchelle = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 1960]);
+                                $CoupeEchelle2 = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 3360]);
+                                $CoupeEchelleEchelle = new CoupeEchelleEchelle();
+                                $CoupeEchelleEchelle->setEchelleId($Echelle);
+                                $CoupeEchelleEchelle->setCoupeEchelleId($CoupeEchelle2);
+                                $CoupeEchelleEchelle->setQte(3);
+                                $entityManager->persist($CoupeEchelleEchelle);
+                                $entityManager->flush($CoupeEchelleEchelle);
+                                $TableauEchelleCoupe = array($CoupeEchelleEchelle);
+                                $session->set('TableauEchelleCoupe',$TableauEchelleCoupe);
+                            }
+                            else
+                            {
+                                if($hauteurmesure<= 11810)
+                                {
+                                    $CoupeEchelle = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 1960]);
+                                    $CoupeEchelle2 = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 3360]);
+                                    $CoupeEchelleEchelle = new CoupeEchelleEchelle();
+                                    $CoupeEchelleEchelle->setEchelleId($Echelle);
+                                    $CoupeEchelleEchelle->setCoupeEchelleId($CoupeEchelle);
+                                    $CoupeEchelleEchelle->setQte(1);
+                                    $entityManager->persist($CoupeEchelleEchelle);
+                                    $entityManager->flush($CoupeEchelleEchelle);
+                                    $TableauEchelleCoupe = array($CoupeEchelleEchelle);
+                                    $session->set('TableauEchelleCoupe',$TableauEchelleCoupe);
+                                    $CoupeEchelleEchelle = new CoupeEchelleEchelle();
+                                    $CoupeEchelleEchelle->setEchelleId($Echelle);
+                                    $CoupeEchelleEchelle->setCoupeEchelleId($CoupeEchelle2);
+                                    $CoupeEchelleEchelle->setQte(3);
+                                    $entityManager->persist($CoupeEchelleEchelle);
+                                    $entityManager->flush($CoupeEchelleEchelle);
+                                    $TableauEchelleCoupe = array($CoupeEchelleEchelle);
+                                    $session->set('TableauEchelleCoupe',$TableauEchelleCoupe);
+                                }
+                                else
+                                {
+                                    if($hauteurmesure<= 13770)
+                                    {
+                                        $CoupeEchelle = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 1960]);
+                                        $CoupeEchelle2 = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 3360]);
+                                        $CoupeEchelleEchelle = new CoupeEchelleEchelle();
+                                        $CoupeEchelleEchelle->setEchelleId($Echelle);
+                                        $CoupeEchelleEchelle->setCoupeEchelleId($CoupeEchelle2);
+                                        $CoupeEchelleEchelle->setQte(4);
+                                        $entityManager->persist($CoupeEchelleEchelle);
+                                        $entityManager->flush($CoupeEchelleEchelle);
+                                        $TableauEchelleCoupe = array($CoupeEchelleEchelle);
+                                        $session->set('TableauEchelleCoupe',$TableauEchelleCoupe);
+                                    }
+                                    else
+                                    {
+                                        if($hauteurmesure<= 15730)
+                                        {
+                                            $CoupeEchelle = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 1960]);
+                                            $CoupeEchelle2 = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 3360]);
+                                            $CoupeEchelleEchelle = new CoupeEchelleEchelle();
+                                            $CoupeEchelleEchelle->setEchelleId($Echelle);
+                                            $CoupeEchelleEchelle->setCoupeEchelleId($CoupeEchelle2);
+                                            $CoupeEchelleEchelle->setQte(5);
+                                            $entityManager->persist($CoupeEchelleEchelle);
+                                            $entityManager->flush($CoupeEchelleEchelle);
+                                            $TableauEchelleCoupe = array($CoupeEchelleEchelle);
+                                            $session->set('TableauEchelleCoupe',$TableauEchelleCoupe);
+                                        }
+                                        else
+                                        {
+                                            if($hauteurmesure<= 17690)
+                                            {
+                                                $CoupeEchelle = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 1960]);
+                                                $CoupeEchelle2 = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 3360]);
+                                                $CoupeEchelleEchelle = new CoupeEchelleEchelle();
+                                                $CoupeEchelleEchelle->setEchelleId($Echelle);
+                                                $CoupeEchelleEchelle->setCoupeEchelleId($CoupeEchelle);
+                                                $CoupeEchelleEchelle->setQte(1);
+                                                $entityManager->persist($CoupeEchelleEchelle);
+                                                $entityManager->flush($CoupeEchelleEchelle);
+                                                $TableauEchelleCoupe = array($CoupeEchelleEchelle);
+                                                $session->set('TableauEchelleCoupe',$TableauEchelleCoupe);
+                                                $CoupeEchelleEchelle = new CoupeEchelleEchelle();
+                                                $CoupeEchelleEchelle->setEchelleId($Echelle);
+                                                $CoupeEchelleEchelle->setCoupeEchelleId($CoupeEchelle2);
+                                                $CoupeEchelleEchelle->setQte(5);
+                                                $entityManager->persist($CoupeEchelleEchelle);
+                                                $entityManager->flush($CoupeEchelleEchelle);
+                                                $TableauEchelleCoupe = array($CoupeEchelleEchelle);
+                                                $session->set('TableauEchelleCoupe',$TableauEchelleCoupe);
+                                            }
+                                            else
+                                            {
+                                                if($hauteurmesure<= 19650)
+                                                {
+                                                    $CoupeEchelle = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 1960]);
+                                                    $CoupeEchelle2 = $this->getDoctrine()->getRepository(CoupeEchelle::class)->findOneBy(['Longueur' => 3360]);
+                                                    $CoupeEchelleEchelle = new CoupeEchelleEchelle();
+                                                    $CoupeEchelleEchelle->setEchelleId($Echelle);
+                                                    $CoupeEchelleEchelle->setCoupeEchelleId($CoupeEchelle);
+                                                    $CoupeEchelleEchelle->setQte(2);
+                                                    $entityManager->persist($CoupeEchelleEchelle);
+                                                    $entityManager->flush($CoupeEchelleEchelle);
+                                                    $TableauEchelleCoupe = array($CoupeEchelleEchelle);
+                                                    $session->set('TableauEchelleCoupe',$TableauEchelleCoupe);
+                                                    $CoupeEchelleEchelle = new CoupeEchelleEchelle();
+                                                    $CoupeEchelleEchelle->setEchelleId($Echelle);
+                                                    $CoupeEchelleEchelle->setCoupeEchelleId($CoupeEchelle2);
+                                                    $CoupeEchelleEchelle->setQte(6);
+                                                    $entityManager->persist($CoupeEchelleEchelle);
+                                                    $entityManager->flush($CoupeEchelleEchelle);
+                                                    $TableauEchelleCoupe = array($CoupeEchelleEchelle);
+                                                    $session->set('TableauEchelleCoupe',$TableauEchelleCoupe);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             $entityManager->persist($class);
             $entityManager->flush();
             /* On récupère la session pour y affecter une variable qui sera accessible partout*/
@@ -419,13 +628,13 @@ else{
             $entityManager->persist($Echelle);
             $entityManager->flush();
 
-
             return $this->redirectToRoute('accessoireAjout', array('id'=> $id));
         }
 
         return $this->render('SortieAjout.html.twig',['SortieAjoutForm' => $form->createView()]);
     }
     else{
+
         return $this->render('Denied.html.twig');
     }
     }
@@ -433,7 +642,6 @@ else{
     /* Choix des accessoires d'une echelle dans la liste d'accessoires*/
     public function AjoutAccessoire(Request $request, int $id): Response
     {
-
         $session = $this->get('session');
         if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
         {
@@ -443,9 +651,16 @@ else{
 
         if ($form->isSubmitted() && $form->isValid())
         {   
-            
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('ajoutChangementVolee', array('id'=> $id));
+            if($session->get('valeurverification') == 2)
+            {
+                $redirection = $this->redirectToRoute('RegisterInvite', array('id'=> $id));
+            }
+            else
+            {
+                $redirection = $this->redirectToRoute('pdf', array('id'=> $id));
+            }
+            return $redirection;
         }
         return $this->render('AccessoireAjout.html.twig',['Form' => $form->createView()]);
     }
@@ -535,6 +750,7 @@ else{
             $Echelle = $repository->find($id);
             $PrixSortie = $Echelle->getEchellesortie();
             $ListeAccessoire = $Echelle->getEchelleAccessoire();
+            $CoupeEchelle = $Echelle->getCoupeEchelleEchelles();
             
 
             /*$html = $this->renderView(
@@ -560,18 +776,19 @@ else{
                 $knpSnappyPdf->generateFromHtml(
                     $this->renderView(
                         'test.html.twig',['ListeAccessoire' => $ListeAccessoire,
-                        'Echelle' => $Echelle, ]
+                        'Echelle' => $Echelle,
+                        'CoupeEchelle' => $CoupeEchelle ]
                     ),
-                    '../Devis/' . $user->getnom() . $date["mday"] . $date["mon"] . $date["year"] . '1.pdf'
+                    '../Devis/' . $user->getnom() . $date["mday"] . $date["mon"] . $date["year"] .'.pdf'
                 );
 
-                $knpSnappyPdf->generateFromHtml(
+                /*$knpSnappyPdf->generateFromHtml(
                     $this->renderView(
                         'test3.html.twig',['ListeAccessoire' => $ListeAccessoire,
                         'Echelle' => $Echelle, ]
                     ),
                     '../Devis/' . $user->getnom() . $date["mday"] . $date["mon"] . $date["year"] . '2.pdf'
-                );
+                );*/
                 $config = $session->get('LaConfig');
                 for($i=1; $i<3; $i++)
                 {
@@ -603,7 +820,6 @@ else{
                 return $this->render('Denied.html.twig');
             }                
         }
-
 
         public function toPdfActionLegend(Pdf $knpSnappyPdf) {
             

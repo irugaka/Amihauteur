@@ -15,7 +15,8 @@ class HauteurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('AFranchirHauteur', NumberType::class)
+            ->add('AFranchirHauteur', NumberType::class, [
+            ])
         ;
     }
 

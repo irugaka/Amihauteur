@@ -52,17 +52,14 @@
         $(document).ready(function() {
             const $accessoriessCollectionHolder = $('ul.accessories');
             $accessoriessCollectionHolder.data('index', $accessoriessCollectionHolder.find('input').length);
-
             $('body').on('click', '.add_item_link', function(e) {
                 var $accessoriessCollectionHolder = $(e.currentTarget).data('collectionHolderClass');
                 addFormToCollection($accessoriessCollectionHolder);
             });
-
             $accessoriessCollectionHolder.find('li').each(function() {
                 addTagFormDeleteLink($(this));
             });
         });
-
         function addFormToCollection($collectionHolderClass) {
             const $collectionHolder = $('.' + $collectionHolderClass);
             const prototype = $collectionHolder.data('prototype');
@@ -74,11 +71,9 @@
             $collectionHolder.append($newFormLi);
             addTagFormDeleteLink($newFormLi);
         }
-
         function addTagFormDeleteLink($accessoryFormLi) {
             const $removeFormButton = $('<button class="text-dark btn bg-warning" type="button">-</button>');
             $accessoryFormLi.append($removeFormButton);
-
             $removeFormButton.on('click', function() {
                 $accessoryFormLi.remove();
             });
@@ -87,6 +82,5 @@
 {% endblock %}
 
 {% block progression %}
-<br>
 {{ include('ProgressionBar.html.twig') }}
 {% endblock %}

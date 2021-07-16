@@ -18,6 +18,7 @@ class SortieType extends AbstractType
             'class'=>Sortie::class,
             'choice_label'=> 'LibelleSortie',
             'choice_value'=>'id',
+            'expanded' => true,
         ])
     ;
     }
