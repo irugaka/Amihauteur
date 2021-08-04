@@ -41,14 +41,7 @@ class __TwigTemplate_d45d7b537cce20e59f6d8f949f2936be29a4b0b1237cab18b1274f0f6ff
 
         // line 8
         echo "
-<footer class=\"page-footer font-small blue\">
-
-  <!-- Copyright -->
-  <div class=\"footer-copyright text-center py-3\">Site developpé par Ami-Hauteur
-  </div>
-  <!-- Copyright -->
-
-</footer>";
+";
         
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
@@ -77,13 +70,6 @@ class __TwigTemplate_d45d7b537cce20e59f6d8f949f2936be29a4b0b1237cab18b1274f0f6ff
 <p>Site developpé par Ami-Hauteur</p>
 </footer> #}
 
-<footer class=\"page-footer font-small blue\">
-
-  <!-- Copyright -->
-  <div class=\"footer-copyright text-center py-3\">Site developpé par Ami-Hauteur
-  </div>
-  <!-- Copyright -->
-
-</footer>", "footer.html.twig", "C:\\wamp64\\www\\Projet\\AmiHauteurApp\\templates\\footer.html.twig");
+", "footer.html.twig", "C:\\wamp64\\www\\Projet\\AmiHauteurApp\\templates\\footer.html.twig");
     }
 }
