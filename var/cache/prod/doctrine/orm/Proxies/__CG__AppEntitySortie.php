@@ -66,10 +66,10 @@ class Sortie extends \App\Entity\Sortie implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'referenceSortie', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'prixSortie', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'libelleSortie', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'descriptionEntree'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'referenceSortie', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'prixSortie', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'libelleSortie', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'descriptionEntree', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'Commercialise', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'ImageUrl'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'referenceSortie', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'prixSortie', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'libelleSortie', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'descriptionEntree'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'referenceSortie', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'prixSortie', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'libelleSortie', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'descriptionEntree', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'Commercialise', '' . "\0" . 'App\\Entity\\Sortie' . "\0" . 'ImageUrl'];
     }
 
     /**
@@ -277,6 +277,50 @@ class Sortie extends \App\Entity\Sortie implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDescriptionEntree', [$descriptionEntree]);
 
         return parent::setDescriptionEntree($descriptionEntree);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCommercialise(): ?bool
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCommercialise', []);
+
+        return parent::getCommercialise();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCommercialise(bool $Commercialise): \App\Entity\Sortie
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCommercialise', [$Commercialise]);
+
+        return parent::setCommercialise($Commercialise);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getImageUrl(): ?string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getImageUrl', []);
+
+        return parent::getImageUrl();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setImageUrl(string $ImageUrl): \App\Entity\Sortie
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setImageUrl', [$ImageUrl]);
+
+        return parent::setImageUrl($ImageUrl);
     }
 
 }

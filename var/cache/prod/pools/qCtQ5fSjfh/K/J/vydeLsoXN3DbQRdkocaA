@@ -1,0 +1,137 @@
+<?php //%255BApp%255CEntity%255CSortie%2524CLASSMETADATA%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+        clone ($p['Doctrine\\ORM\\Id\\IdentityGenerator'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Id\\IdentityGenerator')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'App\\Entity\\Sortie',
+            ],
+            'namespace' => [
+                'App\\Entity',
+            ],
+            'rootEntityName' => [
+                'App\\Entity\\Sortie',
+            ],
+            'identifier' => [
+                [
+                    'id',
+                ],
+            ],
+            'generatorType' => [
+                4,
+            ],
+            'fieldMappings' => [
+                [
+                    'id' => [
+                        'fieldName' => 'id',
+                        'type' => 'integer',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'id',
+                        'id' => true,
+                    ],
+                    'referenceSortie' => [
+                        'fieldName' => 'referenceSortie',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 50,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'reference_sortie',
+                    ],
+                    'prixSortie' => [
+                        'fieldName' => 'prixSortie',
+                        'type' => 'integer',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'prix_sortie',
+                    ],
+                    'libelleSortie' => [
+                        'fieldName' => 'libelleSortie',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 255,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'libelle_sortie',
+                    ],
+                    'descriptionEntree' => [
+                        'fieldName' => 'descriptionEntree',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 255,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'description_entree',
+                    ],
+                    'Commercialise' => [
+                        'fieldName' => 'Commercialise',
+                        'type' => 'boolean',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'commercialise',
+                    ],
+                    'ImageUrl' => [
+                        'fieldName' => 'ImageUrl',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 255,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'image_url',
+                    ],
+                ],
+            ],
+            'fieldNames' => [
+                [
+                    'id' => 'id',
+                    'reference_sortie' => 'referenceSortie',
+                    'prix_sortie' => 'prixSortie',
+                    'libelle_sortie' => 'libelleSortie',
+                    'description_entree' => 'descriptionEntree',
+                    'commercialise' => 'Commercialise',
+                    'image_url' => 'ImageUrl',
+                ],
+            ],
+            'columnNames' => [
+                [
+                    'id' => 'id',
+                    'referenceSortie' => 'reference_sortie',
+                    'prixSortie' => 'prix_sortie',
+                    'libelleSortie' => 'libelle_sortie',
+                    'descriptionEntree' => 'description_entree',
+                    'Commercialise' => 'commercialise',
+                    'ImageUrl' => 'image_url',
+                ],
+            ],
+            'table' => [
+                [
+                    'name' => 'sortie',
+                ],
+            ],
+            'idGenerator' => [
+                $o[1],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

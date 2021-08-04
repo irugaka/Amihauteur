@@ -66,10 +66,10 @@ class Norme extends \App\Entity\Norme implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Norme' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Norme' . "\0" . 'descriptionNorme', '' . "\0" . 'App\\Entity\\Norme' . "\0" . 'element'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Norme' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Norme' . "\0" . 'descriptionNorme', '' . "\0" . 'App\\Entity\\Norme' . "\0" . 'element', '' . "\0" . 'App\\Entity\\Norme' . "\0" . 'ImageUrl'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Norme' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Norme' . "\0" . 'descriptionNorme', '' . "\0" . 'App\\Entity\\Norme' . "\0" . 'element'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Norme' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Norme' . "\0" . 'descriptionNorme', '' . "\0" . 'App\\Entity\\Norme' . "\0" . 'element', '' . "\0" . 'App\\Entity\\Norme' . "\0" . 'ImageUrl'];
     }
 
     /**
@@ -244,6 +244,28 @@ class Norme extends \App\Entity\Norme implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeElement', [$element]);
 
         return parent::removeElement($element);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getImageUrl(): ?string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getImageUrl', []);
+
+        return parent::getImageUrl();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setImageUrl(string $ImageUrl): \App\Entity\Norme
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setImageUrl', [$ImageUrl]);
+
+        return parent::setImageUrl($ImageUrl);
     }
 
 }

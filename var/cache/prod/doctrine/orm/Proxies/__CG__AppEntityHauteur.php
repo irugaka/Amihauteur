@@ -66,10 +66,10 @@ class Hauteur extends \App\Entity\Hauteur implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Hauteur' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Hauteur' . "\0" . 'afranchirHauteur'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Hauteur' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Hauteur' . "\0" . 'afranchirHauteur', '' . "\0" . 'App\\Entity\\Hauteur' . "\0" . 'prix'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Hauteur' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Hauteur' . "\0" . 'afranchirHauteur'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Hauteur' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Hauteur' . "\0" . 'afranchirHauteur', '' . "\0" . 'App\\Entity\\Hauteur' . "\0" . 'prix'];
     }
 
     /**
@@ -211,6 +211,28 @@ class Hauteur extends \App\Entity\Hauteur implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAfranchirHauteur', [$afranchirHauteur]);
 
         return parent::setAfranchirHauteur($afranchirHauteur);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPrix(): ?int
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPrix', []);
+
+        return parent::getPrix();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPrix(?int $prix): \App\Entity\Hauteur
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPrix', [$prix]);
+
+        return parent::setPrix($prix);
     }
 
 }

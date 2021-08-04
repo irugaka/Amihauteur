@@ -1,0 +1,63 @@
+<?php //%255BApp%255CEntity%255CEchelle%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\Table'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Table')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Index'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Index')),
+        clone $p['Doctrine\\ORM\\Mapping\\Index'],
+        clone $p['Doctrine\\ORM\\Mapping\\Index'],
+        clone $p['Doctrine\\ORM\\Mapping\\Index'],
+        clone $p['Doctrine\\ORM\\Mapping\\Index'],
+        clone $p['Doctrine\\ORM\\Mapping\\Index'],
+        clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'echelle',
+                'IDX_DA65794D712551BC',
+                'IDX_DA65794D52EAF347',
+                'IDX_DA65794D21127304',
+                'IDX_DA65794DB7242249',
+                'IDX_DA65794DC9BBACD4',
+                'IDX_DA65794D421B7347',
+            ],
+            'indexes' => [
+                [
+                    $o[1],
+                    $o[2],
+                    $o[3],
+                    $o[4],
+                    $o[5],
+                    $o[6],
+                ],
+            ],
+            'columns' => [
+                1 => [
+                    'echelle_type_echelle_id',
+                ],
+                [
+                    'echelle_hauteur_id',
+                ],
+                [
+                    'echelle_sortie_id',
+                ],
+                [
+                    'echelle_norme_id',
+                ],
+                [
+                    'echelle_config_id',
+                ],
+                [
+                    'echelle_entree_id',
+                ],
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[7],
+    ],
+    []
+); }];

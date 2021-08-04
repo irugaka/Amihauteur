@@ -66,10 +66,10 @@ class TypeEchelle extends \App\Entity\TypeEchelle implements \Doctrine\ORM\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\TypeEchelle' . "\0" . 'id', '' . "\0" . 'App\\Entity\\TypeEchelle' . "\0" . 'libelleTypeEchelle'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\TypeEchelle' . "\0" . 'id', '' . "\0" . 'App\\Entity\\TypeEchelle' . "\0" . 'prix', '' . "\0" . 'App\\Entity\\TypeEchelle' . "\0" . 'libelleTypeEchelle', '' . "\0" . 'App\\Entity\\TypeEchelle' . "\0" . 'image', '' . "\0" . 'App\\Entity\\TypeEchelle' . "\0" . 'Commercialise'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\TypeEchelle' . "\0" . 'id', '' . "\0" . 'App\\Entity\\TypeEchelle' . "\0" . 'libelleTypeEchelle'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\TypeEchelle' . "\0" . 'id', '' . "\0" . 'App\\Entity\\TypeEchelle' . "\0" . 'prix', '' . "\0" . 'App\\Entity\\TypeEchelle' . "\0" . 'libelleTypeEchelle', '' . "\0" . 'App\\Entity\\TypeEchelle' . "\0" . 'image', '' . "\0" . 'App\\Entity\\TypeEchelle' . "\0" . 'Commercialise'];
     }
 
     /**
@@ -211,6 +211,72 @@ class TypeEchelle extends \App\Entity\TypeEchelle implements \Doctrine\ORM\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLibelleTypeEchelle', [$libelleTypeEchelle]);
 
         return parent::setLibelleTypeEchelle($libelleTypeEchelle);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPrix(): ?int
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPrix', []);
+
+        return parent::getPrix();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPrix(string $prix): \App\Entity\TypeEchelle
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPrix', [$prix]);
+
+        return parent::setPrix($prix);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getImage(): ?\App\Entity\Image
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getImage', []);
+
+        return parent::getImage();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setImage(?\App\Entity\Image $image): \App\Entity\TypeEchelle
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setImage', [$image]);
+
+        return parent::setImage($image);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCommercialise(): ?bool
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCommercialise', []);
+
+        return parent::getCommercialise();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCommercialise(bool $Commercialise): \App\Entity\TypeEchelle
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCommercialise', [$Commercialise]);
+
+        return parent::setCommercialise($Commercialise);
     }
 
 }

@@ -1,0 +1,478 @@
+<?php //%255BApp%255CEntity%255CEchelle%2524CLASSMETADATA%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+        clone ($p['Doctrine\\ORM\\Id\\IdentityGenerator'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Id\\IdentityGenerator')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'App\\Entity\\Echelle',
+            ],
+            'namespace' => [
+                'App\\Entity',
+            ],
+            'rootEntityName' => [
+                'App\\Entity\\Echelle',
+            ],
+            'identifier' => [
+                [
+                    'id',
+                ],
+            ],
+            'generatorType' => [
+                4,
+            ],
+            'fieldMappings' => [
+                [
+                    'id' => [
+                        'fieldName' => 'id',
+                        'type' => 'integer',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'id',
+                        'id' => true,
+                    ],
+                ],
+            ],
+            'fieldNames' => [
+                [
+                    'id' => 'id',
+                ],
+            ],
+            'columnNames' => [
+                [
+                    'id' => 'id',
+                ],
+            ],
+            'table' => [
+                [
+                    'name' => 'echelle',
+                    'indexes' => [
+                        'IDX_DA65794D712551BC' => [
+                            'columns' => [
+                                'echelle_type_echelle_id',
+                            ],
+                        ],
+                        'IDX_DA65794D52EAF347' => [
+                            'columns' => [
+                                'echelle_hauteur_id',
+                            ],
+                        ],
+                        'IDX_DA65794D21127304' => [
+                            'columns' => [
+                                'echelle_sortie_id',
+                            ],
+                        ],
+                        'IDX_DA65794DB7242249' => [
+                            'columns' => [
+                                'echelle_norme_id',
+                            ],
+                        ],
+                        'IDX_DA65794DC9BBACD4' => [
+                            'columns' => [
+                                'echelle_config_id',
+                            ],
+                        ],
+                        'IDX_DA65794D421B7347' => [
+                            'columns' => [
+                                'echelle_entree_id',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'associationMappings' => [
+                [
+                    'echelleSortie' => [
+                        'fieldName' => 'echelleSortie',
+                        'joinColumns' => [
+                            [
+                                'name' => 'echelle_sortie_id',
+                                'unique' => false,
+                                'nullable' => true,
+                                'onDelete' => null,
+                                'columnDefinition' => null,
+                                'referencedColumnName' => 'id',
+                            ],
+                        ],
+                        'cascade' => [],
+                        'inversedBy' => null,
+                        'targetEntity' => 'App\\Entity\\Sortie',
+                        'fetch' => 2,
+                        'type' => 2,
+                        'mappedBy' => null,
+                        'isOwningSide' => true,
+                        'sourceEntity' => 'App\\Entity\\Echelle',
+                        'isCascadeRemove' => false,
+                        'isCascadePersist' => false,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                        'sourceToTargetKeyColumns' => [
+                            'echelle_sortie_id' => 'id',
+                        ],
+                        'joinColumnFieldNames' => [
+                            'echelle_sortie_id' => 'echelle_sortie_id',
+                        ],
+                        'targetToSourceKeyColumns' => [
+                            'id' => 'echelle_sortie_id',
+                        ],
+                        'orphanRemoval' => false,
+                    ],
+                    'echelleEntree' => [
+                        'fieldName' => 'echelleEntree',
+                        'joinColumns' => [
+                            [
+                                'name' => 'echelle_entree_id',
+                                'unique' => false,
+                                'nullable' => true,
+                                'onDelete' => null,
+                                'columnDefinition' => null,
+                                'referencedColumnName' => 'id',
+                            ],
+                        ],
+                        'cascade' => [],
+                        'inversedBy' => null,
+                        'targetEntity' => 'App\\Entity\\Entree',
+                        'fetch' => 2,
+                        'type' => 2,
+                        'mappedBy' => null,
+                        'isOwningSide' => true,
+                        'sourceEntity' => 'App\\Entity\\Echelle',
+                        'isCascadeRemove' => false,
+                        'isCascadePersist' => false,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                        'sourceToTargetKeyColumns' => [
+                            'echelle_entree_id' => 'id',
+                        ],
+                        'joinColumnFieldNames' => [
+                            'echelle_entree_id' => 'echelle_entree_id',
+                        ],
+                        'targetToSourceKeyColumns' => [
+                            'id' => 'echelle_entree_id',
+                        ],
+                        'orphanRemoval' => false,
+                    ],
+                    'echelleHauteur' => [
+                        'fieldName' => 'echelleHauteur',
+                        'joinColumns' => [
+                            [
+                                'name' => 'echelle_hauteur_id',
+                                'unique' => false,
+                                'nullable' => true,
+                                'onDelete' => null,
+                                'columnDefinition' => null,
+                                'referencedColumnName' => 'id',
+                            ],
+                        ],
+                        'cascade' => [],
+                        'inversedBy' => null,
+                        'targetEntity' => 'App\\Entity\\Hauteur',
+                        'fetch' => 2,
+                        'type' => 2,
+                        'mappedBy' => null,
+                        'isOwningSide' => true,
+                        'sourceEntity' => 'App\\Entity\\Echelle',
+                        'isCascadeRemove' => false,
+                        'isCascadePersist' => false,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                        'sourceToTargetKeyColumns' => [
+                            'echelle_hauteur_id' => 'id',
+                        ],
+                        'joinColumnFieldNames' => [
+                            'echelle_hauteur_id' => 'echelle_hauteur_id',
+                        ],
+                        'targetToSourceKeyColumns' => [
+                            'id' => 'echelle_hauteur_id',
+                        ],
+                        'orphanRemoval' => false,
+                    ],
+                    'echelleTypeEchelle' => [
+                        'fieldName' => 'echelleTypeEchelle',
+                        'joinColumns' => [
+                            [
+                                'name' => 'echelle_type_echelle_id',
+                                'unique' => false,
+                                'nullable' => true,
+                                'onDelete' => null,
+                                'columnDefinition' => null,
+                                'referencedColumnName' => 'id',
+                            ],
+                        ],
+                        'cascade' => [],
+                        'inversedBy' => null,
+                        'targetEntity' => 'App\\Entity\\TypeEchelle',
+                        'fetch' => 2,
+                        'type' => 2,
+                        'mappedBy' => null,
+                        'isOwningSide' => true,
+                        'sourceEntity' => 'App\\Entity\\Echelle',
+                        'isCascadeRemove' => false,
+                        'isCascadePersist' => false,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                        'sourceToTargetKeyColumns' => [
+                            'echelle_type_echelle_id' => 'id',
+                        ],
+                        'joinColumnFieldNames' => [
+                            'echelle_type_echelle_id' => 'echelle_type_echelle_id',
+                        ],
+                        'targetToSourceKeyColumns' => [
+                            'id' => 'echelle_type_echelle_id',
+                        ],
+                        'orphanRemoval' => false,
+                    ],
+                    'echelleNorme' => [
+                        'fieldName' => 'echelleNorme',
+                        'joinColumns' => [
+                            [
+                                'name' => 'echelle_norme_id',
+                                'unique' => false,
+                                'nullable' => true,
+                                'onDelete' => null,
+                                'columnDefinition' => null,
+                                'referencedColumnName' => 'id',
+                            ],
+                        ],
+                        'cascade' => [],
+                        'inversedBy' => null,
+                        'targetEntity' => 'App\\Entity\\Norme',
+                        'fetch' => 2,
+                        'type' => 2,
+                        'mappedBy' => null,
+                        'isOwningSide' => true,
+                        'sourceEntity' => 'App\\Entity\\Echelle',
+                        'isCascadeRemove' => false,
+                        'isCascadePersist' => false,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                        'sourceToTargetKeyColumns' => [
+                            'echelle_norme_id' => 'id',
+                        ],
+                        'joinColumnFieldNames' => [
+                            'echelle_norme_id' => 'echelle_norme_id',
+                        ],
+                        'targetToSourceKeyColumns' => [
+                            'id' => 'echelle_norme_id',
+                        ],
+                        'orphanRemoval' => false,
+                    ],
+                    'echelleConfig' => [
+                        'fieldName' => 'echelleConfig',
+                        'joinColumns' => [
+                            [
+                                'name' => 'echelle_config_id',
+                                'unique' => false,
+                                'nullable' => true,
+                                'onDelete' => null,
+                                'columnDefinition' => null,
+                                'referencedColumnName' => 'id',
+                            ],
+                        ],
+                        'cascade' => [],
+                        'inversedBy' => null,
+                        'targetEntity' => 'App\\Entity\\Config',
+                        'fetch' => 2,
+                        'type' => 2,
+                        'mappedBy' => null,
+                        'isOwningSide' => true,
+                        'sourceEntity' => 'App\\Entity\\Echelle',
+                        'isCascadeRemove' => false,
+                        'isCascadePersist' => false,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                        'sourceToTargetKeyColumns' => [
+                            'echelle_config_id' => 'id',
+                        ],
+                        'joinColumnFieldNames' => [
+                            'echelle_config_id' => 'echelle_config_id',
+                        ],
+                        'targetToSourceKeyColumns' => [
+                            'id' => 'echelle_config_id',
+                        ],
+                        'orphanRemoval' => false,
+                    ],
+                    'changementVolee' => [
+                        'fieldName' => 'changementVolee',
+                        'joinTable' => [
+                            'name' => 'echelle_changement_volee',
+                            'schema' => null,
+                            'joinColumns' => [
+                                [
+                                    'name' => 'echelle_id',
+                                    'unique' => false,
+                                    'nullable' => true,
+                                    'onDelete' => null,
+                                    'columnDefinition' => null,
+                                    'referencedColumnName' => 'id',
+                                ],
+                            ],
+                            'inverseJoinColumns' => [
+                                [
+                                    'name' => 'changement_volee_id',
+                                    'unique' => false,
+                                    'nullable' => true,
+                                    'onDelete' => null,
+                                    'columnDefinition' => null,
+                                    'referencedColumnName' => 'id',
+                                ],
+                            ],
+                        ],
+                        'targetEntity' => 'App\\Entity\\ChangementVolee',
+                        'mappedBy' => null,
+                        'inversedBy' => 'echelle',
+                        'cascade' => [],
+                        'orphanRemoval' => false,
+                        'fetch' => 2,
+                        'type' => 8,
+                        'isOwningSide' => true,
+                        'sourceEntity' => 'App\\Entity\\Echelle',
+                        'isCascadeRemove' => false,
+                        'isCascadePersist' => false,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                        'joinTableColumns' => [
+                            'echelle_id',
+                            'changement_volee_id',
+                        ],
+                        'relationToSourceKeyColumns' => [
+                            'echelle_id' => 'id',
+                        ],
+                        'relationToTargetKeyColumns' => [
+                            'changement_volee_id' => 'id',
+                        ],
+                    ],
+                    'EchelleFixation' => [
+                        'fieldName' => 'EchelleFixation',
+                        'mappedBy' => 'Echelle',
+                        'targetEntity' => 'App\\Entity\\EchelleFixation',
+                        'cascade' => [
+                            'persist',
+                            'remove',
+                        ],
+                        'orphanRemoval' => false,
+                        'fetch' => 2,
+                        'type' => 4,
+                        'inversedBy' => null,
+                        'isOwningSide' => false,
+                        'sourceEntity' => 'App\\Entity\\Echelle',
+                        'isCascadeRemove' => true,
+                        'isCascadePersist' => true,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                    ],
+                    'palier' => [
+                        'fieldName' => 'palier',
+                        'joinTable' => [
+                            'name' => 'echelle_palier',
+                            'schema' => null,
+                            'joinColumns' => [
+                                [
+                                    'name' => 'echelle_id',
+                                    'unique' => false,
+                                    'nullable' => true,
+                                    'onDelete' => null,
+                                    'columnDefinition' => null,
+                                    'referencedColumnName' => 'id',
+                                ],
+                            ],
+                            'inverseJoinColumns' => [
+                                [
+                                    'name' => 'palier_id',
+                                    'unique' => false,
+                                    'nullable' => true,
+                                    'onDelete' => null,
+                                    'columnDefinition' => null,
+                                    'referencedColumnName' => 'id',
+                                ],
+                            ],
+                        ],
+                        'targetEntity' => 'App\\Entity\\Palier',
+                        'mappedBy' => null,
+                        'inversedBy' => 'echelle',
+                        'cascade' => [],
+                        'orphanRemoval' => false,
+                        'fetch' => 2,
+                        'type' => 8,
+                        'isOwningSide' => true,
+                        'sourceEntity' => 'App\\Entity\\Echelle',
+                        'isCascadeRemove' => false,
+                        'isCascadePersist' => false,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                        'joinTableColumns' => [
+                            'echelle_id',
+                            'palier_id',
+                        ],
+                        'relationToSourceKeyColumns' => [
+                            'echelle_id' => 'id',
+                        ],
+                        'relationToTargetKeyColumns' => [
+                            'palier_id' => 'id',
+                        ],
+                    ],
+                    'EchelleAccessoire' => [
+                        'fieldName' => 'EchelleAccessoire',
+                        'mappedBy' => 'Echelle',
+                        'targetEntity' => 'App\\Entity\\EchelleAccessoire',
+                        'cascade' => [
+                            'persist',
+                            'remove',
+                        ],
+                        'orphanRemoval' => false,
+                        'fetch' => 2,
+                        'type' => 4,
+                        'inversedBy' => null,
+                        'isOwningSide' => false,
+                        'sourceEntity' => 'App\\Entity\\Echelle',
+                        'isCascadeRemove' => true,
+                        'isCascadePersist' => true,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                    ],
+                    'coupeEchelleEchelles' => [
+                        'fieldName' => 'coupeEchelleEchelles',
+                        'mappedBy' => 'EchelleId',
+                        'targetEntity' => 'App\\Entity\\CoupeEchelleEchelle',
+                        'cascade' => [
+                            'persist',
+                        ],
+                        'orphanRemoval' => false,
+                        'fetch' => 2,
+                        'type' => 4,
+                        'inversedBy' => null,
+                        'isOwningSide' => false,
+                        'sourceEntity' => 'App\\Entity\\Echelle',
+                        'isCascadeRemove' => false,
+                        'isCascadePersist' => true,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                    ],
+                ],
+            ],
+            'idGenerator' => [
+                $o[1],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

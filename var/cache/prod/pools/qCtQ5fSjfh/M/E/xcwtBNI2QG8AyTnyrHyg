@@ -1,0 +1,89 @@
+<?php //%255BApp%255CEntity%255CDoctrineMigrationVersions%2524CLASSMETADATA%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+        clone ($p['Doctrine\\ORM\\Id\\IdentityGenerator'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Id\\IdentityGenerator')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'App\\Entity\\DoctrineMigrationVersions',
+            ],
+            'namespace' => [
+                'App\\Entity',
+            ],
+            'rootEntityName' => [
+                'App\\Entity\\DoctrineMigrationVersions',
+            ],
+            'identifier' => [
+                [
+                    'version',
+                ],
+            ],
+            'generatorType' => [
+                4,
+            ],
+            'fieldMappings' => [
+                [
+                    'version' => [
+                        'fieldName' => 'version',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 191,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'version',
+                        'id' => true,
+                    ],
+                    'executedAt' => [
+                        'fieldName' => 'executedAt',
+                        'type' => 'datetime',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => true,
+                        'precision' => 0,
+                        'columnName' => 'executed_at',
+                    ],
+                    'executionTime' => [
+                        'fieldName' => 'executionTime',
+                        'type' => 'integer',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => true,
+                        'precision' => 0,
+                        'columnName' => 'execution_time',
+                    ],
+                ],
+            ],
+            'fieldNames' => [
+                [
+                    'version' => 'version',
+                    'executed_at' => 'executedAt',
+                    'execution_time' => 'executionTime',
+                ],
+            ],
+            'columnNames' => [
+                [
+                    'version' => 'version',
+                    'executedAt' => 'executed_at',
+                    'executionTime' => 'execution_time',
+                ],
+            ],
+            'table' => [
+                [
+                    'name' => 'doctrine_migration_versions',
+                ],
+            ],
+            'idGenerator' => [
+                $o[1],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

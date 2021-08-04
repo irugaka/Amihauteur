@@ -66,10 +66,10 @@ class Fixation extends \App\Entity\Fixation implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'departFixation', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'hauteurRelativeFixation', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'hauteurAbsolueFixation', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'echelle'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'departFixation', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'EchelleFixation', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'Commercialise', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'NomFixation', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'prixFixation'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'departFixation', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'hauteurRelativeFixation', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'hauteurAbsolueFixation', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'echelle'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'departFixation', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'EchelleFixation', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'Commercialise', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'NomFixation', '' . "\0" . 'App\\Entity\\Fixation' . "\0" . 'prixFixation'];
     }
 
     /**
@@ -260,34 +260,100 @@ class Fixation extends \App\Entity\Fixation implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getEchelle(): \Doctrine\Common\Collections\Collection
+    public function getEchelleFixation(): \Doctrine\Common\Collections\Collection
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEchelle', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEchelleFixation', []);
 
-        return parent::getEchelle();
+        return parent::getEchelleFixation();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function addEchelle(\App\Entity\Echelle $echelle): \App\Entity\Fixation
+    public function addEchelleFixation(\App\Entity\EchelleFixation $EchelleFixation): \App\Entity\Fixation
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addEchelle', [$echelle]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addEchelleFixation', [$EchelleFixation]);
 
-        return parent::addEchelle($echelle);
+        return parent::addEchelleFixation($EchelleFixation);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function removeEchelle(\App\Entity\Echelle $echelle): \App\Entity\Fixation
+    public function removeEchelleFixation(\App\Entity\EchelleFixation $EchelleFixation): \App\Entity\Fixation
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeEchelle', [$echelle]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeEchelleFixation', [$EchelleFixation]);
 
-        return parent::removeEchelle($echelle);
+        return parent::removeEchelleFixation($EchelleFixation);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCommercialise(): ?bool
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCommercialise', []);
+
+        return parent::getCommercialise();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCommercialise(bool $Commercialise): \App\Entity\Fixation
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCommercialise', [$Commercialise]);
+
+        return parent::setCommercialise($Commercialise);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getNomFixation(): ?string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getNomFixation', []);
+
+        return parent::getNomFixation();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setNomFixation(string $NomFixation): \App\Entity\Fixation
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNomFixation', [$NomFixation]);
+
+        return parent::setNomFixation($NomFixation);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPrixFixation(): ?int
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPrixFixation', []);
+
+        return parent::getPrixFixation();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPrixFixation(int $prixFixation): \App\Entity\Fixation
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPrixFixation', [$prixFixation]);
+
+        return parent::setPrixFixation($prixFixation);
     }
 
 }

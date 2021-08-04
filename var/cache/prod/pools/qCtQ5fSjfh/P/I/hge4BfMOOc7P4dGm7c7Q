@@ -1,0 +1,126 @@
+<?php //%255BApp%255CEntity%255CTypeEchelle%2524CLASSMETADATA%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+        clone ($p['Doctrine\\ORM\\Id\\IdentityGenerator'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Id\\IdentityGenerator')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'App\\Entity\\TypeEchelle',
+            ],
+            'namespace' => [
+                'App\\Entity',
+            ],
+            'rootEntityName' => [
+                'App\\Entity\\TypeEchelle',
+            ],
+            'identifier' => [
+                [
+                    'id',
+                ],
+            ],
+            'generatorType' => [
+                4,
+            ],
+            'fieldMappings' => [
+                [
+                    'id' => [
+                        'fieldName' => 'id',
+                        'type' => 'integer',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'id',
+                        'id' => true,
+                    ],
+                    'prix' => [
+                        'fieldName' => 'prix',
+                        'type' => 'integer',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'prix',
+                    ],
+                    'libelleTypeEchelle' => [
+                        'fieldName' => 'libelleTypeEchelle',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 50,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'libelle_type_echelle',
+                    ],
+                    'Commercialise' => [
+                        'fieldName' => 'Commercialise',
+                        'type' => 'boolean',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'commercialise',
+                    ],
+                ],
+            ],
+            'fieldNames' => [
+                [
+                    'id' => 'id',
+                    'prix' => 'prix',
+                    'libelle_type_echelle' => 'libelleTypeEchelle',
+                    'commercialise' => 'Commercialise',
+                ],
+            ],
+            'columnNames' => [
+                [
+                    'id' => 'id',
+                    'prix' => 'prix',
+                    'libelleTypeEchelle' => 'libelle_type_echelle',
+                    'Commercialise' => 'commercialise',
+                ],
+            ],
+            'table' => [
+                [
+                    'name' => 'type_echelle',
+                ],
+            ],
+            'associationMappings' => [
+                [
+                    'image' => [
+                        'fieldName' => 'image',
+                        'targetEntity' => 'App\\Entity\\Image',
+                        'joinColumns' => [],
+                        'mappedBy' => 'TypeEchelle',
+                        'inversedBy' => null,
+                        'cascade' => [
+                            'persist',
+                            'remove',
+                        ],
+                        'orphanRemoval' => false,
+                        'fetch' => 2,
+                        'type' => 1,
+                        'isOwningSide' => false,
+                        'sourceEntity' => 'App\\Entity\\TypeEchelle',
+                        'isCascadeRemove' => true,
+                        'isCascadePersist' => true,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                    ],
+                ],
+            ],
+            'idGenerator' => [
+                $o[1],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

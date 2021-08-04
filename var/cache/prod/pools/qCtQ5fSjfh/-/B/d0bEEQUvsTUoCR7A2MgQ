@@ -1,0 +1,136 @@
+<?php //%255BApp%255CEntity%255CFixation%2524CLASSMETADATA%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+        clone ($p['Doctrine\\ORM\\Id\\IdentityGenerator'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Id\\IdentityGenerator')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'App\\Entity\\Fixation',
+            ],
+            'namespace' => [
+                'App\\Entity',
+            ],
+            'rootEntityName' => [
+                'App\\Entity\\Fixation',
+            ],
+            'identifier' => [
+                [
+                    'id',
+                ],
+            ],
+            'generatorType' => [
+                4,
+            ],
+            'fieldMappings' => [
+                [
+                    'id' => [
+                        'fieldName' => 'id',
+                        'type' => 'integer',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'id',
+                        'id' => true,
+                    ],
+                    'departFixation' => [
+                        'fieldName' => 'departFixation',
+                        'type' => 'integer',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'depart_fixation',
+                    ],
+                    'Commercialise' => [
+                        'fieldName' => 'Commercialise',
+                        'type' => 'boolean',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'commercialise',
+                    ],
+                    'NomFixation' => [
+                        'fieldName' => 'NomFixation',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 255,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'nom_fixation',
+                    ],
+                    'prixFixation' => [
+                        'fieldName' => 'prixFixation',
+                        'type' => 'integer',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'prix_fixation',
+                    ],
+                ],
+            ],
+            'fieldNames' => [
+                [
+                    'id' => 'id',
+                    'depart_fixation' => 'departFixation',
+                    'commercialise' => 'Commercialise',
+                    'nom_fixation' => 'NomFixation',
+                    'prix_fixation' => 'prixFixation',
+                ],
+            ],
+            'columnNames' => [
+                [
+                    'id' => 'id',
+                    'departFixation' => 'depart_fixation',
+                    'Commercialise' => 'commercialise',
+                    'NomFixation' => 'nom_fixation',
+                    'prixFixation' => 'prix_fixation',
+                ],
+            ],
+            'table' => [
+                [
+                    'name' => 'fixation',
+                ],
+            ],
+            'associationMappings' => [
+                [
+                    'EchelleFixation' => [
+                        'fieldName' => 'EchelleFixation',
+                        'mappedBy' => 'fixation',
+                        'targetEntity' => 'App\\Entity\\EchelleFixation',
+                        'cascade' => [
+                            'persist',
+                        ],
+                        'orphanRemoval' => false,
+                        'fetch' => 2,
+                        'type' => 4,
+                        'inversedBy' => null,
+                        'isOwningSide' => false,
+                        'sourceEntity' => 'App\\Entity\\Fixation',
+                        'isCascadeRemove' => false,
+                        'isCascadePersist' => true,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                    ],
+                ],
+            ],
+            'idGenerator' => [
+                $o[1],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

@@ -66,10 +66,10 @@ class Config extends \App\Entity\Config implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'nomConfig', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'referenceConfig', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'descriptionConfig', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'remiseConfig'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'nomConfig', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'referenceConfig', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'descriptionConfig', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'remiseConfig', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'ConfigPDF', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'User', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'DateConfig'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'nomConfig', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'referenceConfig', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'descriptionConfig', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'remiseConfig'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'nomConfig', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'referenceConfig', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'descriptionConfig', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'remiseConfig', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'ConfigPDF', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'User', '' . "\0" . 'App\\Entity\\Config' . "\0" . 'DateConfig'];
     }
 
     /**
@@ -277,6 +277,83 @@ class Config extends \App\Entity\Config implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRemiseConfig', [$remiseConfig]);
 
         return parent::setRemiseConfig($remiseConfig);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getConfigPDF(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getConfigPDF', []);
+
+        return parent::getConfigPDF();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addConfigPDF(\App\Entity\EntityPDF $configPDF): \App\Entity\Config
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addConfigPDF', [$configPDF]);
+
+        return parent::addConfigPDF($configPDF);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeConfigPDF(\App\Entity\EntityPDF $configPDF): \App\Entity\Config
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeConfigPDF', [$configPDF]);
+
+        return parent::removeConfigPDF($configPDF);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUser(): ?\App\Entity\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUser', []);
+
+        return parent::getUser();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUser(?\App\Entity\User $User): \App\Entity\Config
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUser', [$User]);
+
+        return parent::setUser($User);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDateConfig(): ?\DateTimeInterface
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDateConfig', []);
+
+        return parent::getDateConfig();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDateConfig(\DateTimeInterface $DateConfig): \App\Entity\Config
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDateConfig', [$DateConfig]);
+
+        return parent::setDateConfig($DateConfig);
     }
 
 }

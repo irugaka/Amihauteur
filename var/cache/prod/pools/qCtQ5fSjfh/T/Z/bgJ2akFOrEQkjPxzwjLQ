@@ -1,0 +1,180 @@
+<?php //%255BApp%255CEntity%255CConfig%2524CLASSMETADATA%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+        clone ($p['Doctrine\\ORM\\Id\\IdentityGenerator'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Id\\IdentityGenerator')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'App\\Entity\\Config',
+            ],
+            'namespace' => [
+                'App\\Entity',
+            ],
+            'rootEntityName' => [
+                'App\\Entity\\Config',
+            ],
+            'identifier' => [
+                [
+                    'id',
+                ],
+            ],
+            'generatorType' => [
+                4,
+            ],
+            'fieldMappings' => [
+                [
+                    'id' => [
+                        'fieldName' => 'id',
+                        'type' => 'integer',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'id',
+                        'id' => true,
+                    ],
+                    'nomConfig' => [
+                        'fieldName' => 'nomConfig',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 50,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'nom_config',
+                    ],
+                    'referenceConfig' => [
+                        'fieldName' => 'referenceConfig',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 255,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'reference_config',
+                    ],
+                    'descriptionConfig' => [
+                        'fieldName' => 'descriptionConfig',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 255,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'description_config',
+                    ],
+                    'remiseConfig' => [
+                        'fieldName' => 'remiseConfig',
+                        'type' => 'integer',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => true,
+                        'precision' => 0,
+                        'columnName' => 'remise_config',
+                    ],
+                    'DateConfig' => [
+                        'fieldName' => 'DateConfig',
+                        'type' => 'date',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'date_config',
+                    ],
+                ],
+            ],
+            'fieldNames' => [
+                [
+                    'id' => 'id',
+                    'nom_config' => 'nomConfig',
+                    'reference_config' => 'referenceConfig',
+                    'description_config' => 'descriptionConfig',
+                    'remise_config' => 'remiseConfig',
+                    'date_config' => 'DateConfig',
+                ],
+            ],
+            'columnNames' => [
+                [
+                    'id' => 'id',
+                    'nomConfig' => 'nom_config',
+                    'referenceConfig' => 'reference_config',
+                    'descriptionConfig' => 'description_config',
+                    'remiseConfig' => 'remise_config',
+                    'DateConfig' => 'date_config',
+                ],
+            ],
+            'table' => [
+                [
+                    'name' => 'config',
+                ],
+            ],
+            'associationMappings' => [
+                [
+                    'ConfigPDF' => [
+                        'fieldName' => 'ConfigPDF',
+                        'mappedBy' => 'Config',
+                        'targetEntity' => 'App\\Entity\\EntityPDF',
+                        'cascade' => [],
+                        'orphanRemoval' => false,
+                        'fetch' => 2,
+                        'type' => 4,
+                        'inversedBy' => null,
+                        'isOwningSide' => false,
+                        'sourceEntity' => 'App\\Entity\\Config',
+                        'isCascadeRemove' => false,
+                        'isCascadePersist' => false,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                    ],
+                    'User' => [
+                        'fieldName' => 'User',
+                        'joinColumns' => [
+                            [
+                                'name' => 'user_id',
+                                'referencedColumnName' => 'id',
+                            ],
+                        ],
+                        'cascade' => [
+                            'persist',
+                        ],
+                        'inversedBy' => 'ConfigUser',
+                        'targetEntity' => 'App\\Entity\\User',
+                        'fetch' => 2,
+                        'type' => 2,
+                        'mappedBy' => null,
+                        'isOwningSide' => true,
+                        'sourceEntity' => 'App\\Entity\\Config',
+                        'isCascadeRemove' => false,
+                        'isCascadePersist' => true,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                        'sourceToTargetKeyColumns' => [
+                            'user_id' => 'id',
+                        ],
+                        'joinColumnFieldNames' => [
+                            'user_id' => 'user_id',
+                        ],
+                        'targetToSourceKeyColumns' => [
+                            'id' => 'user_id',
+                        ],
+                        'orphanRemoval' => false,
+                    ],
+                ],
+            ],
+            'idGenerator' => [
+                $o[1],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

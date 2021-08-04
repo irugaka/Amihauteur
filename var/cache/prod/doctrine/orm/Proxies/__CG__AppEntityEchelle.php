@@ -66,10 +66,10 @@ class Echelle extends \App\Entity\Echelle implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleSortie', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleEntree', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleHauteur', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleTypeEchelle', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleNorme', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleConfig', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'changementVolee', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'fixation', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'palier'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleSortie', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleEntree', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleHauteur', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleTypeEchelle', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleNorme', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleConfig', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'changementVolee', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'EchelleFixation', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'palier', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'EchelleAccessoire', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'coupeEchelleEchelles'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleSortie', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleEntree', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleHauteur', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleTypeEchelle', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleNorme', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleConfig', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'changementVolee', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'fixation', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'palier'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleSortie', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleEntree', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleHauteur', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleTypeEchelle', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleNorme', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'echelleConfig', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'changementVolee', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'EchelleFixation', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'palier', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'EchelleAccessoire', '' . "\0" . 'App\\Entity\\Echelle' . "\0" . 'coupeEchelleEchelles'];
     }
 
     /**
@@ -359,39 +359,6 @@ class Echelle extends \App\Entity\Echelle implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getFixation(): \Doctrine\Common\Collections\Collection
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFixation', []);
-
-        return parent::getFixation();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addFixation(\App\Entity\Fixation $fixation): \App\Entity\Echelle
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addFixation', [$fixation]);
-
-        return parent::addFixation($fixation);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function removeFixation(\App\Entity\Fixation $fixation): \App\Entity\Echelle
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeFixation', [$fixation]);
-
-        return parent::removeFixation($fixation);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getPalier(): \Doctrine\Common\Collections\Collection
     {
 
@@ -420,6 +387,127 @@ class Echelle extends \App\Entity\Echelle implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'removePalier', [$palier]);
 
         return parent::removePalier($palier);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getEchelleAccessoire(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEchelleAccessoire', []);
+
+        return parent::getEchelleAccessoire();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setEchelleAccessoire(\Doctrine\Common\Collections\Collection $EchelleAccessoire): \App\Entity\Echelle
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEchelleAccessoire', [$EchelleAccessoire]);
+
+        return parent::setEchelleAccessoire($EchelleAccessoire);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addEchelleAccessoire(\App\Entity\EchelleAccessoire $EchelleAccessoire): \App\Entity\Echelle
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addEchelleAccessoire', [$EchelleAccessoire]);
+
+        return parent::addEchelleAccessoire($EchelleAccessoire);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeEchelleAccessoire(\App\Entity\EchelleAccessoire $EchelleAccessoire): \App\Entity\Echelle
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeEchelleAccessoire', [$EchelleAccessoire]);
+
+        return parent::removeEchelleAccessoire($EchelleAccessoire);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getEchelleFixation(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEchelleFixation', []);
+
+        return parent::getEchelleFixation();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setEchelleFixation(\Doctrine\Common\Collections\Collection $EchelleFixation): \App\Entity\Echelle
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEchelleFixation', [$EchelleFixation]);
+
+        return parent::setEchelleFixation($EchelleFixation);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addEchelleFixation(\App\Entity\EchelleFixation $EchelleFixation): \App\Entity\Echelle
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addEchelleFixation', [$EchelleFixation]);
+
+        return parent::addEchelleFixation($EchelleFixation);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeEchelleFixation(\App\Entity\EchelleFixation $EchelleFixation): \App\Entity\Echelle
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeEchelleFixation', [$EchelleFixation]);
+
+        return parent::removeEchelleFixation($EchelleFixation);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCoupeEchelleEchelles(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCoupeEchelleEchelles', []);
+
+        return parent::getCoupeEchelleEchelles();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addCoupeEchelleEchelle(\App\Entity\CoupeEchelleEchelle $coupeEchelleEchelle): \App\Entity\Echelle
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addCoupeEchelleEchelle', [$coupeEchelleEchelle]);
+
+        return parent::addCoupeEchelleEchelle($coupeEchelleEchelle);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeCoupeEchelleEchelle(\App\Entity\CoupeEchelleEchelle $coupeEchelleEchelle): \App\Entity\Echelle
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeCoupeEchelleEchelle', [$coupeEchelleEchelle]);
+
+        return parent::removeCoupeEchelleEchelle($coupeEchelleEchelle);
     }
 
 }

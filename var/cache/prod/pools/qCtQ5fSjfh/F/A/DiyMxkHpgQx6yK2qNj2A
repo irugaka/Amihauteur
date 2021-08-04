@@ -1,0 +1,137 @@
+<?php //%255BApp%255CEntity%255CEntree%2524CLASSMETADATA%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+        clone ($p['Doctrine\\ORM\\Id\\IdentityGenerator'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Id\\IdentityGenerator')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'App\\Entity\\Entree',
+            ],
+            'namespace' => [
+                'App\\Entity',
+            ],
+            'rootEntityName' => [
+                'App\\Entity\\Entree',
+            ],
+            'identifier' => [
+                [
+                    'id',
+                ],
+            ],
+            'generatorType' => [
+                4,
+            ],
+            'fieldMappings' => [
+                [
+                    'id' => [
+                        'fieldName' => 'id',
+                        'type' => 'integer',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'id',
+                        'id' => true,
+                    ],
+                    'referenceEntree' => [
+                        'fieldName' => 'referenceEntree',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 50,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'reference_entree',
+                    ],
+                    'prixEntree' => [
+                        'fieldName' => 'prixEntree',
+                        'type' => 'integer',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'prix_entree',
+                    ],
+                    'libelleEntree' => [
+                        'fieldName' => 'libelleEntree',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 255,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'libelle_entree',
+                    ],
+                    'descriptionEntree' => [
+                        'fieldName' => 'descriptionEntree',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 255,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'description_entree',
+                    ],
+                    'Commercialise' => [
+                        'fieldName' => 'Commercialise',
+                        'type' => 'boolean',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'commercialise',
+                    ],
+                    'ImageUrl' => [
+                        'fieldName' => 'ImageUrl',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 255,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'image_url',
+                    ],
+                ],
+            ],
+            'fieldNames' => [
+                [
+                    'id' => 'id',
+                    'reference_entree' => 'referenceEntree',
+                    'prix_entree' => 'prixEntree',
+                    'libelle_entree' => 'libelleEntree',
+                    'description_entree' => 'descriptionEntree',
+                    'commercialise' => 'Commercialise',
+                    'image_url' => 'ImageUrl',
+                ],
+            ],
+            'columnNames' => [
+                [
+                    'id' => 'id',
+                    'referenceEntree' => 'reference_entree',
+                    'prixEntree' => 'prix_entree',
+                    'libelleEntree' => 'libelle_entree',
+                    'descriptionEntree' => 'description_entree',
+                    'Commercialise' => 'commercialise',
+                    'ImageUrl' => 'image_url',
+                ],
+            ],
+            'table' => [
+                [
+                    'name' => 'entree',
+                ],
+            ],
+            'idGenerator' => [
+                $o[1],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

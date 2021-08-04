@@ -66,10 +66,10 @@ class Accessoire extends \App\Entity\Accessoire implements \Doctrine\ORM\Proxy\P
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'nomAccessoire', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'refAccessoire', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'prixAccessoire'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'nomAccessoire', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'refAccessoire', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'prixAccessoire', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'EchelleAccessoire', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'Commercialise'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'nomAccessoire', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'refAccessoire', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'prixAccessoire'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'nomAccessoire', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'refAccessoire', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'prixAccessoire', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'EchelleAccessoire', '' . "\0" . 'App\\Entity\\Accessoire' . "\0" . 'Commercialise'];
     }
 
     /**
@@ -255,6 +255,72 @@ class Accessoire extends \App\Entity\Accessoire implements \Doctrine\ORM\Proxy\P
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPrixAccessoire', [$prixAccessoire]);
 
         return parent::setPrixAccessoire($prixAccessoire);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getEchelleAccessoire(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEchelleAccessoire', []);
+
+        return parent::getEchelleAccessoire();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setEchelleAccessoire(\Doctrine\Common\Collections\Collection $EchelleAccessoire): \App\Entity\Accessoire
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEchelleAccessoire', [$EchelleAccessoire]);
+
+        return parent::setEchelleAccessoire($EchelleAccessoire);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addEchelleAccessoire(\App\Entity\EchelleAccessoire $EchelleAccessoire): \App\Entity\Accessoire
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addEchelleAccessoire', [$EchelleAccessoire]);
+
+        return parent::addEchelleAccessoire($EchelleAccessoire);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeEchelleAccessoire(\App\Entity\EchelleAccessoire $EchelleAccessoire): \App\Entity\Accessoire
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeEchelleAccessoire', [$EchelleAccessoire]);
+
+        return parent::removeEchelleAccessoire($EchelleAccessoire);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCommercialise(): ?bool
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCommercialise', []);
+
+        return parent::getCommercialise();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCommercialise(bool $Commercialise): \App\Entity\Accessoire
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCommercialise', [$Commercialise]);
+
+        return parent::setCommercialise($Commercialise);
     }
 
 }
