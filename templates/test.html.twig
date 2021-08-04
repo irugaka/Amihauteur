@@ -80,6 +80,20 @@ Email : assistant@amihauteur.com
                             </tr>
                             <tr>
                     {% set PrixFinal = 0 %}
+                    {% set PrixFinalFixation = 0 %}
+                    {% for Fixation in ListeFixation %}
+                            <tr>
+                                <td class="table-light">
+                                {{ Fixation.Fixation.NomFixation }}
+                                </a></td>
+                                <td class="table-light">-</td>
+                                <td class="table-light">{{ Fixation.Qte }}</td>
+                                <td class="table-light">{{ Fixation.Fixation.prixFixation }}</td>
+                                <td class="table-light"> 20% </td>
+                                <td class="table-light"> {{ Fixation.Fixation.prixFixation * Fixation.Qte }}</td>
+                            </tr>
+                            {% set PrixFinalFixation = PrixFinalFixation + (Fixation.Fixation.prixFixation * Fixation.Qte) %}
+                            {% endfor %}
                     {% set PrixFinalAccessoire = 0 %}
                     {% for Accessoire in ListeAccessoire %}
                             <tr>
@@ -96,7 +110,7 @@ Email : assistant@amihauteur.com
                             {% endfor %}
                     </tbody>
                 </table>
-                {% set PrixFinal = PrixFinal + PrixFinalCoupe + Echelle.echelleEntree.prixEntree + Echelle.echelleSortie.prixSortie + PrixFinalAccessoire %}
+                {% set PrixFinal = PrixFinal + PrixFinalCoupe + PrixFinalFixation + Echelle.echelleEntree.prixEntree + Echelle.echelleSortie.prixSortie + PrixFinalAccessoire %}
             </div>
 
 <p style="text-align:right">

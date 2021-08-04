@@ -15,6 +15,7 @@ use App\Entity\Fixation;
 use App\Form\SortieType;
 use App\Form\AccessoireType;
 use App\Form\AccessoireType2Type;
+use App\Form\EchelleFixationType2Type;
 use App\Entity\Accessoire;
 use App\Entity\Sortie;
 use App\Entity\Entree;
@@ -628,7 +629,7 @@ else{
             $entityManager->persist($Echelle);
             $entityManager->flush();
 
-            return $this->redirectToRoute('accessoireAjout', array('id'=> $id));
+            return $this->redirectToRoute('ajoutFixation', array('id'=> $id));
         }
 
         return $this->render('SortieAjout.html.twig',['SortieAjoutForm' => $form->createView()]);
@@ -719,18 +720,15 @@ else{
         $session = $this->get('session');
         if($session->get('valeurverification') == 1 || $session->get('valeurverification') == 2)
         {
-        $Fixation = new Fixation();
         $Echelle = $this->getDoctrine()->getRepository(Echelle::class)->find($id);
-    $form = $this->createForm(FixationCollectionFormType::class/*, Echelle::class*/);
+    $form = $this->createForm(EchelleFixationType2Type::class, $Echelle);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $Data = $form->getData();
-            echo dump($Data['Fixation']);
             $this->getDoctrine()->getManager()->flush();
 
-            //return $this->redirectToRoute('pdf', array('id'=> $id));
+            return $this->redirectToRoute('accessoireAjout', array('id'=> $id));
         }
         return $this->render('AjoutFixation.html.twig',['Form' => $form->createView()]);
 
@@ -750,6 +748,7 @@ else{
             $Echelle = $repository->find($id);
             $PrixSortie = $Echelle->getEchellesortie();
             $ListeAccessoire = $Echelle->getEchelleAccessoire();
+            $ListeFixation = $Echelle->getEchelleFixation();
             $CoupeEchelle = $Echelle->getCoupeEchelleEchelles();
             
 
@@ -777,7 +776,8 @@ else{
                     $this->renderView(
                         'test.html.twig',['ListeAccessoire' => $ListeAccessoire,
                         'Echelle' => $Echelle,
-                        'CoupeEchelle' => $CoupeEchelle ]
+                        'CoupeEchelle' => $CoupeEchelle,
+                        'ListeFixation' => $ListeFixation ]
                     ),
                     '../Devis/' . $user->getnom() . $date["mday"] . $date["mon"] . $date["year"] .'.pdf'
                 );

@@ -31,24 +31,25 @@ class Fixation
     private $departFixation;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="hauteur_relative_fixation", type="integer", nullable=false)
-     */
-    private $hauteurRelativeFixation;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="hauteur_absolue_fixation", type="integer", nullable=false)
-     */
-    private $hauteurAbsolueFixation;
-
-    /**
      * @var EchelleFixation[]|Collection
      * @ORM\OneToMany(targetEntity="App\Entity\EchelleFixation", mappedBy="fixation", cascade={"persist"})
      */
     private $EchelleFixation;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Commercialise;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $NomFixation;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $prixFixation;
 
     /**
      * Constructor
@@ -116,6 +117,42 @@ class Fixation
     public function removeEchelleFixation(EchelleFixation $EchelleFixation): self
     {
         $this->EchelleFixation->removeElement($EchelleFixation);
+        return $this;
+    }
+
+    public function getCommercialise(): ?bool
+    {
+        return $this->Commercialise;
+    }
+
+    public function setCommercialise(bool $Commercialise): self
+    {
+        $this->Commercialise = $Commercialise;
+
+        return $this;
+    }
+
+    public function getNomFixation(): ?string
+    {
+        return $this->NomFixation;
+    }
+
+    public function setNomFixation(string $NomFixation): self
+    {
+        $this->NomFixation = $NomFixation;
+
+        return $this;
+    }
+
+    public function getPrixFixation(): ?int
+    {
+        return $this->prixFixation;
+    }
+
+    public function setPrixFixation(int $prixFixation): self
+    {
+        $this->prixFixation = $prixFixation;
+
         return $this;
     }
 

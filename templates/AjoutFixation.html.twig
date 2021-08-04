@@ -13,14 +13,19 @@
     <table>
             <tr>
                 <td>
-                    <ul class="fixation" data-prototype="{{ form_widget(Form.Fixation.vars.prototype)|e('html_attr') }}">
-                        {% for fixation in Form.Fixation %}
+                    <ul class="fixation" data-prototype="{{ form_widget(Form.EchelleFixation.vars.prototype)|e('html_attr') }}">
+                        {% for fixation in Form.EchelleFixation %}
                             <li>
                                 <table>
                                     <tr>
-                                        <td>{{ form_row(fixation.departFixation) }}</td>
-                                        <td>{{ form_row(fixation.hauteurRelativeFixation) }}</td>
-                                        <td>{{ form_row(fixation.hauteurAbsolueFixation) }}</td>
+                                        <td>{{ form_label(fixation.Fixation) }}</td>
+                                        <td>{{ form_widget(fixation.Fixation) }}</td>
+                                        <td>{{ form_errors(fixation.Fixation) }}</td>
+                                    <tr>
+                                    <tr>
+                                        <td>{{ form_label(fixation.Qte) }}</td>
+                                        <td>{{ form_widget(fixation.Qte) }}</td>
+                                        <td>{{ form_errors(fixation.Qte) }}</td>
                                     <tr>
                                 </table>
                             </li>
@@ -80,4 +85,7 @@
             });
         }
     </script>
+{% endblock %}
+{% block progression %}
+{{ include('ProgressionBar.html.twig') }}
 {% endblock %}

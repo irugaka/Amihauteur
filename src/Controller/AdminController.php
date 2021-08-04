@@ -231,7 +231,6 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $em->persist($TypeEchelle);
             $em->flush();
 
@@ -314,7 +313,7 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $Entree->setImageUrl("0");
             $em->persist($Entree);
             $em->flush();
 
@@ -398,7 +397,7 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $Sortie->setImageUrl("0");
             $em->persist($Sortie);
             $em->flush();
 

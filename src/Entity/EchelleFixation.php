@@ -29,6 +29,11 @@ class EchelleFixation
      */
     private $Fixation;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Qte;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,6 +59,18 @@ class EchelleFixation
     public function setFixation(?Fixation $Fixation): self
     {
         $this->Fixation = $Fixation;
+
+        return $this;
+    }
+
+    public function getQte(): ?int
+    {
+        return $this->Qte;
+    }
+
+    public function setQte(int $Qte): self
+    {
+        $this->Qte = $Qte;
 
         return $this;
     }

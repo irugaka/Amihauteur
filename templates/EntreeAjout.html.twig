@@ -10,18 +10,18 @@
         <div class="w-75 mx-auto">
         <div><h1>Choix de l'entrée</h1></div>
     {{ form_start(EntreeAjoutForm) }}
-    <table class="table table-striped table-bordered table-sm ">
+    {# <table class="table table-striped table-bordered table-sm "> #}
     {% for key, type in EntreeAjoutForm.echelleEntree %}
-    {% set attr = EntreeAjoutForm.echelleEntree.vars.choices[key].data.ImageUrl %}
-    <tr>
-      <td>
+    {# {% set attr = EntreeAjoutForm.echelleEntree.vars.choices[key].data.ImageUrl %} #}
+    {# <tr>
+      <td> #}
       {{ form_widget(type) }}
-      </td>
+      {# </td>
     <td style="width:auto"><img src="{{ asset(attr) }}"></td>
-     </tr>
+     </tr> #}
     {% endfor %}
    
-    </table>
+    {# </table> #}
         <a styke="color:black" class="text-dark btn bg-warning" href="{{ path('index') }}">Precedent</a>
         <button type="submit" class="btn bg-warning">Suivant</button>
     {{ form_end(EntreeAjoutForm) }}

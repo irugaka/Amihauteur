@@ -71,6 +71,9 @@
 		5<div class="desc">Choix de la Sortie</div>
         </span><span class="ligne">
 	</span><span class="etape">
+	5<div class="desc">Choix des fixations</div>
+        </span><span class="ligne">
+	</span><span class="etape">
 		6<div class="desc">Choix des Accessoire</div>
         </span><span class="ligne"></span><span class="etape">
 		7<div class="desc">Generation du Devis</div>
@@ -95,6 +98,9 @@
         </span><span class="ligne">
 	</span><span class="etape">
 		5<div class="desc">Choix de la Sortie</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+	5<div class="desc">Choix des fixations</div>
         </span><span class="ligne">
 	</span><span class="etape">
 		6<div class="desc">Choix des Accessoire</div>
@@ -124,6 +130,9 @@
 		5<div class="desc">Choix de la Sortie</div>
         </span><span class="ligne">
 	</span><span class="etape">
+	5<div class="desc">Choix des fixations</div>
+        </span><span class="ligne">
+	</span><span class="etape">
 		6<div class="desc">Choix des Accessoire</div>
         </span><span class="ligne"></span><span class="etape">
 		7<div class="desc">Generation du Devis</div>
@@ -149,6 +158,9 @@
         </span><span class="ligne">
 	</span><span class="etape">
 		5<div class="desc">Choix de la Sortie</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+	5<div class="desc">Choix des fixations</div>
         </span><span class="ligne">
 	</span><span class="etape">
 		6<div class="desc">Choix des Accessoire</div>
@@ -178,6 +190,9 @@
 		5<div class="desc">Choix de la Sortie</div>
         </span><span class="ligne">
 	</span><span class="etape">
+	5<div class="desc">Choix des fixations</div>
+        </span><span class="ligne">
+	</span><span class="etape">
 		6<div class="desc">Choix des Accessoire</div>
         </span><span class="ligne"></span><span class="etape">
 		7<div class="desc">Generation du Devis</div>
@@ -203,6 +218,39 @@
         </span><span class="ligne">
 	</span><span class="etape fait">
 		5<div class="desc">Choix de la Sortie</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+	5<div class="desc">Choix des fixations</div>
+        </span><span class="ligne">
+	</span><span class="etape">
+		6<div class="desc">Choix des Accessoire</div>
+        </span><span class="ligne"></span><span class="etape">
+		7<div class="desc">Generation du Devis</div>
+        </span>
+	</span>
+</div>
+{% endif %}
+{% if app.request.attributes.get('_route') == 'ajoutFixation' %}
+{% set tab = app.session.get('tab') %}
+<div id="progression">
+	<span class="etape fait">
+		1<div class="desc"><a href="{{ path('ajout', { 'verification' : app.session.get('valeurverification') }) }}">Ajouter une configuration</a></div>
+	</span><span class="ligne">
+	</span>
+	<span class="etape fait">
+		2<div class="desc"><a href="{{ path('ajoutEchelle', {id : tab[0].id }) }}">Choisir un type d'echelle</a></div>
+	</span><span class="ligne">
+	</span><span class="etape fait">
+		3<div class="desc"><a href="{{ path('ajoutHauteur', {id : tab[1].id }) }}">Choix de la Hauteur</a></div>
+	</span><span class="ligne">
+	</span><span class="etape fait">
+		4<div class="desc"><a href="{{ path('ajoutEntree', {id : tab[1].id }) }}">Choix de l'Entree</a></div>
+        </span><span class="ligne">
+	</span><span class="etape fait">
+		5<div class="desc"><a href="{{ path('ajoutSortie', {id : tab[1].id }) }}">Choix de la Sortie</a></div>
+        </span><span class="ligne">
+	</span><span class="etape fait">
+	5<div class="desc">Choix des fixations</div>
         </span><span class="ligne">
 	</span><span class="etape">
 		6<div class="desc">Choix des Accessoire</div>
@@ -232,6 +280,9 @@
 		5<div class="desc"><a href="{{ path('ajoutSortie', {id : tab[1].id }) }}">Choix de la Sortie</a></div>
         </span><span class="ligne">
 	</span><span class="etape fait">
+	5<div class="desc"><a href="{{ path('ajoutFixation', {id : tab[1].id }) }}">Choix des fixations</a></div>
+        </span><span class="ligne">
+	</span><span class="etape fait">
 		6<div class="desc">Choix des Accessoire</div>
         </span><span class="ligne"></span><span class="etape">
 		7<div class="desc">Generation du Devis</div>
@@ -257,6 +308,9 @@
         </span><span class="ligne">
 	</span><span class="etape fait">
 		5<div class="desc"><a href="{{ path('ajoutSortie', {id : tab[1].id }) }}">Choix de la Sortie</a></div>
+        </span><span class="ligne">
+	</span><span class="etape fait">
+	5<div class="desc"><a href="{{ path('ajoutFixation', {id : tab[1].id }) }}">Choix des fixations</a></div>
         </span><span class="ligne">
 	</span><span class="etape fait">
 		6<div class="desc"><a href="{{ path('accessoireAjout', {id : tab[1].id }) }}"> Choix des Accessoire</a></div>
@@ -285,6 +339,9 @@
 		5<div class="desc">Choix de la Sortie</div>
         </span><span class="ligne">
 	</span><span class="etape fait">
+	5<div class="desc">Choix des fixations</div>
+        </span><span class="ligne">
+	</span><span class="etape">
 		6<div class="desc">Choix des Accessoire</div>
         </span><span class="ligne"></span><span class="etape fait">
 		7<div class="desc">Generation du Devis</div>

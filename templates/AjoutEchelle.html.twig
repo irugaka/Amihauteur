@@ -9,17 +9,17 @@
         <div class="w-75 mx-auto">
         <div><h1>Choix de L'echelle</h1></div>
     {{ form_start(EchelleAjoutForm) }}
-    <table class="table table-striped table-bordered table-sm ">
+    {# <table class="table table-striped table-bordered table-sm "> #}
     {% for key, type in EchelleAjoutForm.Echelle_TypeEchelle %}
-    {% set attr = EchelleAjoutForm.Echelle_TypeEchelle.vars.choices[key].data.image.url %}
-    <tr>
-      <td>
+    {# {% set attr = EchelleAjoutForm.Echelle_TypeEchelle.vars.choices[key].data.image.url %} #}
+   {# } <tr>
+      <td> #}
       {{ form_widget(type) }}
-      </td>
+    {#   </td>
     <td style="width:auto"><img src="{{ asset(attr) }}"></td>
-     </tr>
+     </tr> #}
     {% endfor %}
-    </table>
+    {# </table> #}
     <br>
     <a styke="color:black" class="btn bg-warning" href="#">Precedent</a>
     <button class="btn bg-warning">Suivant</button>

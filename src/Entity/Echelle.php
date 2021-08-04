@@ -170,7 +170,6 @@ class Echelle
     public function setEchelleEntree(?Entree $echelleEntree): self
     {
         $this->echelleEntree = $echelleEntree;
-
         return $this;
     }
 
