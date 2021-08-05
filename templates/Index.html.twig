@@ -27,7 +27,7 @@
                     <tbody>
                         {% for Config in listeConfig.getConfigUser %}
                             <tr>
-                                <td class="table-light"><a href="{{ path('detailConfig', {'id': Config.id}) }}">
+                                <td class="table-light"><a href="{{ path('pdf3', {'id': Config.id}) }}">
                                 {{ Config.NomConfig }}
                                 </a></td>
                                 <td class="table-light">{{ Config.DescriptionConfig }}</td>
@@ -63,7 +63,7 @@
                     <tbody>
                         {% for Config in listeAdmin %}
                             <tr>
-                                <td class="table-light"><a href="{{ path('detailConfig', {'id': Config.id}) }}">
+                                <td class="table-light"><a href="{{ path('pdf3', {'id': Config.id}) }}">
                                 {{ Config.NomConfig }}
                                 </a></td>
                                 <td class="table-light">{{ Config.DescriptionConfig }}</td>

@@ -21,7 +21,6 @@ return [
         '/index' => [[['_route' => 'index', '_controller' => 'App\\Controller\\DefaultController::index'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
         '/pdf2' => [[['_route' => 'pdf2', '_controller' => 'App\\Controller\\DefaultController::toPdfActionLegend'], null, null, null, false, false, null]],
-        '/pdf3' => [[['_route' => 'pdf3', '_controller' => 'App\\Controller\\DefaultController::toPdfActionIncruste'], null, null, null, false, false, null]],
         '/GestionAdmin' => [[['_route' => 'GestionAdmin', '_controller' => 'App\\Controller\\AdminController::GestionAdmin'], null, null, null, false, false, null]],
         '/GestionAdmin/AjouterAccessoire' => [[['_route' => 'AdminAjouterAccessoire', '_controller' => 'App\\Controller\\AdminController::AjouterAccessoire'], null, null, null, false, false, null]],
         '/GestionAdmin/AjouterTypeEchelle' => [[['_route' => 'AdminAjouterTypeEchelle', '_controller' => 'App\\Controller\\AdminController::AjouterTypeEchelle'], null, null, null, false, false, null]],
@@ -67,27 +66,28 @@ return [
                 .')'
                 .'|/ChangementVolee/([^/]++)(*:491)'
                 .'|/Pdf/([^/]++)(*:512)'
+                .'|/pdf3/([^/]++)(*:534)'
                 .'|/GestionAdmin/(?'
                     .'|Supprimer(?'
-                        .'|Accessoire/([^/]++)(*:568)'
-                        .'|TypeEchelle/([^/]++)(*:596)'
-                        .'|Entree/([^/]++)(*:619)'
-                        .'|Sortie/([^/]++)(*:642)'
+                        .'|Accessoire/([^/]++)(*:590)'
+                        .'|TypeEchelle/([^/]++)(*:618)'
+                        .'|Entree/([^/]++)(*:641)'
+                        .'|Sortie/([^/]++)(*:664)'
                     .')'
                     .'|Modifier(?'
-                        .'|Accessoire/([^/]++)(*:681)'
-                        .'|TypeEchelle/([^/]++)(*:709)'
-                        .'|Entree/([^/]++)(*:732)'
-                        .'|Sortie/([^/]++)(*:755)'
+                        .'|Accessoire/([^/]++)(*:703)'
+                        .'|TypeEchelle/([^/]++)(*:731)'
+                        .'|Entree/([^/]++)(*:754)'
+                        .'|Sortie/([^/]++)(*:777)'
                     .')'
                     .'|Commercialise(?'
-                        .'|Accessoire/([^/]++)(*:799)'
-                        .'|TypeEchelle/([^/]++)(*:827)'
-                        .'|Entree/([^/]++)(*:850)'
-                        .'|Sortie/([^/]++)(*:873)'
+                        .'|Accessoire/([^/]++)(*:821)'
+                        .'|TypeEchelle/([^/]++)(*:849)'
+                        .'|Entree/([^/]++)(*:872)'
+                        .'|Sortie/([^/]++)(*:895)'
                     .')'
                 .')'
-                .'|/ModifierConfig/([^/]++)(*:907)'
+                .'|/ModifierConfig/([^/]++)(*:929)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -112,19 +112,20 @@ return [
         457 => [[['_route' => 'ajoutFixation', '_controller' => 'App\\Controller\\DefaultController::AjoutFixation'], ['id'], null, null, false, true, null]],
         491 => [[['_route' => 'ajoutChangementVolee', '_controller' => 'App\\Controller\\DefaultController::ajoutChangementVolee'], ['id'], null, null, false, true, null]],
         512 => [[['_route' => 'pdf', '_controller' => 'App\\Controller\\DefaultController::toPdfAction'], ['id'], null, null, false, true, null]],
-        568 => [[['_route' => 'AdminSupprimerAccessoire', '_controller' => 'App\\Controller\\AdminController::SupprimerAccessoire'], ['id'], null, null, false, true, null]],
-        596 => [[['_route' => 'AdminSupprimerTypeEchelle', '_controller' => 'App\\Controller\\AdminController::SupprimerTypeEchelle'], ['id'], null, null, false, true, null]],
-        619 => [[['_route' => 'AdminSupprimerEntree', '_controller' => 'App\\Controller\\AdminController::SupprimerEntree'], ['id'], null, null, false, true, null]],
-        642 => [[['_route' => 'AdminSupprimerSortie', '_controller' => 'App\\Controller\\AdminController::SupprimerSortie'], ['id'], null, null, false, true, null]],
-        681 => [[['_route' => 'AdminModifierAccessoire', '_controller' => 'App\\Controller\\AdminController::ModifierAccessoire'], ['id'], null, null, false, true, null]],
-        709 => [[['_route' => 'AdminModifierTypeEchelle', '_controller' => 'App\\Controller\\AdminController::ModifierTypeEchelle'], ['id'], null, null, false, true, null]],
-        732 => [[['_route' => 'AdminModifierEntree', '_controller' => 'App\\Controller\\AdminController::ModifierEntree'], ['id'], null, null, false, true, null]],
-        755 => [[['_route' => 'AdminModifierSortie', '_controller' => 'App\\Controller\\AdminController::ModifierSortie'], ['id'], null, null, false, true, null]],
-        799 => [[['_route' => 'AdminCommercialiseAccessoire', '_controller' => 'App\\Controller\\AdminController::CommercialiseAccessoire'], ['id'], null, null, false, true, null]],
-        827 => [[['_route' => 'AdminCommercialiseTypeEchelle', '_controller' => 'App\\Controller\\AdminController::CommercialiseTypeEchelle'], ['id'], null, null, false, true, null]],
-        850 => [[['_route' => 'AdminCommercialiseEntree', '_controller' => 'App\\Controller\\AdminController::CommercialiseEntree'], ['id'], null, null, false, true, null]],
-        873 => [[['_route' => 'AdminCommercialiseSortie', '_controller' => 'App\\Controller\\AdminController::CommercialiseSortie'], ['id'], null, null, false, true, null]],
-        907 => [
+        534 => [[['_route' => 'pdf3', '_controller' => 'App\\Controller\\DefaultController::toPdfActionIncruste'], ['id'], null, null, false, true, null]],
+        590 => [[['_route' => 'AdminSupprimerAccessoire', '_controller' => 'App\\Controller\\AdminController::SupprimerAccessoire'], ['id'], null, null, false, true, null]],
+        618 => [[['_route' => 'AdminSupprimerTypeEchelle', '_controller' => 'App\\Controller\\AdminController::SupprimerTypeEchelle'], ['id'], null, null, false, true, null]],
+        641 => [[['_route' => 'AdminSupprimerEntree', '_controller' => 'App\\Controller\\AdminController::SupprimerEntree'], ['id'], null, null, false, true, null]],
+        664 => [[['_route' => 'AdminSupprimerSortie', '_controller' => 'App\\Controller\\AdminController::SupprimerSortie'], ['id'], null, null, false, true, null]],
+        703 => [[['_route' => 'AdminModifierAccessoire', '_controller' => 'App\\Controller\\AdminController::ModifierAccessoire'], ['id'], null, null, false, true, null]],
+        731 => [[['_route' => 'AdminModifierTypeEchelle', '_controller' => 'App\\Controller\\AdminController::ModifierTypeEchelle'], ['id'], null, null, false, true, null]],
+        754 => [[['_route' => 'AdminModifierEntree', '_controller' => 'App\\Controller\\AdminController::ModifierEntree'], ['id'], null, null, false, true, null]],
+        777 => [[['_route' => 'AdminModifierSortie', '_controller' => 'App\\Controller\\AdminController::ModifierSortie'], ['id'], null, null, false, true, null]],
+        821 => [[['_route' => 'AdminCommercialiseAccessoire', '_controller' => 'App\\Controller\\AdminController::CommercialiseAccessoire'], ['id'], null, null, false, true, null]],
+        849 => [[['_route' => 'AdminCommercialiseTypeEchelle', '_controller' => 'App\\Controller\\AdminController::CommercialiseTypeEchelle'], ['id'], null, null, false, true, null]],
+        872 => [[['_route' => 'AdminCommercialiseEntree', '_controller' => 'App\\Controller\\AdminController::CommercialiseEntree'], ['id'], null, null, false, true, null]],
+        895 => [[['_route' => 'AdminCommercialiseSortie', '_controller' => 'App\\Controller\\AdminController::CommercialiseSortie'], ['id'], null, null, false, true, null]],
+        929 => [
             [['_route' => 'ModifierConfig', '_controller' => 'App\\Controller\\DefaultController::ModifierConfig'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

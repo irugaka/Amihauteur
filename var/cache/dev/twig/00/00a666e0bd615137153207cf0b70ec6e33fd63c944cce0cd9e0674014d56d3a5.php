@@ -105,7 +105,7 @@ class __TwigTemplate_5f2d6f5af91ed7417bfb9d1b36ff5271d976beae4445b5d307c8d4e4fba
                     echo "                            <tr>
                                 <td class=\"table-light\"><a href=\"";
                     // line 30
-                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("detailConfig", ["id" => twig_get_attribute($this->env, $this->source, $context["Config"], "id", [], "any", false, false, false, 30)]), "html", null, true);
+                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("pdf3", ["id" => twig_get_attribute($this->env, $this->source, $context["Config"], "id", [], "any", false, false, false, 30)]), "html", null, true);
                     echo "\">
                                 ";
                     // line 31
@@ -171,7 +171,7 @@ class __TwigTemplate_5f2d6f5af91ed7417bfb9d1b36ff5271d976beae4445b5d307c8d4e4fba
                     echo "                            <tr>
                                 <td class=\"table-light\"><a href=\"";
                     // line 66
-                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("detailConfig", ["id" => twig_get_attribute($this->env, $this->source, $context["Config"], "id", [], "any", false, false, false, 66)]), "html", null, true);
+                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("pdf3", ["id" => twig_get_attribute($this->env, $this->source, $context["Config"], "id", [], "any", false, false, false, 66)]), "html", null, true);
                     echo "\">
                                 ";
                     // line 67
@@ -277,7 +277,7 @@ class __TwigTemplate_5f2d6f5af91ed7417bfb9d1b36ff5271d976beae4445b5d307c8d4e4fba
                     <tbody>
                         {% for Config in listeConfig.getConfigUser %}
                             <tr>
-                                <td class=\"table-light\"><a href=\"{{ path('detailConfig', {'id': Config.id}) }}\">
+                                <td class=\"table-light\"><a href=\"{{ path('pdf3', {'id': Config.id}) }}\">
                                 {{ Config.NomConfig }}
                                 </a></td>
                                 <td class=\"table-light\">{{ Config.DescriptionConfig }}</td>
@@ -313,7 +313,7 @@ class __TwigTemplate_5f2d6f5af91ed7417bfb9d1b36ff5271d976beae4445b5d307c8d4e4fba
                     <tbody>
                         {% for Config in listeAdmin %}
                             <tr>
-                                <td class=\"table-light\"><a href=\"{{ path('detailConfig', {'id': Config.id}) }}\">
+                                <td class=\"table-light\"><a href=\"{{ path('pdf3', {'id': Config.id}) }}\">
                                 {{ Config.NomConfig }}
                                 </a></td>
                                 <td class=\"table-light\">{{ Config.DescriptionConfig }}</td>

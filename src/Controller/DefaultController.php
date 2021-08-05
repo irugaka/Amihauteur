@@ -840,23 +840,32 @@ else{
                 );
         }
 
-        public function toPdfActionIncruste(Pdf $knpSnappyPdf) {
+        public function toPdfActionIncruste(Pdf $knpSnappyPdf, int $id) {
             //return $this->render('test3.html.twig');
+            $session = $this->get('session');
+            $user = $session->get('iduser');
             $repository = $this->getDoctrine()->getRepository(Echelle::class);
-            $Echelle = $repository->find(5);
+            $Echelle = $repository->findOneBy(array('echelleConfig' => $id));
             $PrixSortie = $Echelle->getEchellesortie();
             $ListeAccessoire = $Echelle->getEchelleAccessoire();
+            $ListeFixation = $Echelle->getEchelleFixation();
+            $CoupeEchelle = $Echelle->getCoupeEchelleEchelles();
             $basedir = __DIR__.'/../';
             $filename = 'Devis';
+            $nom = $user->getnom();
+            $date = getdate();
 
             $html = $this->renderView(
-                'test3.html.twig',
+                'test.html.twig',
             [
+                'ListeAccessoire' => $ListeAccessoire,
                 'Echelle' => $Echelle,
+                'CoupeEchelle' => $CoupeEchelle,
+                'ListeFixation' => $ListeFixation
             ]);
 
                 return new PdfResponse(
-                    $knpSnappyPdf->getOutputFromHtml($html),'Plan_Incrustation.pdf'
+                    $knpSnappyPdf->getOutputFromHtml($html),$user->getnom() . $date["mday"] . $date["mon"] . $date["year"] .'.pdf'
                 );
         }
 

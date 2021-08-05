@@ -35,7 +35,7 @@ return [
     'pdf' => [['id'], ['_controller' => 'App\\Controller\\DefaultController::toPdfAction'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/Pdf']], [], []],
     'ajoutFixation' => [['id'], ['_controller' => 'App\\Controller\\DefaultController::AjoutFixation'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/AjoutFixation']], [], []],
     'pdf2' => [[], ['_controller' => 'App\\Controller\\DefaultController::toPdfActionLegend'], [], [['text', '/pdf2']], [], []],
-    'pdf3' => [[], ['_controller' => 'App\\Controller\\DefaultController::toPdfActionIncruste'], [], [['text', '/pdf3']], [], []],
+    'pdf3' => [['id'], ['_controller' => 'App\\Controller\\DefaultController::toPdfActionIncruste'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/pdf3']], [], []],
     'GestionAdmin' => [[], ['_controller' => 'App\\Controller\\AdminController::GestionAdmin'], [], [['text', '/GestionAdmin']], [], []],
     'AdminSupprimerAccessoire' => [['id'], ['_controller' => 'App\\Controller\\AdminController::SupprimerAccessoire'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/GestionAdmin/SupprimerAccessoire']], [], []],
     'AdminModifierAccessoire' => [['id'], ['_controller' => 'App\\Controller\\AdminController::ModifierAccessoire'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/GestionAdmin/ModifierAccessoire']], [], []],

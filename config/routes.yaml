@@ -67,7 +67,7 @@ pdf2:
     controller: App\Controller\DefaultController::toPdfActionLegend
 
 pdf3:
-    path : pdf3
+    path : pdf3/{id}
     controller: App\Controller\DefaultController::toPdfActionIncruste
 
 GestionAdmin:
