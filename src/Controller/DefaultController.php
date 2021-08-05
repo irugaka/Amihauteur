@@ -772,7 +772,7 @@ else{
                 $nom = $user->getnom();
                 $date = getdate();
 
-                $knpSnappyPdf->generateFromHtml(
+                /*$knpSnappyPdf->generateFromHtml(
                     $this->renderView(
                         'test.html.twig',['ListeAccessoire' => $ListeAccessoire,
                         'Echelle' => $Echelle,
@@ -780,7 +780,7 @@ else{
                         'ListeFixation' => $ListeFixation ]
                     ),
                     '../Devis/' . $user->getnom() . $date["mday"] . $date["mon"] . $date["year"] .'.pdf'
-                );
+                );*/
 
                 /*$knpSnappyPdf->generateFromHtml(
                     $this->renderView(
