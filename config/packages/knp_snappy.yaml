@@ -1,7 +1,7 @@
 knp_snappy:
     pdf:
         enabled:    true
-        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
+        binary:     "\"..\\..\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
         options:    
             - { name: 'viewport-size', value: ‘1024x768’}
             - { name: 'page-size', value: 'A4'}
@@ -10,5 +10,5 @@ knp_snappy:
             - { name: 'default-header', value: null}
     image:
         enabled:    true
-        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\""
+        binary:     "\"..\\..\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\""
         options:    []
