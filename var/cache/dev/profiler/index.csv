@@ -4375,3 +4375,8 @@ d714ec,::1,GET,http://virtualhost/AmiHauteurApp/public/Accessoire/sticky-footer.
 3b34f4,::1,POST,http://virtualhost/AmiHauteurApp/public/Accessoire/103,1628002602,,302
 b50018,::1,GET,http://virtualhost/AmiHauteurApp/public/Pdf/103,1628002602,06bf73,500
 06bf73,::1,GET,http://virtualhost/AmiHauteurApp/public/Pdf/103,1628002602,,500
+2e9373,::1,GET,http://virtualhost/AmiHauteurApp/public/,1628169383,f7197d,500
+f7197d,::1,GET,http://virtualhost/AmiHauteurApp/public/,1628169383,,500
+d4752b,::1,GET,http://virtualhost/AmiHauteurApp/public/,1628169422,,200
+5f059c,::1,GET,http://virtualhost/AmiHauteurApp/public/sticky-footer.css,1628169422,30eeaa,404
+30eeaa,::1,GET,http://virtualhost/AmiHauteurApp/public/sticky-footer.css,1628169422,,404
