@@ -55,38 +55,41 @@ class __TwigTemplate_047e904b63a9ecf4c0020c577a36e1fa31121925faa6b182f3152e86ced
     {
         $macros = $this->macros;
         // line 6
-        echo "<form method=\"post\">
+        echo "<div class=\"container\">
+        <div class=\"w-75 mx-auto\">
+<form method=\"post\">
     ";
-        // line 7
+        // line 9
         if (($context["error"] ?? null)) {
-            // line 8
+            // line 10
             echo "        <div class=\"alert alert-danger\">";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans(twig_get_attribute($this->env, $this->source, ($context["error"] ?? null), "messageKey", [], "any", false, false, false, 8), twig_get_attribute($this->env, $this->source, ($context["error"] ?? null), "messageData", [], "any", false, false, false, 8), "security"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans(twig_get_attribute($this->env, $this->source, ($context["error"] ?? null), "messageKey", [], "any", false, false, false, 10), twig_get_attribute($this->env, $this->source, ($context["error"] ?? null), "messageData", [], "any", false, false, false, 10), "security"), "html", null, true);
             echo "</div>
     ";
         }
-        // line 10
+        // line 12
         echo "
     ";
-        // line 11
-        if (twig_get_attribute($this->env, $this->source, ($context["app"] ?? null), "user", [], "any", false, false, false, 11)) {
-            // line 12
+        // line 13
+        if (twig_get_attribute($this->env, $this->source, ($context["app"] ?? null), "user", [], "any", false, false, false, 13)) {
+            // line 14
             echo "        <div class=\"mb-3\">
             You are logged in as ";
-            // line 13
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["app"] ?? null), "user", [], "any", false, false, false, 13), "username", [], "any", false, false, false, 13), "html", null, true);
+            // line 15
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["app"] ?? null), "user", [], "any", false, false, false, 15), "username", [], "any", false, false, false, 15), "html", null, true);
             echo ", <a href=\"";
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
             echo "\">Logout</a>
         </div>
     ";
         }
-        // line 16
+        // line 18
         echo "
+
     <h1 class=\"h3 mb-3 font-weight-normal\">Connectez-vous</h1>
     <label for=\"inputEmail\">Email</label>
     <input type=\"email\" value=\"";
-        // line 19
+        // line 22
         echo twig_escape_filter($this->env, ($context["last_username"] ?? null), "html", null, true);
         echo "\" name=\"email\" id=\"inputEmail\" class=\"form-control\" required autofocus>
     <label for=\"inputPassword\">Mot de passe</label>
@@ -94,31 +97,33 @@ class __TwigTemplate_047e904b63a9ecf4c0020c577a36e1fa31121925faa6b182f3152e86ced
     <br>
     Pas encore de compte ?
     <a href=\" ";
-        // line 24
+        // line 27
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("register", ["Verification" => 1]);
         echo " \">Cliquez ici</a>
     <br>
     Vous souhaitez réaliser un devis sans vous inscrire ?
     <a href=\" ";
-        // line 27
+        // line 30
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("register", ["Verification" => 2]);
         echo " \">Cliquez ici</a>
     <br>
 
     <input type=\"hidden\" name=\"_csrf_token\"
            value=\"";
-        // line 31
+        // line 34
         echo twig_escape_filter($this->env, $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("authenticate"), "html", null, true);
         echo "\"
     >
 
     ";
-        // line 44
+        // line 47
         echo "
     <button class=\"btn bg-warning\" type=\"submit\">
         Connexion
     </button>
 </form>
+</div>
+</div>
 ";
     }
 
@@ -134,7 +139,7 @@ class __TwigTemplate_047e904b63a9ecf4c0020c577a36e1fa31121925faa6b182f3152e86ced
 
     public function getDebugInfo()
     {
-        return array (  117 => 44,  111 => 31,  104 => 27,  98 => 24,  90 => 19,  85 => 16,  77 => 13,  74 => 12,  72 => 11,  69 => 10,  63 => 8,  61 => 7,  58 => 6,  54 => 5,  47 => 3,  36 => 1,);
+        return array (  120 => 47,  114 => 34,  107 => 30,  101 => 27,  93 => 22,  87 => 18,  79 => 15,  76 => 14,  74 => 13,  71 => 12,  65 => 10,  63 => 9,  58 => 6,  54 => 5,  47 => 3,  36 => 1,);
     }
 
     public function getSourceContext()

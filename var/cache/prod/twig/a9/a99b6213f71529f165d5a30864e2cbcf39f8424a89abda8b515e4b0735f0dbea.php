@@ -87,7 +87,7 @@ class __TwigTemplate_fb43fdf33c7f2933e1874c5ed5431815d1d14404f0014d0d2209ae9f428
                     echo "                            <tr>
                                 <td class=\"table-light\"><a href=\"";
                     // line 30
-                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("detailConfig", ["id" => twig_get_attribute($this->env, $this->source, $context["Config"], "id", [], "any", false, false, false, 30)]), "html", null, true);
+                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("pdf3", ["id" => twig_get_attribute($this->env, $this->source, $context["Config"], "id", [], "any", false, false, false, 30)]), "html", null, true);
                     echo "\">
                                 ";
                     // line 31
@@ -153,7 +153,7 @@ class __TwigTemplate_fb43fdf33c7f2933e1874c5ed5431815d1d14404f0014d0d2209ae9f428
                     echo "                            <tr>
                                 <td class=\"table-light\"><a href=\"";
                     // line 66
-                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("detailConfig", ["id" => twig_get_attribute($this->env, $this->source, $context["Config"], "id", [], "any", false, false, false, 66)]), "html", null, true);
+                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("pdf3", ["id" => twig_get_attribute($this->env, $this->source, $context["Config"], "id", [], "any", false, false, false, 66)]), "html", null, true);
                     echo "\">
                                 ";
                     // line 67

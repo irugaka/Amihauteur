@@ -1,0 +1,11 @@
+
+###> symfony/framework-bundle ###
+/var/
+
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+###< symfony/phpunit-bridge ###
+
+###> symfony/webpack-encore-bundle ###
+###< symfony/webpack-encore-bundle ###

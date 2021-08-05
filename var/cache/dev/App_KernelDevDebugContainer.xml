@@ -253,7 +253,7 @@
       <parameter>main</parameter>
     </parameter>
     <parameter key="security.main._indexed_authenticators" type="collection"/>
-    <parameter key="knp_snappy.pdf.binary">"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"</parameter>
+    <parameter key="knp_snappy.pdf.binary">"..\..\wkhtmltopdf\bin\wkhtmltopdf.exe"</parameter>
     <parameter key="knp_snappy.pdf.options" type="collection">
       <parameter key="viewport-size">‘1024x768’</parameter>
       <parameter key="page-size">A4</parameter>
@@ -262,7 +262,7 @@
       <parameter key="default-header">null</parameter>
     </parameter>
     <parameter key="knp_snappy.pdf.env" type="collection"/>
-    <parameter key="knp_snappy.image.binary">"C:\Program Files\wkhtmltopdf\bin\wkhtmltoimage.exe"</parameter>
+    <parameter key="knp_snappy.image.binary">"..\..\wkhtmltopdf\bin\wkhtmltoimage.exe"</parameter>
     <parameter key="knp_snappy.image.options" type="collection"/>
     <parameter key="knp_snappy.image.env" type="collection"/>
     <parameter key="data_collector.templates" type="collection">
@@ -5482,7 +5482,7 @@
     </service>
     <service id="knp_snappy.pdf" class="Knp\Snappy\Pdf" public="true">
       <tag name="monolog.logger" channel="snappy"/>
-      <argument>"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"</argument>
+      <argument>"..\..\wkhtmltopdf\bin\wkhtmltopdf.exe"</argument>
       <argument>%knp_snappy.pdf.options%</argument>
       <argument type="collection"/>
       <call method="setLogger">
@@ -5491,7 +5491,7 @@
     </service>
     <service id="knp_snappy.image" class="Knp\Snappy\Image" public="true">
       <tag name="monolog.logger" channel="snappy"/>
-      <argument>"C:\Program Files\wkhtmltopdf\bin\wkhtmltoimage.exe"</argument>
+      <argument>"..\..\wkhtmltopdf\bin\wkhtmltoimage.exe"</argument>
       <argument type="collection"/>
       <argument type="collection"/>
       <call method="setLogger">
